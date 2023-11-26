@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        app:srcCompat="@drawable/kantor_kelurahan_kemang_manis__kec_ilir_barat_ii__kota_palembang" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="Posyandu Terpadu"
+        android:textColor="#2980B9"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="Jalan Sidosermo 1 No 24"
+        android:textColor="#BDC3C7"
+        android:textSize="20sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        app:cardCornerRadius="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="14dp">
+
+            <TextView
+                android:id="@+id/jadwal_konsultasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Jadwal Konsultasi"
+                android:textColor="#2980B9"
+                android:textSize="22sp" />
+
+            <RelativeLayout
+                android:id="@+id/jadwal_terdekat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/jadwal_konsultasi">
+
+                <ImageButton
+                    android:id="@+id/kalender"
+                    android:layout_width="53dp"
+                    android:layout_height="53dp"
+                    android:layout_alignParentLeft="true"
+                    android:background="none"
+                    app:srcCompat="@drawable/baseline_calendar_today_24" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/kalender">
+
+                    <TextView
+                        android:id="@+id/kapan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/inter"
+                        android:text="Besok"
+                        android:textColor="#2980B9"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/tanggal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/kapan"
+                        android:fontFamily="@font/inter"
+                        android:text="Rabu, 22 November 2023"
+                        android:textColor="#282828"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tanggal"
+                        android:fontFamily="@font/inter"
+                        android:text="10:00 WIB"
+                        android:textColor="#282828"
+                        android:textSize="17sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/jadwal_terdekat"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/inter"
+                android:text="Lihat semua jadwal"
+                android:textColor="#2980B9"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToOutline="false">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kader_card"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            android:elevation="3dp"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToOutline="false"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/gambar_kader"
+
+                    android:layout_width="51dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/kader" />
+
+                <TextView
+                    android:id="@+id/jumlah_kader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/gambar_kader"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="5 kader"
+                    android:textColor="#2980B9"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/terdaftar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/jumlah_kader"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/inter"
+                    android:text="terdaftar"
+                    android:textColor="#2980B9"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/terdaftar"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="@font/inter"
+                    android:text="Lihat semua"
+                    android:textColor="#2980B9"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/data_card"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            android:elevation="3dp"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToOutline="false"
+                android:background="@drawable/pemeriksaanstunting"
+                android:padding="20dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Pemeriksaan Data Stunting"
+                    android:textColor="#2980B9"
+                    android:textSize="19sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+</LinearLayout>
