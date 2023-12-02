@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="14dp">
+
+    <TextView
+        android:id="@+id/loginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="Login Sebagai Bidan"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="14dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageBidan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ilustrasi_bidan"
+        app:layout_constraintTop_toBottomOf="@+id/loginTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginVertical="32dp"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/imageBidan"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginVertical="20dp"
+        android:hint="Username"
+        android:background="@drawable/rounded_text_input_layout_background">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/rounded_text_input_layout_background"
+        android:hint="Password"
+        app:hintTextAppearance="@font/inter_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameInput"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/hyperlinkLupaPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lupa Password?"
+        android:autoLink="web"
+        android:linksClickable="true"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+        app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+        android:paddingVertical="14dp"
+        />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@+id/hyperlinkLupaPassword"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="14dp"/>
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
