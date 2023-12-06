@@ -1,28 +1,73 @@
 package com.example.posyandu
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var editWidth: EditText
+    private lateinit var editHeight: EditText
+    private lateinit var editLength: EditText
+    private lateinit var btnCalculate: Button
+    private lateinit var tvResult: TextView
+
+    companion object {
+        private const val STATE_RESULT = "state_result"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_bidan)
+        setContentView(R.layout.activity_main)
+        editWidth = findViewById(R.id.edit_width)
+        editHeight = findViewById(R.id.edit_height)
+        editLength = findViewById(R.id.edit_length)
+        btnCalculate = findViewById(R.id.btn_calculate)
+        tvResult = findViewById(R.id.tv_result)
+        btnCalculate.setOnClickListener(this)
 
-
-        // Your initialization code goes here
-
-        // Example: Accessing a view from the layout
-        // val myTextView = findViewById<TextView>(R.id.my_text_view)
-        // myTextView.text = "Hello, Kotlin!"
-
-        // Example: Setting up a click listener for a button
-        // val myButton = findViewById<Button>(R.id.my_button)
-        // myButton.setOnClickListener {
-        //     // Handle button click
-        // }
+        if (savedInstanceState != null) {
+            val result = savedInstanceState.getString(STATE_RESULT)
+            tvResult.text = result
+        }
     }
 
-    // Add other lifecycle methods and functions as needed
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(STATE_RESULT, tvResult.text.toString())
+    }
+
+
+    override fun onClick(view: View?) {
+        if (view?.id == R.id.btn_calculate) {
+            val inputLength = editLength.text.toString().trim()
+            val inputWidth = editWidth.text.toString().trim()
+            val inputHeight = editHeight.text.toString().trim()
+            var isEmptyFields = false
+
+            if (inputLength.isEmpty()) {
+                isEmptyFields = true
+                editLength.error = "Panjang tidak boleh kosong"
+            }
+
+            if (inputWidth.isEmpty()) {
+                isEmptyFields = true
+                editWidth.error = "Lebar tidak boleh kosong"
+            }
+
+            if (inputHeight.isEmpty()) {
+                isEmptyFields = true
+                editHeight.error = "Tinggi tidak boleh kosong"
+            }
+
+            if (!isEmptyFields) {
+                val volume = inputLength.toDouble() * inputWidth.toDouble() * inputHeight.toDouble()
+                tvResult.text = volume.toString()
+            }
+        }
+    }
 }

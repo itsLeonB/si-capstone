@@ -5,4 +5,20 @@
     <string name="height">Tinggi</string>
     <string name="calculate">Hitung</string>
     <string name="result">Hasil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="link_card">Lihat semua</string>
+    <string name="jumlah_remaja_risiko">5 remaja berisiko stunting</string>
+    <string name="judul_chart_sebaran_remaja">Sebaran Remaja</string>
+    <string name="card_remaja_title">25 remaja terdaftar</string>
+    <string name="jadwal_terakhir_jam">10:00 WIB</string>
+    <string name="pemeriksaan_card_title">Pemeriksaan Data Stunting</string>
+    <string name="alamat_posyandu">Jalan Sidosermo 1 No 24</string>
+    <string name="title_foto_posyandu">Foto Posyandu</string>
+    <string name="jadwal_konsultasi_card_title">Jadwal Konsultasi</string>
+    <string name="kader_card_title">5 kader</string>
+    <string name="jadwal_konsultasi_card_subtitle">Besok</string>
+    <string name="nama_posyandu">Posyandu Terpadu</string>
+    <string name="jadwal_konsultasi_card_jadwal">Rabu, 22 November 2023</string>
+    <string name="kader_card_subtitle">terdaftar</string>
 </resources>
