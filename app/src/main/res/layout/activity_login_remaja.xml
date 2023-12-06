@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold"
-        android:text="Login Sebagai Bidan"
+        android:text="Login Sebagai Remaja"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,12 +23,11 @@
         android:id="@+id/imageBidan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ilustrasi_bidan"
-        app:layout_constraintTop_toBottomOf="@+id/loginTitle"
+        android:layout_marginVertical="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginVertical="32dp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/loginTitle"
+        app:srcCompat="@drawable/ilustrasi_remaja" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameInput"
@@ -81,8 +80,6 @@
         app:layout_constraintEnd_toEndOf="@+id/passwordInput"
         android:paddingVertical="14dp"
         />
-
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
