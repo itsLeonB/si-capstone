@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+    <TextView
+        android:id="@+id/materi_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Anak Ceria, Tanpa Stunting"
+        android:textColor="@color/primary"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/materi_gambar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/anakceriatanpastunting"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materi_title"/>
+
+    <TextView
+        android:id="@+id/materi_sumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sumber:freepik"
+        android:textColor="@color/grey"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/materi_gambar" />
+
+    <TextView
+        android:id="@+id/materi_isi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Bicara tentang bahaya stunting pada anak, GenBest yang hidup di kota-kota besar mungkin merasa ini bukanlah suatu ancaman yang perlu diwaspadai. Namun, jangan salah, lho. Menurut data yang dirilis Dinas Kesehatan Provinsi DKI Jakarta pada bulan Mei 2019, kasus stunting hingga tahun 2019 masih terjadi di kota besar, termasuk ibukota Indonesia yaitu DKI Jakarta.\n\nSecara keseluruhan, balita dengan kategori sangat pendek di Jakarta jumlahnya 15.657, dan dengan kategori pendek sebanyak 19.122 anak. Jakarta Timur tercatat sebagai kawasan perkotaan dengan jumlah balita stunting tertinggi, dengan kategori sangat pendek 4.857 balita dan pendek sebanyak 5.628 balita.\n\nStunting sendiri merupakan kondisi gagal tumbuh pada anak balita akibat kekurangan gizi kronis sehingga perawakan balita menjadi kerdil atau sangat pendek. Bagaimana kita tahu seorang anak terkena stunting? Berdasarkan standar WHO, pertumbuhan anak berusia 0-5 tahun dikatakan mengalami stunting bila di bawah -2 standar deviasi grafik pertumbuhan anak dan disebut stunting berat bila di bawah -3."
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/materi_sumber" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>
