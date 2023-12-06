@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/materi"
+        android:icon="@drawable/icon_materi_inactive"
+        android:title="Materi"/>
+
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/icon_chat_inactive"
+        android:title="Chat"/>
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/icon_home_inactive"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/posyandu"
+        android:icon="@drawable/icon_posyandu_active"
+        android:title="Posyandu"/>
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/icon_profile_inactive"
+        android:title="Profile"/>
+</menu>
