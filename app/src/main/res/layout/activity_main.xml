@@ -1,245 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:orientation="vertical"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="14dp"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/gambar_posyandu"
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_above="@id/bottom_navigation"
+        android:background="@drawable/shadow" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kantor_kelurahan_kemang_manis__kec_ilir_barat_ii__kota_palembang" />
-
-    <TextView
-        android:id="@+id/nama_posyandu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="Posyandu Terpadu"
-        android:textColor="#2980B9"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/gambar_posyandu" />
-
-    <TextView
-        android:id="@+id/alamat_posyandu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="Jalan Sidosermo 1 No 24"
-        android:textColor="#BDC3C7"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/nama_posyandu" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_jadwal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:elevation="3dp"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintTop_toBottomOf="@id/alamat_posyandu">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="14dp">
-
-            <TextView
-                android:id="@+id/jadwal_konsultasi"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:fontFamily="@font/inter_semibold"
-                android:text="Jadwal Konsultasi"
-                android:textColor="#2980B9"
-                android:textSize="22sp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/jadwal_terdekat"
-                app:layout_constraintTop_toBottomOf="@id/jadwal_konsultasi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/kalender"
-                    android:layout_width="53dp"
-                    android:layout_height="53dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="none"
-                    app:srcCompat="@drawable/baseline_calendar_today_24" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/text_jadwal"
-                    android:layout_margin="10dp"
-                    app:layout_constraintLeft_toRightOf="@id/kalender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/kalender">
-
-                    <TextView
-                        android:id="@+id/kapan"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:fontFamily="@font/inter"
-                        android:text="Besok"
-                        android:textColor="#2980B9"
-                        android:textSize="19sp" />
-
-                    <TextView
-                        android:id="@+id/tanggal"
-                        app:layout_constraintTop_toBottomOf="@id/kapan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/kapan"
-                        android:fontFamily="@font/inter"
-                        android:text="Rabu, 22 November 2023"
-                        android:textColor="#282828"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@id/tanggal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tanggal"
-                        android:fontFamily="@font/inter"
-                        android:text="10:00 WIB"
-                        android:textColor="#282828"
-                        android:textSize="17sp" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/jadwal_terdekat"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
-                android:text="Lihat semua jadwal"
-                android:textColor="#2980B9"
-                android:textSize="10sp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/kader_card"
-        app:layout_constraintTop_toBottomOf="@id/card_jadwal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            app:layout_constraintDimensionRatio="1:1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:elevation="3dp"
-            app:cardCornerRadius="12dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="20dp">
-
-                <ImageView
-                    android:id="@+id/gambar_kader"
-                    android:layout_width="51dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/kader" />
-
-                <TextView
-                    android:id="@+id/jumlah_kader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_semibold"
-                    android:text="5 kader"
-                    android:textColor="#2980B9"
-                    android:textSize="19sp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/gambar_kader" />
-
-                <TextView
-                    android:id="@+id/terdaftar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    android:text="terdaftar"
-                    android:textColor="#2980B9"
-                    android:textSize="17sp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/jumlah_kader" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp"
-                    android:fontFamily="@font/inter"
-                    android:text="Lihat semua"
-                    android:textColor="#2980B9"
-                    android:textSize="10sp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/terdaftar" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@id/card_jadwal"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/data_card"
-            app:layout_constraintDimensionRatio="1:1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:elevation="3dp"
-            app:cardCornerRadius="12dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/pemeriksaanstunting"
-                android:clipChildren="false"
-                android:clipToOutline="false"
-                android:padding="20dp">
-
-
-                <TextView
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_semibold"
-                    android:text="Pemeriksaan Data Stunting"
-                    android:textColor="#2980B9"
-                    android:textSize="19sp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:itemIconTint="@color/bottom_nav_icon_color_selector"
+        app:itemTextAppearanceActive="@font/inter"
+        app:itemTextColor="@color/bottom_nav_icon_color_selector"
+        app:menu="@menu/bottom_menu" />
+</RelativeLayout>

@@ -1,73 +1,61 @@
 package com.example.posyandu
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.posyandu.ChatFragment
+import com.example.posyandu.HomeFragment
+import com.example.posyandu.MateriFragment
+import com.example.posyandu.PosyanduFragment
+import com.example.posyandu.ProfileFragment
+import com.example.posyandu.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var editWidth: EditText
-    private lateinit var editHeight: EditText
-    private lateinit var editLength: EditText
-    private lateinit var btnCalculate: Button
-    private lateinit var tvResult: TextView
-
-    companion object {
-        private const val STATE_RESULT = "state_result"
-    }
-
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        editWidth = findViewById(R.id.edit_width)
-        editHeight = findViewById(R.id.edit_height)
-        editLength = findViewById(R.id.edit_length)
-        btnCalculate = findViewById(R.id.btn_calculate)
-        tvResult = findViewById(R.id.tv_result)
-        btnCalculate.setOnClickListener(this)
 
-        if (savedInstanceState != null) {
-            val result = savedInstanceState.getString(STATE_RESULT)
-            tvResult.text = result
-        }
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.selectedItemId = R.id.home
+        bottomNav.setOnItemSelectedListener(navListener)
+
+        // as soon as the application opens the first fragment should
+        // be shown to the user in this case it is algorithm fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, HomeFragment()).commit()
     }
 
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(STATE_RESULT, tvResult.text.toString())
-    }
-
-
-    override fun onClick(view: View?) {
-        if (view?.id == R.id.btn_calculate) {
-            val inputLength = editLength.text.toString().trim()
-            val inputWidth = editWidth.text.toString().trim()
-            val inputHeight = editHeight.text.toString().trim()
-            var isEmptyFields = false
-
-            if (inputLength.isEmpty()) {
-                isEmptyFields = true
-                editLength.error = "Panjang tidak boleh kosong"
+    private val navListener = NavigationBarView.OnItemSelectedListener {
+        // By using switch we can easily get the
+        // selected fragment by using there id
+        lateinit var selectedFragment: Fragment
+        when (it.itemId) {
+            R.id.materi -> {
+                selectedFragment = MateriFragment()
             }
 
-            if (inputWidth.isEmpty()) {
-                isEmptyFields = true
-                editWidth.error = "Lebar tidak boleh kosong"
+            R.id.chat -> {
+                selectedFragment = ChatFragment()
             }
 
-            if (inputHeight.isEmpty()) {
-                isEmptyFields = true
-                editHeight.error = "Tinggi tidak boleh kosong"
+            R.id.home -> {
+                selectedFragment = HomeFragment()
             }
 
-            if (!isEmptyFields) {
-                val volume = inputLength.toDouble() * inputWidth.toDouble() * inputHeight.toDouble()
-                tvResult.text = volume.toString()
+            R.id.posyandu -> {
+                selectedFragment = PosyanduFragment()
+            }
+
+            R.id.profile -> {
+                selectedFragment = ProfileFragment()
             }
         }
+        // It will help to replace the
+        // one fragment to other.
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment)
+            .commit()
+        true
     }
 }
