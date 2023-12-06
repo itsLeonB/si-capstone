@@ -13,7 +13,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val userRole = "bidan"
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
