@@ -5,4 +5,5 @@
     <color name="primary">#2980B9</color>
     <color name="accent">#A2C5D6</color>
     <color name="grey">#BDC3C7</color>
+    <color name="error">#AD2220</color>
 </resources>
