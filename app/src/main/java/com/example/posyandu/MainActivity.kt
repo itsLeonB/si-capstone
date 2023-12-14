@@ -3,12 +3,6 @@ package com.example.posyandu
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.posyandu.ChatFragment
-import com.example.posyandu.HomeFragment
-import com.example.posyandu.MateriFragment
-import com.example.posyandu.PosyanduFragment
-import com.example.posyandu.ProfileFragment
-import com.example.posyandu.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -35,16 +29,12 @@ class MainActivity : AppCompatActivity() {
         // selected fragment by using there id
         lateinit var selectedFragment: Fragment
         when (it.itemId) {
-            R.id.materi -> {
-                selectedFragment = MateriFragment()
-            }
-
-            R.id.chat -> {
-                selectedFragment = ChatFragment()
-            }
-
             R.id.home -> {
                 selectedFragment = HomeFragment()
+            }
+
+            R.id.konsultasi -> {
+                selectedFragment = KonsultasiFragment()
             }
 
             R.id.posyandu -> {
