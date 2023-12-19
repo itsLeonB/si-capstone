@@ -4,77 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VerifikasiResetActivity"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="16dp">
+    android:paddingVertical="16dp"
+    android:theme="@style/AppTheme"
+    tools:context=".VerifikasiResetActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/teks_judul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/inter_bold"
+        android:text="Masukkan Kode Verifikasi"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Masukkan Kode Verifikasi"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="20sp"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/body_verif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/teks_judul"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="Kami telah mengirimkan kode verifikasi ke email tigalipa@gmail.com."
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/inter"
+        android:text="Kami telah mengirimkan kode verifikasi ke email tigalipa@gmail.com."
         android:textSize="16sp"
         android:textStyle=""
-        android:layout_marginTop="12dp"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teks_judul" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/body_lupa_sandi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/body_verif"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="Silakan masukkan kode verifikasi:"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/inter"
+        android:text="Silakan masukkan kode verifikasi:"
         android:textSize="16sp"
         android:textStyle=""
-        android:layout_marginTop="12dp"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/body_verif" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/kodeInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/body_lupa_sandi"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginVertical="12dp"
         android:hint="Kode Verifikasi"
-        app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
-        >
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/body_lupa_sandi">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/kodeInput"
         android:layout_marginVertical="14dp"
-        android:text="Kirim"
         android:fontFamily="@font/inter_bold"
+        android:text="Kirim"
         android:textSize="16sp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/kodeInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

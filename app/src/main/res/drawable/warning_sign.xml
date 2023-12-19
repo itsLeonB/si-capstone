@@ -5,13 +5,13 @@
     android:viewportHeight="102">
   <path
       android:pathData="M51,51m-51,0a51,51 0,1 1,102 0a51,51 0,1 1,-102 0"
-      android:fillColor="#F8F3D6"/>
+      android:fillColor="@color/md_theme_light_errorContainer"/>
   <path
       android:pathData="M49.69,71C48.77,71.91 48.77,73.4 49.69,74.32C50.6,75.24 52.09,75.24 53.01,74.32C53.92,73.4 53.92,71.92 53.01,71C52.09,70.08 50.6,70.08 49.69,71L49.69,71Z"
-      android:fillColor="#FFCB05"
+      android:fillColor="@color/md_theme_light_error"
       android:fillType="evenOdd"/>
   <path
       android:pathData="M53.35,64.98C53.35,66 52.35,67 51.35,67C50.35,67 49.35,66 49.35,64.98L49.35,29C49.35,28 50.35,27 51.35,27C52.35,27 53.35,28 53.35,29V64.98Z"
-      android:fillColor="#FFCB05"
+      android:fillColor="@color/md_theme_light_error"
       android:fillType="evenOdd"/>
 </vector>

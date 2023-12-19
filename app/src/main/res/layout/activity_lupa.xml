@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="16dp">
+    android:paddingVertical="16dp"
+    android:theme="@style/AppTheme">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/teks_judul"
@@ -44,8 +45,7 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:text="Email"
-            />
+            android:text="Email" />
 
         <Button
             android:id="@+id/button2"

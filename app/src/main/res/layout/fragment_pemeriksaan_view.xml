@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_light_surface"
+    android:theme="@style/AppTheme"
+    tools:context=".PemeriksaanViewFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="50dp"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Data Pemeriksaan"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/remaja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginHorizontal="16dp"
+        android:text="Jane Doe"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/tanggal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter"
+        android:text="Kamis, 23 November 2023"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="19sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/remaja" />
+
+    <TextView
+        android:id="@+id/waktu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/inter"
+        android:text="Pukul 12:22"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="19sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tanggal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:clipChildren="false"
+        android:clipToOutline="true"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waktu">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/berat_badan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Berat Badan: 45 kg"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/tinggi_badan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Tinggi Badan: 175 cm"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/tekanan_darah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Tekanan Darah: 110/90 mmHg"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/lingkar_lengan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Lingkar Lengan: 10 cm"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/kadar_glukosa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Kadar Gula Darah: 20 mg/dL"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/kadar_hemoglobin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Kadar Hemoglobin: 20 gram/dL"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/pemberian_fe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Pemberian Zat Besi: Ya"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/kondisi_umum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Kondisi Umum: Baik"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/title_keterangan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="30dp"
+                android:text="Keterangan:"
+                android:textColor="@color/md_theme_light_primary"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/keterangan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="Suatu kegiatan atau pelayanan yang bertujuan untuk meningkatkan mutu gizi perorangan dan masyarakat, antara lain melalui perbaikan pola konsunsi makanan, perbaikan perilaku sadar gizi dan peningkatan akses dan mutu pelayanan gizi dan kesehatan sesuai dengan kemajuan ilmu dan teknologi."
+                android:textSize="19sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/risiko"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="30dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_risiko"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/draw_risiko"
+                    android:textColor="@color/success"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Tidak berisiko stunting"
+                    />
+                <ImageView
+                    android:id="@+id/draw_risiko"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/done_checkmark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/text_risiko"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_del"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Hapus"
+                android:textColor="@color/md_theme_light_error"
+                app:icon="@drawable/trash"
+                app:iconTint="@color/md_theme_light_error" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

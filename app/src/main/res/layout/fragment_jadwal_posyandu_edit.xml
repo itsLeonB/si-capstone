@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_light_surface"
     android:padding="16dp"
+    android:theme="@style/AppTheme"
     tools:context=".JadwalPosyanduFragment">
 
     <LinearLayout
@@ -23,7 +25,7 @@
             android:layout_margin="16dp"
             android:fontFamily="@font/inter_bold"
             android:text="Ubah Jadwal"
-            android:textColor="@color/primary"
+            android:textColor="@color/md_theme_light_primary"
             android:textSize="24sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +47,7 @@
                 android:cursorVisible="false"
                 android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/grey"
+                android:drawableTint="@color/material_on_background_disabled"
                 android:focusable="false"
                 android:focusableInTouchMode="false" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +71,7 @@
                 android:cursorVisible="false"
                 android:drawableEnd="@drawable/schedule"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/grey"
+                android:drawableTint="@color/material_on_background_disabled"
                 android:focusable="false"
                 android:focusableInTouchMode="false" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -93,32 +95,29 @@
                 android:cursorVisible="false"
                 android:drawableEnd="@drawable/schedule"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/grey"
+                android:drawableTint="@color/material_on_background_disabled"
                 android:focusable="false"
                 android:focusableInTouchMode="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnTambah"
+            android:id="@+id/btn_tambah"
             style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/primary"
-            android:text="Simpan"
-            android:textColor="@color/white" />
+            android:text="Simpan" />
 
         <Button
-            style="@style/Widget.Material3.Button.TextButton.Icon"
             android:id="@+id/btn_del"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/error"
-            app:icon="@drawable/trash"
-            app:iconTint="@color/error"
             android:text="Hapus"
-            />
+            android:textColor="@color/md_theme_light_error"
+            app:icon="@drawable/trash"
+            app:iconTint="@color/md_theme_light_error" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

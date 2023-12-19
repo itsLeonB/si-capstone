@@ -3,11 +3,11 @@ package com.example.posyandu
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val userRole = "bidan"
 
@@ -47,7 +47,13 @@ class MainActivity : AppCompatActivity() {
         }
         // It will help to replace the
         // one fragment to other.
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment)
+//        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment)
+//            .commit()
+        supportFragmentManager
+            .beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.fragment_container, selectedFragment)
+            .addToBackStack(null)
             .commit()
         true
     }
