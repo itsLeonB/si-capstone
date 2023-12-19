@@ -1,15 +1,395 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileBidan">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/gambar_posyandu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/title_foto_posyandu"
+                    android:cropToPadding="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/kantor_kelurahan_kemang_manis__kec_ilir_barat_ii__kota_palembang" />
+
+                <ImageView
+                    android:id="@+id/lingkaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="190dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/gambar_posyandu"
+                    android:src="@drawable/ellipse_114"
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/gambar_orang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/line_album_sempro_mas_leon_230621_22_1"
+                    app:layout_constraintTop_toTopOf="@id/lingkaran"
+                    app:layout_constraintLeft_toLeftOf="@id/lingkaran"
+                    app:layout_constraintRight_toRightOf="@id/lingkaran"
+                    app:layout_constraintBottom_toBottomOf="@id/lingkaran"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    app:cornerRadius="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/gambar_posyandu"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="16dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                >
+
+                <TextView
+                    android:id="@+id/tulisandatadiri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Data Diri"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/previewuser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tulisandatadiri"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter"
+                    android:text="Bidan - Posyandu Terpadu 27"
+                    />
+
+                <TextView
+                    android:id="@+id/title_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/previewuser"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:text="Nama"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_nama"
+                    android:text="Vernita Kirana"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_nama"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Email"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_email"
+                    android:text="vernita.k123@gmail.com"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_nik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_email"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="NIK"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_nik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_nik"
+                    android:text="3578042603020010"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_ttl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_nik"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="NIK"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_ttl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_ttl"
+                    android:text="26/03/2002"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_ttl"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Alamat"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_alamat"
+                    android:text="Jl. Sidosermo II Blok K No. 4"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_provinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_alamat"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Provinsi"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_provinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_provinsi"
+                    android:text="Jawa Timur"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_kota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_provinsi"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Kota"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_kota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_kota"
+                    android:text="Surabaya"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_kota"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Kecamatan"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_kecamatan"
+                    android:text="Wonocolo"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_kelurahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_kecamatan"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Kelurahan"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_kelurahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_kelurahan"
+                    android:text="Kedung Baruk"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_kodepos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_kelurahan"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Kode Pos"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_kodepos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_kodepos"
+                    android:text="60298"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/title_rt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_kodepos"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="RT"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_rt"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_rt"
+                    android:text="08"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:layout_marginLeft="50dp"
+                    android:id="@+id/title_rw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_kodepos"
+                    app:layout_constraintLeft_toRightOf="@id/title_rt"
+                    app:layout_constraintBottom_toTopOf="@id/input_rw"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="RW"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/input_rw"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_rt"
+                    android:text="08"
+                    app:layout_constraintLeft_toRightOf="@id/input_rt"
+                    />
+
+                <TextView
+                    android:id="@+id/title_notelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_rt"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:textSize="16sp"
+                    android:text="Nomor Telepon"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_notelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toBottomOf="@id/title_notelp"
+                    android:text="082306071010"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
