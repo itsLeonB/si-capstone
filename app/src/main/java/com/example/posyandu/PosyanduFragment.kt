@@ -1,14 +1,28 @@
 package com.example.posyandu
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.PopupMenu
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 
 class PosyanduFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +46,77 @@ class PosyanduFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cardJadwal: MaterialCardView = view.findViewById(R.id.card_jadwal)
+        val btnSettings: Button = view.findViewById(R.id.btn_settings)
+        val cardJadwalPosyandu: MaterialCardView = view.findViewById(R.id.card_jadwal_posyandu)
+        val btnInput: ExtendedFloatingActionButton = view.findViewById(R.id.btn_input)
 
-        cardJadwal.setOnClickListener {
-            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, JadwalPosyanduFragment())
-            fragmentTransaction.addToBackStack(null) // Add transaction to back stack
-            fragmentTransaction.commit()
+        btnSettings.setOnClickListener { v: View ->
+            showMenu(v, R.menu.posyandu_settings_menu)
         }
+
+        cardJadwalPosyandu.setOnClickListener {
+//            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.fragment_container, JadwalPosyanduFragment())
+//            fragmentTransaction.addToBackStack(null) // Add transaction to back stack
+//            fragmentTransaction.commit()
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container, JadwalPosyanduFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        btnInput.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container, PemeriksaanCreateFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(requireContext(), v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+
+        popup.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.pengaturan -> {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, PosyanduEditFragment())
+                        .commit()
+                }
+
+                R.id.ganti -> {
+                    showPosyanduDialog()
+                }
+            }
+            true
+        }
+
+        // Show the popup menu.
+        popup.show()
+    }
+
+    private fun showPosyanduDialog() {
+        val items = arrayOf("Posyandu Terhebat", "Posyandu Terkuat", "Posyandu Terbaik")
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Ganti Posyandu")
+            .setItems(items) { _, _ ->
+                val fragmentTransaction =
+                    requireActivity().supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, PosyanduFragment())
+                fragmentTransaction.addToBackStack(null) // Add transaction to back stack
+                fragmentTransaction.commit()
+
+                val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+                Snackbar.make(btmBar!!, "Berhasil ganti Posyandu", Snackbar.LENGTH_SHORT)
+                    .setAnchorView(btmBar)
+                    .show()
+            }
+            .show()
     }
 }

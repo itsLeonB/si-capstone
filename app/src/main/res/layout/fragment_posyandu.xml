@@ -7,6 +7,7 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:orientation="vertical"
+    android:theme="@style/AppTheme"
     tools:context=".PosyanduFragment">
 
 
@@ -33,71 +34,89 @@
                 android:id="@+id/layoutmain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:clipToPadding="false"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="14dp"
+                android:paddingVertical="5dp"
                 app:layout_constraintTop_toBottomOf="@id/gambar_posyandu">
 
 
-                <TextView
-                    android:id="@+id/nama_posyandu"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/posyandu_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/nama_posyandu"
-                    android:textColor="@color/primary"
-                    android:textSize="24sp"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_margin="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/alamat_posyandu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/alamat_posyandu"
-                    android:textColor="#BDC3C7"
-                    android:textSize="20sp"
-                    app:layout_constraintTop_toBottomOf="@id/nama_posyandu" />
+                    <TextView
+                        android:id="@+id/nama_posyandu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/nama_posyandu"
+                        android:textColor="@color/md_theme_light_primary"
+                        android:textSize="24sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/alamat_posyandu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/alamat_posyandu"
+                        android:textColor="@color/material_on_background_disabled"
+                        android:textSize="20sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/nama_posyandu" />
+
+                    <Button
+                        android:id="@+id/btn_settings"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/settings"
+                        app:iconTint="@color/md_theme_light_primary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_jadwal"
+                    android:id="@+id/card_jadwal_posyandu"
                     style="@style/Widget.Material3.CardView.Elevated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
+                    android:layout_margin="16dp"
                     app:cardCornerRadius="12dp"
-                    app:layout_constraintTop_toBottomOf="@id/alamat_posyandu">
+                    app:layout_constraintTop_toBottomOf="@id/posyandu_profile">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="14dp">
+                        android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/jadwal_konsultasi"
+                            android:id="@+id/card_title_jadwal_posyandu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
-                            android:layout_margin="5dp"
                             android:fontFamily="@font/inter_semibold"
                             android:text="@string/jadwal_konsultasi_card_title"
-                            android:textColor="#2980B9"
+                            android:textColor="@color/md_theme_light_primary"
                             android:textSize="22sp"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/jadwal_terdekat"
+                            android:id="@+id/jadwal_posyandu_terdekat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/jadwal_konsultasi">
+                            app:layout_constraintTop_toBottomOf="@id/card_title_jadwal_posyandu">
 
                             <ImageButton
-                                android:id="@+id/kalender"
+                                android:id="@+id/draw_posyandu"
                                 android:layout_width="53dp"
                                 android:layout_height="53dp"
                                 android:background="@null"
@@ -105,50 +124,47 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/baseline_calendar_today_24" />
+                                app:srcCompat="@drawable/baseline_calendar_today_24"
+                                app:tint="@color/md_theme_light_primary" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/text_jadwal"
+                                android:id="@+id/text_jadwal_posyandu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintLeft_toRightOf="@id/kalender"
+                                app:layout_constraintLeft_toRightOf="@id/draw_posyandu"
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
-                                    android:id="@+id/kapan"
+                                    android:id="@+id/kapan_jadwal_posyandu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/jadwal_konsultasi_card_subtitle"
-                                    android:textColor="#2980B9"
+                                    android:textColor="@color/md_theme_light_primary"
                                     android:textSize="19sp"
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
-                                    android:id="@+id/tanggal"
+                                    android:id="@+id/tanggal_jadwal_posyandu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/kapan"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/jadwal_konsultasi_card_jadwal"
-                                    android:textColor="#282828"
                                     android:textSize="17sp"
                                     app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/kapan" />
+                                    app:layout_constraintTop_toBottomOf="@id/kapan_jadwal_posyandu" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/tanggal"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/jadwal_terakhir_jam"
-                                    android:textColor="#282828"
                                     android:textSize="17sp"
                                     app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/tanggal" />
+                                    app:layout_constraintTop_toBottomOf="@id/tanggal_jadwal_posyandu" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,233 +174,210 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
                             android:text="@string/link_card"
-                            android:textColor="#2980B9"
+                            android:textColor="@color/md_theme_light_primary"
                             android:textSize="11sp"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/jadwal_terdekat" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <GridLayout
-                    android:id="@+id/dua_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
-                    android:alignmentMode="alignMargins"
-                    android:clipChildren="false"
-                    android:columnCount="2"
-                    android:orientation="horizontal"
-                    android:rowCount="1"
-                    app:layout_constraintTop_toBottomOf="@id/card_jadwal">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/kader_card"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_marginEnd="10dp">
-
-                        <androidx.cardview.widget.CardView
-                            style="@style/Widget.Material3.CardView.Elevated"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            app:cardCornerRadius="12dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="1:1"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:paddingHorizontal="20dp"
-                                android:paddingVertical="14dp">
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:id="@+id/card_kader_content"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintBottom_toTopOf="@id/link_kader"
-                                    app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintRight_toRightOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <ImageView
-                                        android:id="@+id/gambar_kader"
-                                        android:layout_width="40dp"
-                                        android:layout_height="match_parent"
-                                        android:adjustViewBounds="true"
-                                        app:layout_constraintLeft_toLeftOf="parent"
-                                        app:layout_constraintRight_toRightOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintBottom_toTopOf="@id/jumlah_kader"
-                                        app:srcCompat="@drawable/kader"
-                                        android:importantForAccessibility="no" />
-
-                                    <TextView
-                                        android:id="@+id/jumlah_kader"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:fontFamily="@font/inter_semibold"
-                                        android:text="@string/kader_card_title"
-                                        android:textColor="#2980B9"
-                                        android:textSize="19sp"
-                                        app:layout_constraintLeft_toLeftOf="parent"
-                                        app:layout_constraintRight_toRightOf="parent"
-                                        app:layout_constraintBottom_toTopOf="@id/terdaftar"
-                                        app:layout_constraintTop_toBottomOf="@id/gambar_kader" />
-
-                                    <TextView
-                                        android:id="@+id/terdaftar"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/inter"
-                                        android:text="@string/kader_card_subtitle"
-                                        android:textColor="#2980B9"
-                                        android:textSize="17sp"
-                                        app:layout_constraintLeft_toLeftOf="parent"
-                                        app:layout_constraintRight_toRightOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@id/jumlah_kader" />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                                <TextView
-                                    android:id="@+id/link_kader"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginVertical="5dp"
-                                    android:fontFamily="@font/inter"
-                                    android:text="@string/link_card"
-                                    android:textColor="#2980B9"
-                                    android:textSize="11sp"
-                                    app:layout_constraintTop_toBottomOf="@id/card_kader_content"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintRight_toRightOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </androidx.cardview.widget.CardView>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_marginStart="10dp"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/card_jadwal">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/data_card"
-                            style="@style/Widget.Material3.CardView.Elevated"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            app:cardCornerRadius="12dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="1:1"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/periksa"
-                                android:padding="20dp">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/inter_semibold"
-                                    android:text="@string/pemeriksaan_card_title"
-                                    android:textColor="@color/white"
-                                    android:textSize="16sp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintLeft_toLeftOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </androidx.cardview.widget.CardView>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </GridLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_remaja"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_jadwal_konsultasi"
                     style="@style/Widget.Material3.CardView.Elevated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
+                    android:layout_margin="16dp"
                     app:cardCornerRadius="12dp"
-                    app:layout_constraintTop_toBottomOf="@id/dua_card">
+                    app:layout_constraintTop_toBottomOf="@id/card_jadwal_posyandu">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="14dp">
+                        android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/jumlah_remaja"
+                            android:id="@+id/card_title_jadwal_konsultasi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_margin="5dp"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="@string/card_remaja_title"
-                            android:textColor="#2980B9"
+                            android:text="Jadwal Konsultasi"
+                            android:textColor="@color/md_theme_light_primary"
                             android:textSize="22sp"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/sebaran_remaja"
-                            android:layout_width="match_parent"
+                            android:id="@+id/jadwal_konsultasi_terdekat"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/jumlah_remaja">
+                            app:layout_constraintTop_toBottomOf="@id/card_title_jadwal_konsultasi">
 
                             <ImageButton
-                                android:id="@+id/barchart"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/draw_konsultasi"
+                                android:layout_width="53dp"
                                 android:layout_height="53dp"
                                 android:background="@null"
-                                android:contentDescription="@string/judul_chart_sebaran_remaja"
+                                android:importantForAccessibility="no"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/barchart" />
+                                app:srcCompat="@drawable/baseline_calendar_today_24"
+                                app:tint="@color/md_theme_light_primary" />
 
-                            <TextView
-                                android:id="@+id/jumlah_risiko"
-                                android:layout_width="0dp"
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/text_jadwal_konsultasi"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter"
-                                android:text="@string/jumlah_remaja_risiko"
-                                android:textColor="#FFCB05"
-                                android:textSize="19sp"
-                                app:layout_constraintLeft_toRightOf="@id/barchart"
-                                app:layout_constraintRight_toRightOf="parent"
+                                android:layout_margin="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintLeft_toRightOf="@id/draw_konsultasi"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/kapan_jadwal_konsultasi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:text="@string/jadwal_konsultasi_card_subtitle"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    android:textSize="19sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tanggal_jadwal_konsultasi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:text="@string/jadwal_konsultasi_card_jadwal"
+                                    android:textSize="17sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/kapan_jadwal_konsultasi" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:text="@string/jadwal_terakhir_jam"
+                                    android:textSize="17sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/tanggal_jadwal_konsultasi" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="5dp"
                             android:fontFamily="@font/inter"
                             android:text="@string/link_card"
-                            android:textColor="#2980B9"
+                            android:textColor="@color/md_theme_light_primary"
                             android:textSize="11sp"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/sebaran_remaja" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_remaja"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/card_jadwal_konsultasi">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/card_title_remaja"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="25 remaja terdaftar"
+                            android:textColor="@color/md_theme_light_primary"
+                            android:textSize="22sp"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/dash_remaja"
+                            android:layout_margin="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/card_title_remaja">
+
+
+                            <TextView
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:id="@+id/angka_kader"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="5"
+                                android:textColor="@color/success"
+                                android:textSize="29sp" />
+
+                            <TextView
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/angka_kader"
+                                app:layout_constraintRight_toLeftOf="@id/ket_risiko"
+                                android:id="@+id/ket_kader"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:text="remaja aktif sebagai kader"
+                                android:textColor="@color/success"
+                                android:textSize="19sp" />
+
+
+                            <TextView
+                                android:id="@+id/angka_risiko"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toRightOf="@id/ket_kader"
+                                app:layout_constraintBottom_toTopOf="@id/ket_risiko"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="5"
+                                android:textColor="@color/md_theme_light_error"
+                                android:textSize="29sp" />
+
+                            <TextView
+                                android:id="@+id/ket_risiko"
+                                app:layout_constraintLeft_toRightOf="@id/ket_kader"
+                                app:layout_constraintTop_toBottomOf="@id/angka_risiko"
+                                app:layout_constraintRight_toRightOf="parent"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:text="remaja aktif sebagai kader"
+                                android:textColor="@color/md_theme_light_error"
+                                android:textSize="19sp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter"
+                            android:text="@string/link_card"
+                            android:textColor="@color/md_theme_light_primary"
+                            android:textSize="11sp"
+                            app:layout_constraintTop_toBottomOf="@id/dash_remaja"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -392,6 +385,22 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btn_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        android:contentDescription="Input Data"
+        android:text="Input Data"
+        android:textColor="@color/md_theme_light_onPrimary"
+        app:icon="@drawable/ic_plus"
+        app:iconTint="@color/md_theme_light_onPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="provinsi">
+        <item>Jawa Timur</item>
+        <item>Jawa Tengah</item>
+        <item>Jawa Barat</item>
+    </string-array>
+    <string-array name="kota">
+        <item>Surabaya</item>
+        <item>Sidoarjo</item>
+        <item>Gresik</item>
+    </string-array>
+    <string-array name="kecamatan">
+        <item>Wonocolo</item>
+        <item>Wonokromo</item>
+        <item>Rungkut</item>
+        <item>Sukolilo</item>
+        <item>Mulyosari</item>
+    </string-array>
+    <string-array name="kelurahan">
+        <item>Sidosermo</item>
+        <item>Keputih</item>
+    </string-array>
+    <string-array name="remaja">
+        <item>Jane Doe</item>
+        <item>Bona Banana</item>
+        <item>Cikita Citata</item>
+    </string-array>
+    <string-array name="kondisi_umum">
+        <item>Baik</item>
+        <item>Cukup</item>
+        <item>Lemah</item>
+    </string-array>
+</resources>
