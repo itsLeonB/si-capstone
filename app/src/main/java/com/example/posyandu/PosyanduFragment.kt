@@ -1,13 +1,8 @@
 package com.example.posyandu
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -15,31 +10,36 @@ import android.widget.PopupMenu
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
-import androidx.appcompat.view.menu.MenuBuilder
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 
 class PosyanduFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // in here you can do logic when backPress is clicked
-                parentFragmentManager.popBackStack()
-            }
-        })
+        activity?.onBackPressedDispatcher?.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // in here you can do logic when backPress is clicked
+                    parentFragmentManager.popBackStack()
+                }
+            })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_posyandu, container, false)
+        return inflater.inflate(
+            R.layout.fragment_posyandu,
+            container,
+            false
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -48,6 +48,7 @@ class PosyanduFragment : Fragment() {
 
         val btnSettings: Button = view.findViewById(R.id.btn_settings)
         val cardJadwalPosyandu: MaterialCardView = view.findViewById(R.id.card_jadwal_posyandu)
+        val cardRemaja: MaterialCardView = view.findViewById(R.id.card_remaja)
         val btnInput: ExtendedFloatingActionButton = view.findViewById(R.id.btn_input)
 
         btnSettings.setOnClickListener { v: View ->
@@ -63,6 +64,15 @@ class PosyanduFragment : Fragment() {
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.fragment_container, JadwalPosyanduFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        cardRemaja.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container, DaftarRemajaFragment())
                 .addToBackStack(null)
                 .commit()
         }

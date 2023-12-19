@@ -12,8 +12,8 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="50dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="50dp"
         android:fontFamily="@font/inter_bold"
         android:text="Data Pemeriksaan"
         android:textColor="@color/md_theme_light_primary"
@@ -25,8 +25,8 @@
         android:id="@+id/remaja"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
         android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/inter_bold"
         android:text="Jane Doe"
         android:textColor="@color/md_theme_light_primary"
         android:textSize="24sp"
@@ -37,12 +37,12 @@
         android:id="@+id/tanggal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:fontFamily="@font/inter"
         android:text="Kamis, 23 November 2023"
         android:textColor="@color/md_theme_light_primary"
         android:textSize="19sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/remaja" />
 
     <TextView
@@ -69,10 +69,11 @@
         app:layout_constraintTop_toBottomOf="@id/waktu">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/berat_badan"
                 android:layout_width="wrap_content"
@@ -141,8 +142,8 @@
                 android:id="@+id/title_keterangan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_bold"
                 android:layout_marginTop="30dp"
+                android:fontFamily="@font/inter_bold"
                 android:text="Keterangan:"
                 android:textColor="@color/md_theme_light_primary"
                 android:textSize="19sp" />
@@ -157,44 +158,45 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/risiko"
+                android:paddingBottom="50dp"
                 android:layout_width="match_parent"
-                android:layout_marginVertical="30dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="30dp">
+
                 <TextView
                     android:id="@+id/text_risiko"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Tidak berisiko stunting"
+                    android:textColor="@color/success"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/draw_risiko"
-                    android:textColor="@color/success"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="Tidak berisiko stunting"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/draw_risiko"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/done_checkmark"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/text_risiko"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/btn_del"
-                style="@style/Widget.Material3.Button.TextButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Hapus"
-                android:textColor="@color/md_theme_light_error"
-                app:icon="@drawable/trash"
-                app:iconTint="@color/md_theme_light_error" />
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/edit"
+        app:tint="@color/md_theme_light_onPrimary" />
 </androidx.constraintlayout.widget.ConstraintLayout>
