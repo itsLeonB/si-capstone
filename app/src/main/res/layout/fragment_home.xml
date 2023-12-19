@@ -1,15 +1,585 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragmentBidan">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        >
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="50dp">
+
+                <TextView
+                    android:id="@+id/welcomeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:text="Selamat datang,"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/namaUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Cinta Laura Kiehl!"
+                    android:textSize="24sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/dashboardHomeBidan"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/namaUser"
+                    android:layout_marginBottom="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/dataPosyandu"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/kotakbiru"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <ImageView
+                                android:id="@+id/iconPosyandu"
+                                android:layout_width="0dp"
+                                android:layout_height="53dp"
+                                android:src="@drawable/home_health_fill0_wght400_grad0_opsz24"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/md_theme_light_primary" />
+
+                            <TextView
+                                android:id="@+id/kotaPosyandu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="Wonocolo"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="@+id/alamatPosyandu"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/iconPosyandu" />
+
+                            <TextView
+                                android:id="@+id/alamatPosyandu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:text="Jl. Sidosermo No. 12"
+                                android:textSize="16sp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/kotaPosyandu" />
+
+                            <ImageView
+                                android:layout_marginTop="8dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/arrow_circle_right_fill0_wght400_grad0_opsz24"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/alamatPosyandu"
+                                app:layout_constraintTop_toBottomOf="@+id/alamatPosyandu"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:tint="@color/md_theme_light_primary" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/kotakMerah"
+                            style="@style/Widget.Material3.CardView.Filled"
+                            android:layout_width="90dp"
+                            android:layout_height="146dp"
+                            app:cardBackgroundColor="@color/md_theme_light_errorContainer"
+                            app:cardCornerRadius="12dp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:id="@+id/jumlahstunting"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="5"
+                                    android:textColor="@color/md_theme_light_error"
+                                    android:textSize="50sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="remaja berisiko melahirkan anak stunting"
+                                    android:textColor="@color/md_theme_light_error"
+                                    android:textSize="12sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/jumlahstunting" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/kotakbiru"
+                            style="@style/Widget.Material3.CardView.Filled"
+                            android:layout_width="70dp"
+                            android:layout_height="0dp"
+                            android:layout_marginHorizontal="10dp"
+                            app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
+                            app:layout_constraintLeft_toRightOf="@id/dataPosyandu"
+                            app:layout_constraintRight_toLeftOf="@id/kotakMerah"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/kotakijo"
+                            app:cardCornerRadius="12dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/jumlahremaja"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="25"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    android:textSize="30sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:text="remaja"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/jumlahremaja" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/kotakijo"
+                            style="@style/Widget.Material3.CardView.Filled"
+                            android:layout_width="70dp"
+                            android:layout_height="0dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="6dp"
+                            app:cardBackgroundColor="@color/success_light"
+                            app:layout_constraintLeft_toRightOf="@id/dataPosyandu"
+                            app:layout_constraintRight_toLeftOf="@id/kotakMerah"
+                            app:layout_constraintTop_toBottomOf="@id/kotakbiru"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:cardCornerRadius="12dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/jumlahkader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="5"
+                                    android:textColor="@color/success"
+                                    android:textSize="30sp"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:text="kader"
+                                    android:textColor="@color/success"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/jumlahkader" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/jadwalterdekatbidan"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/dashboardHomeBidan"
+                    android:layout_marginBottom="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/barisjuduljadwal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tulisanjadwalterdekat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jadwal Terdekat"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="18sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/arrow_circle_right_fill0_wght400_grad0_opsz24"
+                            app:tint="@color/md_theme_light_primary"
+                            app:layout_constraintTop_toTopOf="@id/tulisanjadwalterdekat"
+                            app:layout_constraintLeft_toRightOf="@id/tulisanjadwalterdekat"
+                            app:layout_constraintBottom_toBottomOf="@id/tulisanjadwalterdekat"
+                            android:layout_marginLeft="6dp"
+                            />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/kartuhari"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/tulisanjadwalterdekat"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            style="@style/Widget.Material3.CardView.Elevated"
+                            app:cardBackgroundColor="@color/cardview_light_background">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/hari"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/judulacara"
+                                    android:text="Senin"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="16sp"
+                                    />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toBottomOf="@id/hari"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/judulacara"
+                                    android:text="25 Desember 2023"
+                                    android:fontFamily="@font/inter"
+                                    android:textSize="12sp"
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/iconpenyuluhan"
+                                    android:layout_width="30dp"
+                                    android:layout_height="0dp"
+                                    android:src="@drawable/history_edu_fill0_wght400_grad0_opsz24"
+                                    app:tint="@color/md_theme_light_primary"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                                <TextView
+                                    android:id="@+id/judulacara"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintRight_toLeftOf="@id/iconpenyuluhan"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:text="Penyuluhan 'Pentingnya Menjaga Nutrisi'"
+                                    android:fontFamily="@font/inter"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    android:layout_marginRight="6dp"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/kartuhari2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/kartuhari"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            style="@style/Widget.Material3.CardView.Elevated"
+                            app:cardBackgroundColor="@color/cardview_light_background">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/hari2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/judulacara2"
+                                    android:text="Selasa"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="16sp"
+                                    />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toBottomOf="@id/hari2"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/judulacara2"
+                                    android:text="26 Desember 2023"
+                                    android:fontFamily="@font/inter"
+                                    android:textSize="12sp"
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/iconpenyuluhan2"
+                                    android:layout_width="30dp"
+                                    android:layout_height="0dp"
+                                    android:src="@drawable/monitor_heart_fill0_wght400_grad0_opsz24"
+                                    app:tint="@color/md_theme_light_primary"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                                <TextView
+                                    android:id="@+id/judulacara2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintRight_toLeftOf="@id/iconpenyuluhan2"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:text="Posyandu bersama"
+                                    android:fontFamily="@font/inter"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    android:layout_marginRight="6dp"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/chatterbarubidan"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/jadwalterdekatbidan"
+                    android:layout_marginBottom="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tulisanchatterbaru"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chat terbaru"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="18sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/arrow_circle_right_fill0_wght400_grad0_opsz24"
+                            app:tint="@color/md_theme_light_primary"
+                            app:layout_constraintTop_toTopOf="@id/tulisanchatterbaru"
+                            app:layout_constraintLeft_toRightOf="@id/tulisanchatterbaru"
+                            app:layout_constraintBottom_toBottomOf="@id/tulisanchatterbaru"
+                            android:layout_marginLeft="6dp"
+                            />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/kartuchatter1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/tulisanchatterbaru"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            style="@style/Widget.Material3.CardView.Elevated"
+                            app:cardBackgroundColor="@color/cardview_light_background">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/sender1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    android:text="Amelia Apta"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/message1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toBottomOf="@id/sender1"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/panah1"
+                                    android:fontFamily="@font/inter"
+                                    android:textSize="12sp"
+                                    android:text="Ohh ternyata begitu ya Bu, saya sendiri sebelumnya juga kurang memperhatikan hal..."
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/panah1"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrow_forward_ios_fill0_wght400_grad0_opsz24"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@id/message1"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/kartuchatter2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/kartuchatter1"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            style="@style/Widget.Material3.CardView.Elevated"
+                            app:cardBackgroundColor="@color/cardview_light_background">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/sender2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    android:text="Leony Avellince"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/md_theme_light_primary"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/message2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintTop_toBottomOf="@id/sender2"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/panah2"
+                                    android:fontFamily="@font/inter"
+                                    android:textSize="12sp"
+                                    android:text="Selamat siang Bu, perkenalkan saya Leony, umur 21 tahun. Saya memiliki berat badan..."
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/panah2"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrow_forward_ios_fill0_wght400_grad0_opsz24"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@id/message2"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
