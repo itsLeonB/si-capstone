@@ -1,15 +1,16 @@
 package com.example.posyandu
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class PemeriksaanViewFragment : Fragment() {
+class PemeriksaanFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.onBackPressedDispatcher?.addCallback(
@@ -29,7 +30,7 @@ class PemeriksaanViewFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(
-            R.layout.fragment_pemeriksaan_view,
+            R.layout.fragment_pemeriksaan,
             container,
             false
         )
@@ -38,13 +39,23 @@ class PemeriksaanViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnEdit: FloatingActionButton = view.findViewById(R.id.btn_edit)
+        val card: MaterialCardView = view.findViewById(R.id.card)
+        val btnTambah: FloatingActionButton = view.findViewById(R.id.btn_tambah)
 
-        btnEdit.setOnClickListener {
+        card.setOnClickListener {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, PemeriksaanEditFragment())
+                .replace(R.id.fragment_container, PemeriksaanViewFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        btnTambah.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container, PemeriksaanCreateFragment())
                 .addToBackStack(null)
                 .commit()
         }

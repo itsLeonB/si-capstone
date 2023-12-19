@@ -18,7 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="150dp">
 
             <ImageView
                 android:id="@+id/gambar_posyandu"
@@ -307,61 +308,61 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/dash_remaja"
-                            android:layout_margin="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/card_title_remaja">
 
 
                             <TextView
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
                                 android:id="@+id/angka_kader"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter_bold"
                                 android:text="5"
                                 android:textColor="@color/success"
-                                android:textSize="29sp" />
+                                android:textSize="29sp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/angka_kader"
-                                app:layout_constraintRight_toLeftOf="@id/ket_risiko"
                                 android:id="@+id/ket_kader"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
                                 android:text="remaja aktif sebagai kader"
                                 android:textColor="@color/success"
-                                android:textSize="19sp" />
+                                android:textSize="19sp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/ket_risiko"
+                                app:layout_constraintTop_toBottomOf="@id/angka_kader" />
 
 
                             <TextView
                                 android:id="@+id/angka_risiko"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintLeft_toRightOf="@id/ket_kader"
-                                app:layout_constraintBottom_toTopOf="@id/ket_risiko"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter_bold"
                                 android:text="5"
                                 android:textColor="@color/md_theme_light_error"
-                                android:textSize="29sp" />
+                                android:textSize="29sp"
+                                app:layout_constraintBottom_toTopOf="@id/ket_risiko"
+                                app:layout_constraintLeft_toRightOf="@id/ket_kader"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/ket_risiko"
-                                app:layout_constraintLeft_toRightOf="@id/ket_kader"
-                                app:layout_constraintTop_toBottomOf="@id/angka_risiko"
-                                app:layout_constraintRight_toRightOf="parent"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
                                 android:text="remaja aktif sebagai kader"
                                 android:textColor="@color/md_theme_light_error"
-                                android:textSize="19sp" />
+                                android:textSize="19sp"
+                                app:layout_constraintLeft_toRightOf="@id/ket_kader"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/angka_risiko" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -373,8 +374,8 @@
                             android:text="@string/link_card"
                             android:textColor="@color/md_theme_light_primary"
                             android:textSize="11sp"
-                            app:layout_constraintTop_toBottomOf="@id/dash_remaja"
-                            app:layout_constraintRight_toRightOf="parent" />
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/dash_remaja" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -400,7 +401,6 @@
         app:iconTint="@color/md_theme_light_onPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
