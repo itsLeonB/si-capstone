@@ -39,6 +39,15 @@ class DaftarRemajaFragment : Fragment() {
         )
     }
 
+    private fun handleOptionClick(fragment: Fragment) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,22 +70,12 @@ class DaftarRemajaFragment : Fragment() {
 
             optProfil.setOnClickListener {
                 remajaDialog.cancel()
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_container, DaftarRemajaEditFragment())
-                    .addToBackStack(null)
-                    .commit()
+                handleOptionClick(DaftarRemajaEditFragment())
             }
 
             optPemeriksaan.setOnClickListener {
                 remajaDialog.cancel()
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_container, PemeriksaanFragment())
-                    .addToBackStack(null)
-                    .commit()
+                handleOptionClick(PemeriksaanFragment())
             }
 
             optKader.setOnClickListener {
@@ -84,10 +83,17 @@ class DaftarRemajaFragment : Fragment() {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Anda yakin untuk mencabut akses kader?")
                     .setPositiveButton("Ya") { _, _ ->
+                        // Try to find an existing instance of DaftarRemajaFragment
+                        val existingFragment = requireActivity().supportFragmentManager
+                            .findFragmentByTag("DaftarRemajaFragment") as? DaftarRemajaFragment
+
+                        // Use the existing instance if found, otherwise create a new one
+                        val fragmentToUse = existingFragment ?: DaftarRemajaFragment()
+
                         requireActivity().supportFragmentManager
                             .beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .replace(R.id.fragment_container, DaftarRemajaFragment())
+                            .replace(R.id.fragment_container, fragmentToUse, "DaftarRemajaFragment")
                             .commit()
 
                         val btmBar =
@@ -123,22 +129,12 @@ class DaftarRemajaFragment : Fragment() {
 
             optProfil.setOnClickListener {
                 remajaDialog.cancel()
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_container, DaftarRemajaEditFragment())
-                    .addToBackStack(null)
-                    .commit()
+                handleOptionClick(DaftarRemajaEditFragment())
             }
 
             optPemeriksaan.setOnClickListener {
                 remajaDialog.cancel()
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_container, PemeriksaanFragment())
-                    .addToBackStack(null)
-                    .commit()
+                handleOptionClick(PemeriksaanFragment())
             }
 
             optKader.setOnClickListener {

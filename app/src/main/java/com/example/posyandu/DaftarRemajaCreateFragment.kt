@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -77,10 +76,15 @@ class DaftarRemajaCreateFragment : Fragment() {
         }
 
         btnSimpan.setOnClickListener {
+            val existingFragment = requireActivity().supportFragmentManager
+                .findFragmentByTag("DaftarRemajaFragment") as? DaftarRemajaFragment
+
+            val fragmentToUse = existingFragment ?: DaftarRemajaFragment()
+
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, DaftarRemajaFragment())
+                .replace(R.id.fragment_container, fragmentToUse, "DaftarRemajaFragment")
                 .commit()
 
             val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -89,31 +93,5 @@ class DaftarRemajaCreateFragment : Fragment() {
                 .setAnchorView(btmBar)
                 .show()
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createDatePicker(
-        editText: TextInputEditText,
-        constraintsBuilder: CalendarConstraints.Builder,
-        today: Long,
-    ): MaterialDatePicker<Long> {
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setCalendarConstraints(constraintsBuilder.build())
-                .setSelection(today)
-                .setTitleText("Pilih tanggal")
-                .build()
-
-        datePicker.addOnPositiveButtonClickListener {
-            val dateTime = LocalDateTime.ofInstant(
-                datePicker.selection?.let { it1 -> Instant.ofEpochMilli(it1) },
-                TimeZone.getDefault().toZoneId()
-            )
-            val formatter = DateTimeFormatter.ofPattern("dd MMM YY")
-            val formattedDate = dateTime.format(formatter)
-            editText.setText(formattedDate)
-        }
-
-        return datePicker
     }
 }

@@ -69,10 +69,17 @@ class PosyanduFragment : Fragment() {
         }
 
         cardRemaja.setOnClickListener {
+            // Try to find an existing instance of DaftarRemajaFragment
+            val existingFragment = requireActivity().supportFragmentManager
+                .findFragmentByTag("DaftarRemajaFragment") as? DaftarRemajaFragment
+
+            // Use the existing instance if found, otherwise create a new one
+            val fragmentToUse = existingFragment ?: DaftarRemajaFragment()
+
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, DaftarRemajaFragment())
+                .replace(R.id.fragment_container, fragmentToUse, "DaftarRemajaFragment")
                 .addToBackStack(null)
                 .commit()
         }
