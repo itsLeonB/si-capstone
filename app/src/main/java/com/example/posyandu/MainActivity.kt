@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         // as soon as the application opens the first fragment should
         // be shown to the user in this case it is algorithm fragment
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, HomeFragment()).commit()
+            .replace(R.id.fragment_container, HomeFragmentBidan()).commit()
     }
 
     private val navListener = NavigationBarView.OnItemSelectedListener {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var selectedFragment: Fragment
         when (it.itemId) {
             R.id.home -> {
-                selectedFragment = HomeFragment()
+                selectedFragment = HomeFragmentBidan()
             }
 
             R.id.konsultasi -> {
