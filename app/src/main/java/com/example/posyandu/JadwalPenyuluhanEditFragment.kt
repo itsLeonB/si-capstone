@@ -51,9 +51,9 @@ class JadwalPenyuluhanEditFragment : Fragment() {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.fragment_container, JadwalPenyuluhanViewFragment())
                 .commit()
-            Snackbar.make(btmBar!!, "Jadwal berhasil dibuat", Snackbar.LENGTH_SHORT)
+            btmBar?.let { Snackbar.make(it, "Jadwal berhasil dibuat", Snackbar.LENGTH_SHORT)
                 .setAnchorView(btmBar)
-                .show()
+                .show()}
         }
         del.setOnClickListener {
             requireActivity().supportFragmentManager
