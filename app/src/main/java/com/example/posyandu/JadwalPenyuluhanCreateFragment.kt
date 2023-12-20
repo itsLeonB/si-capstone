@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -37,7 +38,7 @@ class JadwalPenyuluhanCreateFragment : Fragment() {
             }
         )
         val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val btnTambah: FloatingActionButton = view.findViewById(R.id.btn_tambah)
+        val btnTambah: Button = view.findViewById(R.id.btn_tambah)
 
         btnTambah.setOnClickListener {
             requireActivity().supportFragmentManager
