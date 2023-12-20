@@ -12,18 +12,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 class JadwalPenyuluhanCreateFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    // in here you can do logic when backPress is clicked
-                    parentFragmentManager.popBackStack()
-                }
-            }
-        )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +27,15 @@ class JadwalPenyuluhanCreateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // in here you can do logic when backPress is clicked
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        )
         val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val btnTambah: FloatingActionButton = view.findViewById(R.id.btn_tambah)
 
