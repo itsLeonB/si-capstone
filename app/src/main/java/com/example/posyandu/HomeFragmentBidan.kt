@@ -36,10 +36,8 @@ class HomeFragmentBidan: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val cardJadwalTerdekat: MaterialCardView = view.findViewById(R.id.jadwalterdekatbidan)
-
-        val btnSettings: Button = view.findViewById(R.id.btn_settings)
-        val cardJadwalPosyandu: MaterialCardView = view.findViewById(R.id.card_jadwal_posyandu)
-        val btnInput: ExtendedFloatingActionButton = view.findViewById(R.id.btn_input)
+        val cardDashboard: MaterialCardView = view.findViewById(R.id.dashboardHomeBidan)
+//        val cardChatTerbaru: MaterialCardView = view.findViewById(R.id.chatterbarubidan)
 
         cardJadwalTerdekat.setOnClickListener { v: View ->
             requireActivity().supportFragmentManager
@@ -49,6 +47,24 @@ class HomeFragmentBidan: Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        cardDashboard.setOnClickListener { v: View ->
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container, DaftarRemajaFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+//        cardChatTerbaru.setOnClickListener { v: View ->
+//            requireActivity().supportFragmentManager
+//                .beginTransaction()
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                .replace(R.id.fragment_container, ChatFragment())
+//                .addToBackStack(null)
+//                .commit()
+//        }
 
 
     }
