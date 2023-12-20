@@ -48,6 +48,7 @@ class PosyanduFragment : Fragment() {
 
         val btnSettings: Button = view.findViewById(R.id.btn_settings)
         val cardJadwalPosyandu: MaterialCardView = view.findViewById(R.id.card_jadwal_posyandu)
+        val cardJadwalPenyuluhan: MaterialCardView = view.findViewById(R.id.card_jadwal_penyuluhan)
         val cardRemaja: MaterialCardView = view.findViewById(R.id.card_remaja)
         val btnInput: ExtendedFloatingActionButton = view.findViewById(R.id.btn_input)
 
@@ -56,14 +57,18 @@ class PosyanduFragment : Fragment() {
         }
 
         cardJadwalPosyandu.setOnClickListener {
-//            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.fragment_container, JadwalPosyanduFragment())
-//            fragmentTransaction.addToBackStack(null) // Add transaction to back stack
-//            fragmentTransaction.commit()
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.fragment_container, JadwalPosyanduFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+        cardJadwalPenyuluhan.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container, JadwalPenyuluhanFragment())
                 .addToBackStack(null)
                 .commit()
         }
