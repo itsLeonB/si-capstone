@@ -31,14 +31,15 @@
                     android:contentDescription="@string/title_foto_posyandu"
                     android:cropToPadding="false"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/kantor_kelurahan_kemang_manis__kec_ilir_barat_ii__kota_palembang" />
+                    app:srcCompat="@drawable/kantor_kelurahan_kemang_manis__kec_ilir_barat_ii__kota_palembang"
+/>
 
                 <ImageView
                     android:id="@+id/lingkaran"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="190dp"
+                    android:layout_marginTop="160dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@id/gambar_posyandu"
@@ -57,6 +58,7 @@
                     />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonedit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Edit Profile"
@@ -108,15 +110,27 @@
                     android:text="Nama"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    app:layout_constraintTop_toBottomOf="@id/title_nama"
-                    android:text="Vernita Kirana"
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/title_nama">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="Vernita Kirana"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_email"
@@ -130,15 +144,29 @@
                     android:text="Email"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    app:layout_constraintTop_toBottomOf="@id/title_email"
-                    android:text="vernita.k123@gmail.com"
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/title_email"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="vernita.k123@gmail.com"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_nik"
@@ -152,15 +180,29 @@
                     android:text="NIK"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_nik"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_nik"
-                    android:text="3578042603020010"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editNIK"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="3578042603020010"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_ttl"
@@ -171,18 +213,33 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/inter"
                     android:textSize="16sp"
-                    android:text="NIK"
+                    android:text="Tanggal Lahir"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_ttl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_ttl"
-                    android:text="26/03/2002"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTTL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="26/03/2002"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
 
                 <TextView
                     android:id="@+id/title_alamat"
@@ -196,15 +253,29 @@
                     android:text="Alamat"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_alamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_alamat"
-                    android:text="Jl. Sidosermo II Blok K No. 4"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editAlamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="Jl. Sidosermo II Blok K No. 4"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_provinsi"
@@ -218,15 +289,30 @@
                     android:text="Provinsi"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_provinsi"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_provinsi"
-                    android:text="Jawa Timur"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/editProvinsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:text="Jawa Timur"
+                        app:simpleItems="@array/provinsi"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_kota"
@@ -240,15 +326,31 @@
                     android:text="Kota"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_kota"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_kota"
-                    android:text="Surabaya"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/editKota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        app:simpleItems="@array/kota"
+                        android:text="Surabaya"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_kecamatan"
@@ -262,15 +364,31 @@
                     android:text="Kecamatan"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_kecamatan"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_kecamatan"
-                    android:text="Wonocolo"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/editKecamatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        app:simpleItems="@array/kecamatan"
+                        android:text="Wonocolo"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_kelurahan"
@@ -284,15 +402,31 @@
                     android:text="Kelurahan"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_kelurahan"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_kelurahan"
-                    android:text="Kedung Baruk"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/editKelurahan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        app:simpleItems="@array/kelurahan"
+                        android:text="Kedung Baruk"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_kodepos"
@@ -306,15 +440,30 @@
                     android:text="Kode Pos"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_kodepos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_kodepos"
-                    android:text="60298"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editKodePos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="60298"
+                        android:maxLength="5"
+                        android:enabled="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_rt"
@@ -328,46 +477,69 @@
                     android:text="RT"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_rt"
-                    android:layout_width="50dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_rt"
-                    android:text="08"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editRT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="08"
+                        android:maxLength="2"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:layout_marginLeft="50dp"
                     android:id="@+id/title_rw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/input_kodepos"
-                    app:layout_constraintLeft_toRightOf="@id/title_rt"
-                    app:layout_constraintBottom_toTopOf="@id/input_rw"
+                    app:layout_constraintTop_toBottomOf="@id/input_rt"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/inter"
                     android:textSize="16sp"
-                    android:text="RW"
+                    android:text="RT"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_marginLeft="20dp"
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_rw"
-                    android:layout_width="50dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    app:layout_constraintTop_toBottomOf="@id/title_rt"
-                    android:text="08"
-                    app:layout_constraintLeft_toRightOf="@id/input_rt"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/title_rw"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editRW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="08"
+                        android:maxLength="2"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/title_notelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/input_rt"
+                    app:layout_constraintTop_toBottomOf="@id/input_rw"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/inter"
@@ -375,16 +547,39 @@
                     android:text="Nomor Telepon"
                     />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_notelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintTop_toBottomOf="@id/title_notelp"
-                    android:text="082306071010"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    android:layout_marginTop="6dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editNotelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="082306071010"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    app:cornerRadius="12dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonSaveChanges"
+                    app:layout_constraintTop_toBottomOf="@id/input_notelp"
+                    android:fontFamily="@font/inter"
+                    android:text="Save Changes"
+                    android:visibility="gone"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
