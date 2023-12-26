@@ -49,7 +49,7 @@ class JadwalPenyuluhanEditFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPenyuluhanViewFragment())
+                .replace(R.id.container, JadwalPenyuluhanViewFragment())
                 .commit()
             btmBar?.let { Snackbar.make(it, "Jadwal berhasil dibuat", Snackbar.LENGTH_SHORT)
                 .setAnchorView(btmBar)
@@ -59,7 +59,7 @@ class JadwalPenyuluhanEditFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPenyuluhanFragment())
+                .replace(R.id.container, JadwalPenyuluhanFragment())
                 .commit()
             Snackbar.make(btmBar!!, "Jadwal berhasil dihapus", Snackbar.LENGTH_SHORT)
                 .setAnchorView(btmBar)

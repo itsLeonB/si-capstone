@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/md_theme_light_surface"
     android:theme="@style/AppTheme"
-    tools:context=".PemeriksaanViewFragment">
+    tools:context=".PemeriksaanViewActivity">
 
     <TextView
         android:id="@+id/title"
@@ -158,10 +158,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/risiko"
-                android:paddingBottom="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="30dp">
+                android:layout_marginVertical="30dp"
+                android:paddingBottom="50dp">
 
                 <TextView
                     android:id="@+id/text_risiko"

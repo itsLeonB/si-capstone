@@ -43,19 +43,19 @@ class HomeFragmentBidan: Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, PosyanduFragment())
+                .replace(R.id.container, PosyanduFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        cardDashboard.setOnClickListener { v: View ->
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, DaftarRemajaFragment())
-                .addToBackStack(null)
-                .commit()
-        }
+//        cardDashboard.setOnClickListener { v: View ->
+//            requireActivity().supportFragmentManager
+//                .beginTransaction()
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                .replace(R.id.container, DaftarRemajaFragment())
+//                .addToBackStack(null)
+//                .commit()
+//        }
 
 //        cardChatTerbaru.setOnClickListener { v: View ->
 //            requireActivity().supportFragmentManager

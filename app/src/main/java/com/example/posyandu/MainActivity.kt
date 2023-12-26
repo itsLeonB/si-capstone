@@ -1,60 +1,49 @@
 package com.example.posyandu
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.posyandu.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var navHostFragment: NavHostFragment
+    private lateinit var btmBar: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
-        val userRole = "bidan"
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNav.selectedItemId = R.id.home
-        bottomNav.setOnItemSelectedListener(navListener)
+        // Retrieve the selectedPosyandu from the Intent
+        val selectedPosyandu = intent.getStringExtra("selectedPosyandu")
 
-        // as soon as the application opens the first fragment should
-        // be shown to the user in this case it is algorithm fragment
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, HomeFragmentBidan()).commit()
+        btmBar = binding.bottomNavigation
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        navController = navHostFragment.navController
+        btmBar.setupWithNavController(navController)
+
+        if (selectedPosyandu != null) {
+            val toPosyanduFragment =
+                HomeFragmentDirections.actionHomeFragmentToPosyanduFragment(selectedPosyandu)
+            navController.navigate(toPosyanduFragment)
+        }
     }
 
-    private val navListener = NavigationBarView.OnItemSelectedListener {
-        // By using switch we can easily get the
-        // selected fragment by using there id
-        lateinit var selectedFragment: Fragment
-        when (it.itemId) {
-            R.id.home -> {
-                selectedFragment = HomeFragmentBidan()
-            }
-
-            R.id.konsultasi -> {
-                selectedFragment = KonsultasiFragment()
-            }
-
-            R.id.posyandu -> {
-                selectedFragment = PosyanduFragment()
-            }
-
-            R.id.profile -> {
-                selectedFragment = ProfileFragment()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.homeFragment -> {
+                navHostFragment.navController.popBackStack()
+                return true
             }
         }
-        // It will help to replace the
-        // one fragment to other.
-//        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment)
-//            .commit()
-        supportFragmentManager
-            .beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.fragment_container, selectedFragment)
-            .addToBackStack(null)
-            .commit()
-        true
+        return super.onOptionsItemSelected(item)
     }
 }

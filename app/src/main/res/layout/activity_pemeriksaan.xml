@@ -7,7 +7,7 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:theme="@style/AppTheme"
-    tools:context=".PemeriksaanFragment">
+    tools:context=".PemeriksaanActivity">
 
     <TextView
         android:id="@+id/pemeriksaan_title"
@@ -74,7 +74,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card"
+                android:id="@+id/card_unok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -86,20 +86,20 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/status"
+                        android:id="@+id/status_unok"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_bold"
                         android:text="Berisiko stunting"
                         android:textColor="@color/md_theme_light_error"
                         android:textSize="17sp"
-                        app:layout_constraintBottom_toTopOf="@id/tanggal"
+                        app:layout_constraintBottom_toTopOf="@id/tanggal_unok"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
-                        android:id="@+id/tanggal"
+                        android:id="@+id/tanggal_unok"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
@@ -107,11 +107,11 @@
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/status" />
+                        app:layout_constraintTop_toBottomOf="@id/status_unok" />
 
 
                     <ImageView
-                        android:id="@+id/status_draw"
+                        android:id="@+id/status_draw_unok"
                         android:layout_width="50dp"
                         android:layout_height="0dp"
                         android:adjustViewBounds="true"
@@ -126,7 +126,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card"
+                android:id="@+id/card_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -138,20 +138,20 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/status"
+                        android:id="@+id/status_ok"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_bold"
                         android:text="Tidak berisiko"
                         android:textColor="@color/success"
                         android:textSize="17sp"
-                        app:layout_constraintBottom_toTopOf="@id/tanggal"
+                        app:layout_constraintBottom_toTopOf="@id/tanggal_ok"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
-                        android:id="@+id/tanggal"
+                        android:id="@+id/tanggal_ok"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
@@ -159,11 +159,11 @@
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/status" />
+                        app:layout_constraintTop_toBottomOf="@id/status_ok" />
 
 
                     <ImageView
-                        android:id="@+id/status_draw"
+                        android:id="@+id/status_draw_ok"
                         android:layout_width="50dp"
                         android:layout_height="0dp"
                         android:adjustViewBounds="true"

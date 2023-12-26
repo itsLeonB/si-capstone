@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".JadwalPosyanduFragment">
+    tools:context=".JadwalPosyanduActivity">
 
     <TextView
         android:id="@+id/jadwal_title"

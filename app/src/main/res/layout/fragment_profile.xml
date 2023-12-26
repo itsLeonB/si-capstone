@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".ProfileBidan">
+    tools:context=".ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"

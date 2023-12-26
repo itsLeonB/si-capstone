@@ -44,7 +44,7 @@ class JadwalPenyuluhanViewFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPenyuluhanEditFragment())
+                .replace(R.id.container, JadwalPenyuluhanEditFragment())
                 .addToBackStack(null)
                 .commit()
         }

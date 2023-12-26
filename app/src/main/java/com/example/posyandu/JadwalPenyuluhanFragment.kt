@@ -47,7 +47,7 @@ class JadwalPenyuluhanFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPenyuluhanViewFragment())
+                .replace(R.id.container, JadwalPenyuluhanViewFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -56,7 +56,7 @@ class JadwalPenyuluhanFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPenyuluhanCreateFragment())
+                .replace(R.id.container, JadwalPenyuluhanCreateFragment())
                 .addToBackStack(null)
                 .commit()
         }
