@@ -17,11 +17,11 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
 
         binding.btnTambah.setOnClickListener {
             val intent = Intent()
-            finish()
             val newIntent = Intent(this, PemeriksaanViewActivity::class.java)
             newIntent.putExtra("snackbar_message", "Pemeriksaan berhasil disimpan")
             setResult(Activity.RESULT_OK, newIntent)
             startActivity(newIntent)
+            finish()
         }
     }
 }

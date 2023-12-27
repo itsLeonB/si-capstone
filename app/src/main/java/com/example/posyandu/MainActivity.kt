@@ -20,21 +20,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // Retrieve the selectedPosyandu from the Intent
-        val selectedPosyandu = intent.getStringExtra("selectedPosyandu")
-
         btmBar = binding.bottomNavigation
 
-        val navHostFragment =
+        navHostFragment =
             supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         navController = navHostFragment.navController
         btmBar.setupWithNavController(navController)
-
-        if (selectedPosyandu != null) {
-            val toPosyanduFragment =
-                HomeFragmentDirections.actionHomeFragmentToPosyanduFragment(selectedPosyandu)
-            navController.navigate(toPosyanduFragment)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

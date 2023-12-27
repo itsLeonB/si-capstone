@@ -54,13 +54,12 @@ class PosyanduFragment : Fragment() {
                 }
             }
 
-        val selectedPosyandu = arguments?.getString("selectedPosyandu")
+        selectedPosyandu = activity?.intent?.getStringExtra("selectedPosyandu")
+        binding = FragmentPosyanduBinding.inflate(inflater, container, false)
         if (selectedPosyandu != null) {
-            binding.namaPosyandu.setText(selectedPosyandu)
+            binding.namaPosyandu.text = selectedPosyandu
         }
 
-
-        binding = FragmentPosyanduBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -126,29 +125,16 @@ class PosyanduFragment : Fragment() {
             .setTitle("Ganti Posyandu")
             .setItems(items) { _, which ->
                 val selectedPosyandu = items[which]
+                val newIntent = Intent(requireActivity(), MainActivity::class.java)
 
-                // Update the EditText in PosyanduFragment with the selected item
-                binding.namaPosyandu.setText(selectedPosyandu)
+                // Pass the selectedPosyandu as an extra to the new MainActivity
+                newIntent.putExtra("selectedPosyandu", selectedPosyandu)
 
-                // Move to the new MainActivity with PosyanduFragment focused
-                moveToNewMainActivity()
+                startActivity(newIntent)
+
+                // If needed, you can finish the current activity
+                requireActivity().finish()
             }
             .show()
-    }
-
-    public fun getSelectedPosyandu(): String? {
-        return selectedPosyandu
-    }
-
-    private fun moveToNewMainActivity() {
-        val newIntent = Intent(requireActivity(), MainActivity::class.java)
-
-        // Pass the selectedPosyandu as an extra to the new MainActivity
-        newIntent.putExtra("selectedPosyandu", selectedPosyandu)
-
-        startActivity(newIntent)
-
-        // If needed, you can finish the current activity
-        requireActivity().finish()
     }
 }
