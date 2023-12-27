@@ -13,6 +13,33 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".PemeriksaanCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PemeriksaanEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PemeriksaanViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PemeriksaanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DaftarRemajaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DaftarRemajaCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DaftarRemajaEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PosyanduEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".JadwalPosyanduActivity"
+            android:exported="false" />
+        <activity
             android:name=".SandiBaruActivity"
             android:exported="false" />
         <activity

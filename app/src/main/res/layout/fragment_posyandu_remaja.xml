@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".PosyanduFragment">
+    tools:context=".PosyanduFragmentRemaja">
 
 
     <ScrollView

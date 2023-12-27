@@ -1,20 +1,16 @@
 package com.example.posyandu
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.card.MaterialCardView
+import androidx.appcompat.app.AppCompatActivity
+import com.example.posyandu.databinding.ActivityJadwalPosyanduBinding
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -24,36 +20,31 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.TimeZone
 
-class JadwalPosyanduFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_jadwal_posyandu, container, false)
-    }
+class JadwalPosyanduActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityJadwalPosyanduBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityJadwalPosyanduBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val btnTambah: FloatingActionButton = view.findViewById(R.id.btn_tambah)
-        val cardJadwal: MaterialCardView = view.findViewById(R.id.card_jadwal_1)
-
-        btnTambah.setOnClickListener {
-            showCreateDialog()
+        binding.btnTambah.setOnClickListener {
+            showCreateDialog(view)
         }
 
-        cardJadwal.setOnClickListener {
-            showViewDialog()
+        binding.cardJadwal1.setOnClickListener {
+            showViewDialog(view)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun showViewDialog() {
+    private fun showViewDialog(view: View) {
         val customView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.fragment_jadwal_posyandu_view, null)
+            LayoutInflater.from(this).inflate(R.layout.fragment_jadwal_posyandu_view, null)
 
-        val viewDialog = MaterialAlertDialogBuilder(requireContext())
+        val viewDialog = MaterialAlertDialogBuilder(this)
             .setView(customView)
             .show()
 
@@ -63,23 +54,23 @@ class JadwalPosyanduFragment : Fragment() {
 
         editJadwal.setOnClickListener {
             viewDialog.cancel()
-            showEditDialog()
+            showEditDialog(view)
         }
 
         btnTambah.setOnClickListener {
             viewDialog.cancel()
-            showCreateDialog()
+            showCreateDialog(view)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun showEditDialog() {
+    private fun showEditDialog(view: View) {
         val customView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.fragment_jadwal_posyandu_edit, null)
+            LayoutInflater.from(this).inflate(R.layout.fragment_jadwal_posyandu_edit, null)
         val tanggalEdit: TextInputEditText = customView.findViewById(R.id.tanggal_edit)
         val jamMulaiEdit: TextInputEditText = customView.findViewById(R.id.jam_mulai_edit)
         val jamSelesaiEdit: TextInputEditText = customView.findViewById(R.id.jam_selesai_edit)
-        
+
         val btnTambah: Button = customView.findViewById(R.id.btn_tambah)
         val btnDel: Button = customView.findViewById(R.id.btn_del)
 
@@ -91,58 +82,42 @@ class JadwalPosyanduFragment : Fragment() {
 
         tanggalEdit.setOnClickListener {
             val datePicker = createDatePicker(tanggalEdit, constraintsBuilder, today)
-            datePicker.show(parentFragmentManager, datePicker.toString())
+            datePicker.show(supportFragmentManager, datePicker.toString())
         }
 
         jamMulaiEdit.setOnClickListener {
             val timePicker = createTimePicker(jamMulaiEdit)
-            timePicker.show(parentFragmentManager, timePicker.toString())
+            timePicker.show(supportFragmentManager, timePicker.toString())
         }
 
         jamSelesaiEdit.setOnClickListener {
             val timePicker = createTimePicker(jamSelesaiEdit)
-            timePicker.show(parentFragmentManager, timePicker.toString())
+            timePicker.show(supportFragmentManager, timePicker.toString())
         }
 
-        val editDialog = MaterialAlertDialogBuilder(requireContext())
+        val editDialog = MaterialAlertDialogBuilder(this)
             .setView(customView)
             .show()
 
         btnTambah.setOnClickListener {
-            val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
             editDialog.cancel()
 
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, JadwalPosyanduFragment())
-                .commit()
-
-            Snackbar.make(btmBar!!, "Jadwal berhasil diperbarui", Snackbar.LENGTH_SHORT)
-                .setAnchorView(btmBar)
+            Snackbar.make(view, "Jadwal berhasil diperbarui", Snackbar.LENGTH_SHORT)
                 .show()
         }
 
         btnDel.setOnClickListener {
-            val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
             editDialog.cancel()
 
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, JadwalPosyanduFragment())
-                .commit()
-
-            Snackbar.make(btmBar!!, "Jadwal berhasil dihapus", Snackbar.LENGTH_SHORT)
-                .setAnchorView(btmBar)
+            Snackbar.make(view, "Jadwal berhasil dihapus", Snackbar.LENGTH_SHORT)
                 .show()
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun showCreateDialog() {
+    private fun showCreateDialog(view: View) {
         val customView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.fragment_jadwal_posyandu_create, null)
+            LayoutInflater.from(this).inflate(R.layout.fragment_jadwal_posyandu_create, null)
         val tanggalEdit: TextInputEditText = customView.findViewById(R.id.tanggal_edit)
         val jamMulaiEdit: TextInputEditText = customView.findViewById(R.id.jam_mulai_edit)
         val jamSelesaiEdit: TextInputEditText = customView.findViewById(R.id.jam_selesai_edit)
@@ -156,40 +131,32 @@ class JadwalPosyanduFragment : Fragment() {
 
         tanggalEdit.setOnClickListener {
             val datePicker = createDatePicker(tanggalEdit, constraintsBuilder, today)
-            datePicker.show(parentFragmentManager, datePicker.toString())
+            datePicker.show(supportFragmentManager, datePicker.toString())
         }
 
         jamMulaiEdit.setOnClickListener {
             val timePicker = createTimePicker(jamMulaiEdit)
-            timePicker.show(parentFragmentManager, timePicker.toString())
+            timePicker.show(supportFragmentManager, timePicker.toString())
         }
 
         jamSelesaiEdit.setOnClickListener {
             val timePicker = createTimePicker(jamSelesaiEdit)
-            timePicker.show(parentFragmentManager, timePicker.toString())
+            timePicker.show(supportFragmentManager, timePicker.toString())
         }
 
-        val createDialog = MaterialAlertDialogBuilder(requireContext())
+        val createDialog = MaterialAlertDialogBuilder(this)
             .setView(customView)
             .show()
 
         btnTambah.setOnClickListener {
-            val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
             createDialog.cancel()
 
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, JadwalPosyanduFragment())
-                .commit()
-
-            Snackbar.make(btmBar!!, "Jadwal berhasil ditambahkan", Snackbar.LENGTH_SHORT)
-                .setAnchorView(btmBar)
+            Snackbar.make(view, "Jadwal berhasil ditambahkan", Snackbar.LENGTH_SHORT)
                 .show()
         }
     }
 
-    @SuppressLint("NewApi")
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createDatePicker(
         editText: TextInputEditText,
         constraintsBuilder: CalendarConstraints.Builder,

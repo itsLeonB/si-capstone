@@ -1,24 +1,31 @@
 package com.example.posyandu
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.PopupMenu
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.posyandu.databinding.FragmentPosyanduBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 class PosyanduFragment : Fragment() {
+    private var selectedPosyandu: String? = null
+    private lateinit var binding: FragmentPosyanduBinding
+    private lateinit var startNewActivity: ActivityResultLauncher<Intent>
+    private lateinit var btmBar: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.onBackPressedDispatcher?.addCallback(
@@ -34,69 +41,60 @@ class PosyanduFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(
-            R.layout.fragment_posyandu,
-            container,
-            false
-        )
+    ): View {
+        btmBar = requireActivity().findViewById(R.id.bottom_navigation)
+
+        startNewActivity =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val snackbarMessage = result.data?.getStringExtra("snackbar_message")
+                    Snackbar.make(requireView(), snackbarMessage!!, Snackbar.LENGTH_SHORT)
+                        .setAnchorView(btmBar)
+                        .show()
+                }
+            }
+
+        selectedPosyandu = activity?.intent?.getStringExtra("selectedPosyandu")
+        binding = FragmentPosyanduBinding.inflate(inflater, container, false)
+        if (selectedPosyandu != null) {
+            binding.namaPosyandu.text = selectedPosyandu
+        }
+
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnSettings: Button = view.findViewById(R.id.btn_settings)
-        val cardJadwalPosyandu: MaterialCardView = view.findViewById(R.id.card_jadwal_posyandu)
-        val cardJadwalPenyuluhan: MaterialCardView = view.findViewById(R.id.card_jadwal_penyuluhan)
-        val cardRemaja: MaterialCardView = view.findViewById(R.id.card_remaja)
-        val btnInput: ExtendedFloatingActionButton = view.findViewById(R.id.btn_input)
-
-        btnSettings.setOnClickListener { v: View ->
+        binding.btnSettings.setOnClickListener { v: View ->
             showMenu(v, R.menu.posyandu_settings_menu)
         }
 
-        cardJadwalPosyandu.setOnClickListener {
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPosyanduFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-        cardJadwalPenyuluhan.setOnClickListener {
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, JadwalPenyuluhanFragment())
-                .addToBackStack(null)
-                .commit()
+        binding.cardJadwalPosyandu.setOnClickListener {
+            val intent = Intent(requireActivity(), JadwalPosyanduActivity::class.java)
+            startNewActivity.launch(intent)
         }
 
-        cardRemaja.setOnClickListener {
-            // Try to find an existing instance of DaftarRemajaFragment
-            val existingFragment = requireActivity().supportFragmentManager
-                .findFragmentByTag("DaftarRemajaFragment") as? DaftarRemajaFragment
-
-            // Use the existing instance if found, otherwise create a new one
-            val fragmentToUse = existingFragment ?: DaftarRemajaFragment()
-
+        binding.cardJadwalPenyuluhan.setOnClickListener {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, fragmentToUse, "DaftarRemajaFragment")
+                .replace(R.id.container, JadwalPenyuluhanFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        btnInput.setOnClickListener {
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, PemeriksaanCreateFragment())
-                .addToBackStack(null)
-                .commit()
+        binding.cardRemaja.setOnClickListener {
+            val intent = Intent(requireActivity(), DaftarRemajaActivity::class.java)
+            startNewActivity.launch(intent)
         }
+
+        binding.btnInput.setOnClickListener {
+            val intent = Intent(requireActivity(), PemeriksaanCreateActivity::class.java)
+            startNewActivity.launch(intent)
+        }
+
     }
 
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
@@ -106,9 +104,8 @@ class PosyanduFragment : Fragment() {
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.pengaturan -> {
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, PosyanduEditFragment())
-                        .commit()
+                    val intent = Intent(requireActivity(), PosyanduEditActivity::class.java)
+                    startNewActivity.launch(intent)
                 }
 
                 R.id.ganti -> {
@@ -126,18 +123,17 @@ class PosyanduFragment : Fragment() {
         val items = arrayOf("Posyandu Terhebat", "Posyandu Terkuat", "Posyandu Terbaik")
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Ganti Posyandu")
-            .setItems(items) { _, _ ->
-                val fragmentTransaction =
-                    requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fragment_container, PosyanduFragment())
-                fragmentTransaction.addToBackStack(null) // Add transaction to back stack
-                fragmentTransaction.commit()
+            .setItems(items) { _, which ->
+                val selectedPosyandu = items[which]
+                val newIntent = Intent(requireActivity(), MainActivity::class.java)
 
-                val btmBar = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+                // Pass the selectedPosyandu as an extra to the new MainActivity
+                newIntent.putExtra("selectedPosyandu", selectedPosyandu)
 
-                Snackbar.make(btmBar!!, "Berhasil ganti Posyandu", Snackbar.LENGTH_SHORT)
-                    .setAnchorView(btmBar)
-                    .show()
+                startActivity(newIntent)
+
+                // If needed, you can finish the current activity
+                requireActivity().finish()
             }
             .show()
     }
