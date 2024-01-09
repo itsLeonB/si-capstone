@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -37,6 +38,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -54,4 +56,15 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+}
+
+secrets {
+    propertiesFileName = "secrets.properties"
+
+    defaultPropertiesFileName = "secrets.default.properties"
+
+    ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
 }
