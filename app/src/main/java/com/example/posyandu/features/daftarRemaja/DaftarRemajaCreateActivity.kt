@@ -1,15 +1,13 @@
-package com.example.posyandu
+package com.example.posyandu.features.daftarRemaja
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentTransaction
+import androidx.appcompat.app.AppCompatActivity
 import com.example.posyandu.databinding.ActivityDaftarRemajaCreateBinding
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.snackbar.Snackbar
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -17,6 +15,7 @@ import java.util.TimeZone
 
 class DaftarRemajaCreateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarRemajaCreateBinding
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

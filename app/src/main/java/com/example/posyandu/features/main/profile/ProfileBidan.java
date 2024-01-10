@@ -1,4 +1,4 @@
-package com.example.posyandu;
+package com.example.posyandu.features.main.profile;
 
 import android.app.Activity;
 

@@ -1,4 +1,4 @@
-package com.example.posyandu
+package com.example.posyandu.features.main.posyandu
 
 import android.app.Activity
 import android.content.Intent
@@ -16,16 +16,26 @@ import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
+import com.example.posyandu.DaftarRemajaActivity
+import com.example.posyandu.JadwalPenyuluhanFragment
+import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduActivity
+import com.example.posyandu.PosyanduEditActivity
+import com.example.posyandu.R
 import com.example.posyandu.databinding.FragmentPosyanduBinding
+import com.example.posyandu.features.main.MainActivity
+import com.example.posyandu.features.pemeriksaan.PemeriksaanCreateActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class PosyanduFragment : Fragment() {
-    private var selectedPosyandu: String? = null
     private lateinit var binding: FragmentPosyanduBinding
     private lateinit var startNewActivity: ActivityResultLauncher<Intent>
     private lateinit var btmBar: BottomNavigationView
+    private val viewModel: PosyanduViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.onBackPressedDispatcher?.addCallback(
@@ -35,9 +45,11 @@ class PosyanduFragment : Fragment() {
                     // in here you can do logic when backPress is clicked
                     parentFragmentManager.popBackStack()
                 }
-            })
+            }
+        )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -54,13 +66,27 @@ class PosyanduFragment : Fragment() {
                 }
             }
 
-        selectedPosyandu = activity?.intent?.getStringExtra("selectedPosyandu")
         binding = FragmentPosyanduBinding.inflate(inflater, container, false)
-        if (selectedPosyandu != null) {
-            binding.namaPosyandu.text = selectedPosyandu
-        }
+
+        viewModel.refreshPosyanduData()
+        displayPosyanduData()
 
         return binding.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun displayPosyanduData() {
+        binding.namaPosyandu.text = viewModel.posyanduData.value!!.nama
+        binding.alamatPosyandu.text = viewModel.posyanduData.value!!.alamat
+        binding.tanggalJadwalPosyandu.text = viewModel.posyanduData.value!!.tanggalPosyandu
+        binding.jamJadwalPosyandu.text =
+            "Pukul " + viewModel.posyanduData.value!!.jamPosyandu + " WIB"
+        binding.cardTitleRemaja.text =
+            viewModel.posyanduData.value!!.jumlahRemaja.toString() + " remaja terdaftar"
+        binding.angkaKader.text = viewModel.posyanduData.value!!.jumlahKader.toString()
+        binding.angkaRisiko.text = viewModel.posyanduData.value!!.jumlahBerisiko.toString()
+
+        Glide.with(this).load(viewModel.posyanduData.value!!.foto).into(binding.gambarPosyandu)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

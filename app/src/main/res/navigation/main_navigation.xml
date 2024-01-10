@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.posyandu.ProfileFragment"
+        android:name="com.example.posyandu.features.main.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/posyanduFragment"
-        android:name="com.example.posyandu.PosyanduFragment"
+        android:name="com.example.posyandu.features.main.posyandu.PosyanduFragment"
         android:label="fragment_posyandu"
         tools:layout="@layout/fragment_posyandu" >
         <argument

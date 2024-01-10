@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".PemeriksaanCreateActivity"
+            android:name=".features.pemeriksaan.PemeriksaanCreateActivity"
             android:exported="false" />
         <activity
             android:name=".PemeriksaanEditActivity"
@@ -30,7 +30,7 @@
             android:name=".DaftarRemajaActivity"
             android:exported="false" />
         <activity
-            android:name=".DaftarRemajaCreateActivity"
+            android:name=".features.daftarRemaja.DaftarRemajaCreateActivity"
             android:exported="false" />
         <activity
             android:name=".DaftarRemajaEditActivity"
@@ -39,7 +39,7 @@
             android:name=".PosyanduEditActivity"
             android:exported="false" />
         <activity
-            android:name=".JadwalPosyanduActivity"
+            android:name=".features.jadwalPosyandu.JadwalPosyanduActivity"
             android:exported="false" />
         <activity
             android:name=".SandiBaruActivity"
@@ -48,13 +48,13 @@
             android:name=".VerifikasiResetActivity"
             android:exported="false" />
         <activity
-            android:name=".LupaActivity"
+            android:name=".features.authentication.LupaActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".features.main.MainActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".features.authentication.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
