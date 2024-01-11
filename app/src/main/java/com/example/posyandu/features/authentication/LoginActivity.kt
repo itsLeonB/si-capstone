@@ -1,4 +1,4 @@
-package com.example.posyandu
+package com.example.posyandu.features.authentication
 
 import android.content.Context
 import android.content.Intent
@@ -7,12 +7,16 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.posyandu.ApiClient
+import com.example.posyandu.LoginRequest
+import com.example.posyandu.LoginResponse
+import com.example.posyandu.R
+import com.example.posyandu.features.main.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 
 class LoginActivity() : AppCompatActivity(), Parcelable {
@@ -72,7 +76,8 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     val token = responseBody?.token
-                    val sharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+                    val sharedPreferences =
+                        getSharedPreferences("Preferences", Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()) {
                         putString("token", token)
                         apply()
@@ -82,13 +87,21 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                     finish()
                 } else {
                     // Handle unsuccessful login
-                    Toast.makeText(this@LoginActivity, "Login failed. Please check credentials.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Login failed. Please check credentials.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 // Handle network errors or other failures
-                Toast.makeText(this@LoginActivity, "Login failed. Please check your internet connection.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@LoginActivity,
+                    "Login failed. Please check your internet connection.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }

@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".PosyanduFragment">
+    tools:context=".features.main.posyandu.PosyanduFragment">
 
 
     <ScrollView
@@ -28,8 +28,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/title_foto_posyandu"
                 android:cropToPadding="false"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/kantor_kelurahan_kemang_manis__kec_ilir_barat_ii__kota_palembang" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutmain"
@@ -138,17 +137,6 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
-                                    android:id="@+id/kapan_jadwal_posyandu"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/inter"
-                                    android:text="Besok"
-                                    android:textColor="@color/md_theme_light_primary"
-                                    android:textSize="19sp"
-                                    app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
                                     android:id="@+id/tanggal_jadwal_posyandu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -156,9 +144,10 @@
                                     android:text="Rabu, 22 November 2023"
                                     android:textSize="17sp"
                                     app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/kapan_jadwal_posyandu" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
+                                    android:id="@+id/jam_jadwal_posyandu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter"
@@ -237,17 +226,6 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
-                                    android:id="@+id/kapan_jadwal_penyuluhan"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/inter"
-                                    android:text="Besok"
-                                    android:textColor="@color/md_theme_light_primary"
-                                    android:textSize="19sp"
-                                    app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
                                     android:id="@+id/tanggal_jadwal_penyuluhan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -255,9 +233,10 @@
                                     android:text="Kamis, 23 November 2023"
                                     android:textSize="17sp"
                                     app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/kapan_jadwal_penyuluhan" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
+                                    android:id="@+id/jam_jadwal_penyuluhan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter"
@@ -357,7 +336,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
-                                android:text="remaja aktif sebagai kader"
+                                android:text="remaja berisiko stunting"
                                 android:textColor="@color/md_theme_light_error"
                                 android:textSize="19sp"
                                 app:layout_constraintLeft_toRightOf="@id/ket_kader"

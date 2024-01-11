@@ -1,4 +1,4 @@
-package com.example.posyandu
+package com.example.posyandu.features.main
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.posyandu.R
 import com.example.posyandu.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

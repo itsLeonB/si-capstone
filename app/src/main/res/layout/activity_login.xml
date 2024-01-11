@@ -7,7 +7,7 @@
     android:paddingHorizontal="20dp"
     android:paddingVertical="14dp"
     android:theme="@style/AppTheme"
-    tools:context=".LoginActivity">
+    tools:context=".features.authentication.LoginActivity">
 
     <TextView
         android:id="@+id/loginTitle"

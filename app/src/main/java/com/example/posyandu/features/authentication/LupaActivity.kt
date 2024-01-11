@@ -1,9 +1,10 @@
-package com.example.posyandu
+package com.example.posyandu.features.authentication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
+import com.example.posyandu.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 
@@ -13,7 +14,8 @@ class LupaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lupa)
 
         val toggleButton = findViewById<MaterialButtonToggleGroup>(R.id.toggleButton)
-        val defaultCheckedButtonId = R.id.button1 // Replace with the ID of the button you want to be checked by default
+        val defaultCheckedButtonId =
+            R.id.button1 // Replace with the ID of the button you want to be checked by default
 
         // Set the default checked state
         toggleButton.check(defaultCheckedButtonId)
