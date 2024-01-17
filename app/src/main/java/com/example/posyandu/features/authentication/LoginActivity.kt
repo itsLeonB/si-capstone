@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.posyandu.ApiClient
 import com.example.posyandu.LoginRequest
-import com.example.posyandu.LoginResponse
 import com.example.posyandu.R
 import com.example.posyandu.features.main.MainActivity
 import com.google.android.material.button.MaterialButton
@@ -66,7 +65,7 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
 
     private fun loginUser(username: String, password: String) {
         val requestModel = LoginRequest(username, password)
-        val call = ApiClient.apiService.loginUser(requestModel)
+        val call = ApiClient.apiService.login(requestModel)
 
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
@@ -75,13 +74,14 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    val token = responseBody?.token
+                    val token = responseBody?.data!!.token
                     val sharedPreferences =
                         getSharedPreferences("Preferences", Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()) {
                         putString("token", token)
                         apply()
                     }
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
