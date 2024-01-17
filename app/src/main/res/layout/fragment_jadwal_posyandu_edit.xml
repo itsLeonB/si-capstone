@@ -7,7 +7,7 @@
     android:background="@color/md_theme_light_surface"
     android:padding="16dp"
     android:theme="@style/AppTheme"
-    tools:context=".JadwalPosyanduEditFragment">
+    tools:context=".features.jadwalPosyandu.JadwalPosyanduActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

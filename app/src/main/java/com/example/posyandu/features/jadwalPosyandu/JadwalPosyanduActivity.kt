@@ -123,7 +123,7 @@ class JadwalPosyanduActivity : AppCompatActivity() {
             .show()
 
         binding.btnSimpan.setOnClickListener {
-            var tanggal = binding.tanggalEdit.text.toString()
+            val tanggal = binding.tanggalEdit.text.toString()
             val jamMulai = binding.jamMulaiEdit.text.toString()
             val jamSelesai = binding.jamSelesaiEdit.text.toString()
 
@@ -155,7 +155,6 @@ class JadwalPosyanduActivity : AppCompatActivity() {
     private fun showCreateDialog(view: View) {
         val binding = FragmentJadwalPosyanduCreateBinding.inflate(layoutInflater)
         val today = MaterialDatePicker.todayInUtcMilliseconds()
-        lateinit var jadwalPosyandu: CreateJadwalPosyanduResponse
 
         val constraintsBuilder =
             CalendarConstraints.Builder()
@@ -181,7 +180,7 @@ class JadwalPosyanduActivity : AppCompatActivity() {
             .show()
 
         binding.btnTambah.setOnClickListener {
-            var tanggal = binding.tanggalEdit.text.toString()
+            val tanggal = binding.tanggalEdit.text.toString()
             val jamMulai = binding.jamMulaiEdit.text.toString()
             val jamSelesai = binding.jamSelesaiEdit.text.toString()
 

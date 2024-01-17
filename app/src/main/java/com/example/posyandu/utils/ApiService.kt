@@ -2,7 +2,6 @@ package com.example.posyandu
 
 import com.example.posyandu.features.authentication.LoginResponse
 import com.example.posyandu.features.jadwalPosyandu.CreateJadwalPosyanduResponse
-import com.example.posyandu.features.jadwalPosyandu.JadwalPosyandu
 import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduIndexResponse
 import com.example.posyandu.features.jadwalPosyandu.UpdateJadwalPosyanduResponse
 import retrofit2.Call

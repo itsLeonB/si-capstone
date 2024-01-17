@@ -69,17 +69,17 @@ class JadwalPosyanduIndexAdapter :
 
             val tanggal = waktuMulai.substring(0, 10)
 
-            val format = SimpleDateFormat("yyyy-MM-dd")
+            val format = SimpleDateFormat("yyyy-MM-dd", Locale("id"))
             val date = format.parse(tanggal)
 
             val hariFormat = SimpleDateFormat("EEEE", Locale("id"))
-            val hari = hariFormat.format(date)
+            val hari = hariFormat.format(date!!)
 
             val jamMulai = waktuMulai.substring(11, 16)
             val jamSelesai = waktuSelesai.substring(11, 16)
 
-            binding.hari.text = "$hari"
-            binding.tanggal.text = "$tanggal"
+            binding.hari.text = hari
+            binding.tanggal.text = tanggal
             binding.mulai.text = "$jamMulai WIB"
             binding.selesai.text = "$jamSelesai WIB"
         }
