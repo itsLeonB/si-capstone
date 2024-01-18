@@ -1,6 +1,5 @@
 package com.example.posyandu.features.authentication
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcel
@@ -12,6 +11,7 @@ import com.example.posyandu.LoginRequest
 import com.example.posyandu.LoginResponse
 import com.example.posyandu.R
 import com.example.posyandu.features.main.MainActivity
+import com.example.posyandu.utils.UserManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -19,15 +19,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class LoginActivity() : AppCompatActivity(), Parcelable {
+class LoginActivity(context: Parcel) : AppCompatActivity(), Parcelable {
 
     private lateinit var usernameEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var loginButton: MaterialButton
 
-    constructor(parcel: Parcel) : this() {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,15 +73,15 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     val token = responseBody?.token
-                    val sharedPreferences =
-                        getSharedPreferences("Preferences", Context.MODE_PRIVATE)
-                    with(sharedPreferences.edit()) {
-                        putString("token", token)
-                        apply()
+
+                    val role = when (username) {
+                        "admin" -> "bidan"
+                        "kader" -> "kader"
+                        else -> "default"
                     }
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+
+                    proceedToMain(token, role)
+
                 } else {
                     // Handle unsuccessful login
                     Toast.makeText(
@@ -104,5 +101,21 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                 ).show()
             }
         })
+    }
+    private fun proceedToMain(token: String?, role: String) {
+        if (token != null) {
+            UserManager.getInstance(this).saveUserDetails(token, role)
+
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        } else {
+            Toast.makeText(
+                this@LoginActivity,
+                "Token is null. Login failed.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
