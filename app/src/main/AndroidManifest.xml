@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,24 +15,50 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".features.pemeriksaan.PemeriksaanCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PemeriksaanEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PemeriksaanViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PemeriksaanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DaftarRemajaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.daftarRemaja.DaftarRemajaCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DaftarRemajaEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PosyanduEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.jadwalPosyandu.JadwalPosyanduActivity"
+            android:exported="false" />
+        <activity
             android:name=".SandiBaruActivity"
             android:exported="false" />
         <activity
             android:name=".VerifikasiResetActivity"
             android:exported="false" />
         <activity
-            android:name=".LupaActivity"
+            android:name=".features.authentication.LupaActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".features.main.MainActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".features.authentication.LoginActivity"
             android:exported="true">
             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

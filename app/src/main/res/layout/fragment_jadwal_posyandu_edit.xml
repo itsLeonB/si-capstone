@@ -7,7 +7,7 @@
     android:background="@color/md_theme_light_surface"
     android:padding="16dp"
     android:theme="@style/AppTheme"
-    tools:context=".JadwalPosyanduFragment">
+    tools:context=".features.jadwalPosyandu.JadwalPosyanduActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -101,7 +101,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_tambah"
+            android:id="@+id/btnSimpan"
             style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/icon_home_inactive"
         android:title="Home"/>
 
     <item
-        android:id="@+id/konsultasi"
+        android:id="@+id/konsultasiFragment"
         android:icon="@drawable/icon_chat_inactive"
         android:title="Konsultasi"/>
 
     <item
-        android:id="@+id/posyandu"
+        android:id="@+id/posyanduFragment"
         android:icon="@drawable/icon_posyandu_active"
         android:title="Posyandu"/>
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/icon_profile_inactive"
         android:title="Profile"/>
 </menu>
