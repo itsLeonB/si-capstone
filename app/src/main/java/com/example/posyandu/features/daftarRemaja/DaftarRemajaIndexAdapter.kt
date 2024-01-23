@@ -1,7 +1,6 @@
 package com.example.posyandu.features.daftarRemaja
 
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.posyandu.databinding.CardRemajaBinding
-import java.time.format.DateTimeFormatter
 
 class DaftarRemajaIndexAdapter :
     ListAdapter<RemajaDataItem, DaftarRemajaIndexAdapter.MyViewHolder>(DIFF_CALLBACK) {
@@ -47,9 +45,9 @@ class DaftarRemajaIndexAdapter :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(remaja: RemajaDataItem) {
-            var nama = remaja.user.nama
-            var tanggalLahir = remaja.user.tanggalLahir
-            var isKader = remaja.isKader
+            val nama = remaja.user.nama
+            val tanggalLahir = remaja.user.tanggalLahir
+            val isKader = remaja.isKader
 
             binding.namaRemaja.text = nama
             binding.umurRemaja.text = tanggalLahir

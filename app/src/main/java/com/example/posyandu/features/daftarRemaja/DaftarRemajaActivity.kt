@@ -100,7 +100,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                     val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
                     val token = prefs.getString("token", "no token")
 
-                    var remaja = UpdateRemajaRequest(
+                    val remajaRequest = UpdateRemajaRequest(
                         model.isKader,
                         model.namaIbu,
                         model.namaAyah,
@@ -110,7 +110,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                     val client =
                         ApiConfig.getApiService().updateRemaja(
                             token = "Bearer $token",
-                            remaja,
+                            remajaRequest,
                         )
 
                     binding.optKader.setOnClickListener {
@@ -118,7 +118,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                         MaterialAlertDialogBuilder(this@DaftarRemajaActivity)
                             .setTitle("Anda yakin untuk mencabut akses kader?")
                             .setPositiveButton("Ya") { _, _ ->
-                                remaja.isKader = false
+                                remajaRequest.isKader = false
 
                                 client.enqueue(object : Callback<UpdateRemajaResponse> {
                                     override fun onResponse(
@@ -164,7 +164,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                     val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
                     val token = prefs.getString("token", "no token")
 
-                    var remaja = UpdateRemajaRequest(
+                    val remajaRequest = UpdateRemajaRequest(
                         model.isKader,
                         model.namaIbu,
                         model.namaAyah,
@@ -174,7 +174,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                     val client =
                         ApiConfig.getApiService().updateRemaja(
                             token = "Bearer $token",
-                            remaja,
+                            remajaRequest,
                         )
 
                     binding.optRemaja.setOnClickListener {
@@ -182,7 +182,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                         MaterialAlertDialogBuilder(this@DaftarRemajaActivity)
                             .setTitle("Anda yakin untuk memberikan akses kader?")
                             .setPositiveButton("Ya") { _, _ ->
-                                remaja.isKader = true
+                                remajaRequest.isKader = true
 
                                 client.enqueue(object : Callback<UpdateRemajaResponse> {
                                     override fun onResponse(

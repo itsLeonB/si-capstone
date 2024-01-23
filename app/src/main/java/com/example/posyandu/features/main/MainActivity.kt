@@ -9,7 +9,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.posyandu.R
 import com.example.posyandu.databinding.ActivityMainBinding
-import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

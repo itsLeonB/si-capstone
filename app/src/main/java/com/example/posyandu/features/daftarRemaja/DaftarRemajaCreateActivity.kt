@@ -61,7 +61,7 @@ class DaftarRemajaCreateActivity : AppCompatActivity() {
         }
 
         binding.btnSimpan.setOnClickListener {
-            var user = RegisterUserRequest(
+            val user = RegisterUserRequest(
                 nama = binding.namaEdit.text.toString(),
                 email = binding.emailEdit.text.toString(),
                 username = binding.emailEdit.text.toString(),
