@@ -14,7 +14,7 @@ class UserManager(private val context: Context) {
         @Volatile
         private var instance: UserManager? = null
 
-        fun getInstance(context: LoginActivity): UserManager {
+        fun getInstance(context: Context): UserManager {
             return instance ?: synchronized(this) {
                 instance ?: UserManager(context).also { instance = it }
             }

@@ -15,10 +15,12 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.posyandu.databinding.FragmentHomeBinding
 import com.example.posyandu.features.main.home.HomeViewModel
 import com.example.posyandu.features.main.posyandu.PosyanduFragment
+import com.example.posyandu.utils.UserManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -59,7 +61,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -80,6 +81,17 @@ class HomeFragment : Fragment() {
             startNewActivity.launch(intent)
         }
 
+        val userManager = UserManager.getInstance(requireActivity().application)
+        val userRole = userManager.getRole()
+
+        // Now you can use userRole as needed
+        if (userRole == "kader") {
+            binding.dashboardHomeBidan.visibility = View.GONE
+        } else if (userRole == "default") {
+            // Display regular user UI features
+
+            viewModel.refreshHomeData()
+
 //        cardChatTerbaru.setOnClickListener { v: View ->
 //            requireActivity().supportFragmentManager
 //                .beginTransaction()
@@ -90,6 +102,7 @@ class HomeFragment : Fragment() {
 //        }
 
 
-    }
+        }
 
+    }
 }
