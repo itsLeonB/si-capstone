@@ -1,5 +1,6 @@
 package com.example.posyandu.features.authentication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcel
@@ -8,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.posyandu.ApiClient
 import com.example.posyandu.LoginRequest
-import com.example.posyandu.LoginResponse
 import com.example.posyandu.R
 import com.example.posyandu.features.main.MainActivity
 import com.example.posyandu.utils.UserManager
@@ -19,12 +19,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class LoginActivity(context: Parcel) : AppCompatActivity(), Parcelable {
+class LoginActivity() : AppCompatActivity(), Parcelable {
 
     private lateinit var usernameEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var loginButton: MaterialButton
 
+    constructor(parcel: Parcel) : this() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +66,7 @@ class LoginActivity(context: Parcel) : AppCompatActivity(), Parcelable {
 
     private fun loginUser(username: String, password: String) {
         val requestModel = LoginRequest(username, password)
-        val call = ApiClient.apiService.loginUser(requestModel)
+        val call = ApiClient.apiService.login(requestModel)
 
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
@@ -72,13 +75,20 @@ class LoginActivity(context: Parcel) : AppCompatActivity(), Parcelable {
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    val token = responseBody?.token
+                    val token = responseBody?.data!!.token
+                    val sharedPreferences =
+                        getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+                    with(sharedPreferences.edit()) {
+                        putString("token", token)
+                        apply()
+                    }
 
                     val role = when (username) {
                         "admin" -> "bidan"
                         "kader" -> "kader"
                         else -> "default"
                     }
+
 
                     proceedToMain(token, role)
 
@@ -92,6 +102,7 @@ class LoginActivity(context: Parcel) : AppCompatActivity(), Parcelable {
                 }
             }
 
+
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 // Handle network errors or other failures
                 Toast.makeText(
@@ -102,6 +113,7 @@ class LoginActivity(context: Parcel) : AppCompatActivity(), Parcelable {
             }
         })
     }
+
     private fun proceedToMain(token: String?, role: String) {
         if (token != null) {
             UserManager.getInstance(this).saveUserDetails(token, role)
