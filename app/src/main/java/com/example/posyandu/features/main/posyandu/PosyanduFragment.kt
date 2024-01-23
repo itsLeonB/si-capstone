@@ -1,9 +1,11 @@
 package com.example.posyandu.features.main.posyandu
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,25 +18,36 @@ import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.example.posyandu.BuildConfig
 import com.example.posyandu.DaftarRemajaActivity
 import com.example.posyandu.JadwalPenyuluhanFragment
-import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduActivity
-import com.example.posyandu.PosyanduEditActivity
 import com.example.posyandu.R
 import com.example.posyandu.databinding.FragmentPosyanduBinding
+import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduActivity
 import com.example.posyandu.features.main.MainActivity
+import com.example.posyandu.features.main.MainActivityViewModel
 import com.example.posyandu.features.pemeriksaan.PemeriksaanCreateActivity
+import com.example.posyandu.utils.ApiConfig
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class PosyanduFragment : Fragment() {
     private lateinit var binding: FragmentPosyanduBinding
     private lateinit var startNewActivity: ActivityResultLauncher<Intent>
     private lateinit var btmBar: BottomNavigationView
-    private val viewModel: PosyanduViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by activityViewModels()
+
+    companion object {
+        private const val TAG = "PosyanduFragment"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +71,7 @@ class PosyanduFragment : Fragment() {
 
         startNewActivity =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                viewModel.refreshData()
                 if (result.resultCode == Activity.RESULT_OK) {
                     val snackbarMessage = result.data?.getStringExtra("snackbar_message")
                     Snackbar.make(requireView(), snackbarMessage!!, Snackbar.LENGTH_SHORT)
@@ -68,25 +82,43 @@ class PosyanduFragment : Fragment() {
 
         binding = FragmentPosyanduBinding.inflate(inflater, container, false)
 
-        viewModel.refreshPosyanduData()
-        displayPosyanduData()
+        viewModel.mainBidanData.observe(viewLifecycleOwner) {
+            displayPosyanduData()
+        }
 
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun displayPosyanduData() {
-        binding.namaPosyandu.text = viewModel.posyanduData.value!!.nama
-        binding.alamatPosyandu.text = viewModel.posyanduData.value!!.alamat
-        binding.tanggalJadwalPosyandu.text = viewModel.posyanduData.value!!.tanggalPosyandu
-        binding.jamJadwalPosyandu.text =
-            "Pukul " + viewModel.posyanduData.value!!.jamPosyandu + " WIB"
-        binding.cardTitleRemaja.text =
-            viewModel.posyanduData.value!!.jumlahRemaja.toString() + " remaja terdaftar"
-        binding.angkaKader.text = viewModel.posyanduData.value!!.jumlahKader.toString()
-        binding.angkaRisiko.text = viewModel.posyanduData.value!!.jumlahBerisiko.toString()
+        val waktuPosyandu = viewModel.mainBidanData.value!!.jadwalPosyandu.first().waktuMulai
+        val tanggalPosyandu = waktuPosyandu.substring(0, 10)
 
-        Glide.with(this).load(viewModel.posyanduData.value!!.foto).into(binding.gambarPosyandu)
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale("id"))
+        val date = format.parse(tanggalPosyandu)
+
+        val hariFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id"))
+        val hari = hariFormat.format(date!!)
+
+        val jamPosyandu = waktuPosyandu.substring(11, 16)
+
+        val remaja = viewModel.mainRemajaData.value!!
+        val remajaCount = remaja.count()
+        val kaderCount = remaja.count { it.isKader }
+        val berisikoCount = remaja.count { it.berisiko }
+
+        val linkFoto = viewModel.mainBidanData.value!!.posyandu.foto
+
+        binding.namaPosyandu.text = viewModel.mainBidanData.value!!.posyandu.nama
+        binding.alamatPosyandu.text = viewModel.mainBidanData.value!!.posyandu.alamat
+        binding.tanggalJadwalPosyandu.text = hari
+        binding.jamJadwalPosyandu.text = "Pukul $jamPosyandu WIB"
+        binding.cardTitleRemaja.text = "$remajaCount remaja terdaftar"
+        binding.angkaKader.text = kaderCount.toString()
+        binding.angkaRisiko.text = berisikoCount.toString()
+
+        Glide.with(this).load(BuildConfig.BASE_URL + linkFoto)
+            .into(binding.gambarPosyandu)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -146,21 +178,83 @@ class PosyanduFragment : Fragment() {
     }
 
     private fun showPosyanduDialog() {
-        val items = arrayOf("Posyandu Terhebat", "Posyandu Terkuat", "Posyandu Terbaik")
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Ganti Posyandu")
-            .setItems(items) { _, which ->
-                val selectedPosyandu = items[which]
-                val newIntent = Intent(requireActivity(), MainActivity::class.java)
+        val prefs = requireActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+        val token = prefs.getString("token", "no token")
 
-                // Pass the selectedPosyandu as an extra to the new MainActivity
-                newIntent.putExtra("selectedPosyandu", selectedPosyandu)
+        val client = ApiConfig.getApiService().getListPosyandu(1, token = "Bearer $token")
 
-                startActivity(newIntent)
+        client.enqueue(object : Callback<ListPosyanduResponse> {
+            override fun onResponse(
+                call: Call<ListPosyanduResponse>,
+                response: Response<ListPosyanduResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val posyandus = response.body()?.data
 
-                // If needed, you can finish the current activity
-                requireActivity().finish()
+                    val filteredList: List<PosyanduItem> = posyandus!!.filter { posyanduItem ->
+                        !posyanduItem.active
+                    }
+
+                    // First array: keys (posyanduData nama and posyanduData id)
+                    val keysArray: Array<Pair<String, Int>> = filteredList.map { posyanduItem ->
+                        Pair(posyanduItem.posyandu.nama, posyanduItem.posyandu.id)
+                    }.toTypedArray()
+
+                    // Second array: values (posyanduData nama)
+                    val valuesArray: Array<String> = filteredList.map { posyanduItem ->
+                        posyanduItem.posyandu.nama
+                    }.toTypedArray()
+
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Ganti Posyandu")
+                        .setItems(valuesArray) { _, which ->
+                            val selectedPosyanduId = keysArray[which]
+
+                            val pengampu = UpdatePengampuRequest(
+                                1,
+                                true,
+                                selectedPosyanduId.second
+                            )
+
+                            val pengampuClient = ApiConfig.getApiService().updatePengampu(
+                                token = "Bearer $token",
+                                pengampu
+                            )
+
+                            pengampuClient.enqueue(object : Callback<Void> {
+                                override fun onResponse(
+                                    call: Call<Void>,
+                                    response: Response<Void>
+                                ) {
+                                    if (response.isSuccessful) {
+                                        val newIntent =
+                                            Intent(requireActivity(), MainActivity::class.java)
+                                        startActivity(newIntent)
+                                        requireActivity().finish()
+                                    } else {
+                                        Log.e(TAG, "onFailure: ${response.message()}")
+                                    }
+                                }
+
+                                override fun onFailure(
+                                    call: Call<Void>,
+                                    t: Throwable
+                                ) {
+                                    Log.e(TAG, "onFailure: ${t.message.toString()}")
+                                }
+                            }
+                            )
+                        }
+                        .show()
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
             }
-            .show()
+
+            override fun onFailure(call: Call<ListPosyanduResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        }
+        )
     }
 }

@@ -37,7 +37,7 @@
             android:name=".DaftarRemajaEditActivity"
             android:exported="false" />
         <activity
-            android:name=".PosyanduEditActivity"
+            android:name=".features.main.posyandu.PosyanduEditActivity"
             android:exported="false" />
         <activity
             android:name=".features.jadwalPosyandu.JadwalPosyanduActivity"
@@ -53,12 +53,12 @@
             android:exported="false" />
         <activity
             android:name=".features.main.MainActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name=".features.authentication.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".features.authentication.LoginActivity"
             android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>

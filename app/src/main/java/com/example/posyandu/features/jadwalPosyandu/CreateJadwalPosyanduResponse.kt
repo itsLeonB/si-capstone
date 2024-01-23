@@ -8,8 +8,8 @@ data class CreateJadwalPosyanduResponse(
 	val posyanduId: Int,
 
 	@field:SerializedName("waktu_mulai")
-	var waktuMulai: String,
+	val waktuMulai: String,
 
 	@field:SerializedName("waktu_selesai")
-	var waktuSelesai: String,
+	val waktuSelesai: String,
 )
