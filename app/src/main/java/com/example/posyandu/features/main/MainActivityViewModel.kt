@@ -45,6 +45,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                     _mainBidanData.value = response.body()?.data
                     val edit = prefs.edit()
                     edit.putInt("posyanduId", _mainBidanData.value!!.posyandu.id)
+                    edit.putInt("userId", _mainBidanData.value!!.bidan.user.id)
                     edit.apply()
 
                     val posyanduId = _mainBidanData.value!!.posyandu.id
