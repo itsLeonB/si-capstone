@@ -11,6 +11,7 @@ import com.example.posyandu.ApiClient
 import com.example.posyandu.LoginRequest
 import com.example.posyandu.R
 import com.example.posyandu.features.main.MainActivity
+import com.example.posyandu.utils.UserManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -82,9 +83,15 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                         apply()
                     }
 
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val role = when (username) {
+                        "admin" -> "bidan"
+                        "kader" -> "kader"
+                        else -> "default"
+                    }
+
+
+                    proceedToMain(token, role)
+
                 } else {
                     // Handle unsuccessful login
                     Toast.makeText(
@@ -95,6 +102,7 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                 }
             }
 
+
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 // Handle network errors or other failures
                 Toast.makeText(
@@ -104,5 +112,22 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                 ).show()
             }
         })
+    }
+
+    private fun proceedToMain(token: String?, role: String) {
+        if (token != null) {
+            UserManager.getInstance(this).saveUserDetails(token, role)
+
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        } else {
+            Toast.makeText(
+                this@LoginActivity,
+                "Token is null. Login failed.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
