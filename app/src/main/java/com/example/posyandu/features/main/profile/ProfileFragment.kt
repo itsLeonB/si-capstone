@@ -10,11 +10,19 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import com.example.posyandu.BuildConfig
 import com.example.posyandu.R
+import com.example.posyandu.databinding.FragmentPosyanduBinding
+import com.example.posyandu.databinding.FragmentProfileBinding
+import com.example.posyandu.features.main.MainActivityViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -34,6 +42,8 @@ class ProfileFragment : Fragment() {
     private lateinit var BtnSaveChanges: MaterialButton
     private lateinit var BtnEditProfile: MaterialButton
     private var isEditMode = false
+    private val viewModel: ProfileViewModel by activityViewModels()
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +55,49 @@ class ProfileFragment : Fragment() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun refreshProfileData() {
+        val nama = viewModel.profileData.value!!.nama
+        val email = viewModel.profileData.value!!.email
+        val nik = viewModel.profileData.value!!.nik.toString()
+        val ttl = viewModel.profileData.value!!.tanggalLahir
+        val alamat = viewModel.profileData.value!!.alamat
+        val provinsi = viewModel.profileData.value!!.provinsi
+        val kota = viewModel.profileData.value!!.kota
+        val kecamatan = viewModel.profileData.value!!.kecamatan
+        val kelurahan = viewModel.profileData.value!!.kelurahan
+        val kodepos = viewModel.profileData.value!!.kodePos.toString()
+        val rt = viewModel.profileData.value!!.rt.toString()
+        val rw = viewModel.profileData.value!!.rw.toString()
+        val notelp = viewModel.profileData.value!!.telepon.toString()
+
+        binding.editNama.setText(nama)
+        binding.editEmail.setText(email)
+        binding.editNIK.setText(nik)
+        binding.editTTL.setText(ttl)
+        binding.editAlamat.setText(alamat)
+        binding.editProvinsi.setText(provinsi)
+        binding.editKota.setText(kota)
+        binding.editKecamatan.setText(kecamatan)
+        binding.editKelurahan.setText(kelurahan)
+        binding.editKodePos.setText(kodepos)
+        binding.editRT.setText(rt)
+        binding.editRW.setText(rw)
+        binding.editNotelp.setText(notelp)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        viewModel.profileData.observe(viewLifecycleOwner) {
+            refreshProfileData()
+        }
+
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -79,9 +127,29 @@ class ProfileFragment : Fragment() {
         BtnSaveChanges.setOnClickListener {
             toggleEditMode()
 
+            val updatedProfile = PutUpdateProfileRequest(
+                nama = editNama.text.toString(),
+                email = editEmail.text.toString(),
+                alamat = editAlamat.text.toString(),
+                provinsi = editProvinsi.text.toString(),
+                kota = editKota.text.toString(),
+                kecamatan = editKecamatan.text.toString(),
+                kelurahan = editKelurahan.text.toString(),
+                rt = (editRT.text.toString()).toInt(),
+                rw = (editRW.text.toString()).toInt(),
+                username = viewModel.profileData.value!!.username,
+                kodePos = viewModel.profileData.value!!.kodePos,
+                foto = viewModel.profileData.value!!.foto,
+                telepon = editNotelp.text.toString()
+            )
+
+            viewModel.updateProfile(updatedProfile)
+
             val btmBar = activity?.findViewById<BottomNavigationView>(
                 R.id.bottom_navigation
             )
+
+
 
             Snackbar.make(
                 btmBar!!,
@@ -90,8 +158,9 @@ class ProfileFragment : Fragment() {
             ).setAnchorView(btmBar)
                 .show()
         }
-
     }
+
+
 
     private fun toggleEditMode() {
         isEditMode = !isEditMode
@@ -143,5 +212,4 @@ class ProfileFragment : Fragment() {
             // Disable other EditText views as needed
         }
     }
-
 }

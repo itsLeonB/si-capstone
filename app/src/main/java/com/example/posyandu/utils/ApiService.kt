@@ -15,6 +15,9 @@ import com.example.posyandu.features.main.posyandu.ListPosyanduResponse
 import com.example.posyandu.features.main.posyandu.UpdatePengampuRequest
 import com.example.posyandu.features.main.posyandu.UpdatePosyanduRequest
 import com.example.posyandu.features.main.posyandu.UpdatePosyanduResponse
+import com.example.posyandu.features.main.profile.GetProfileByIdResponse
+import com.example.posyandu.features.main.profile.PutUpdateProfileRequest
+import com.example.posyandu.features.main.profile.PutUpdateProfileResponse
 import com.example.posyandu.features.register.RegisterUserRequest
 import com.example.posyandu.features.register.RegisterUserResponse
 import retrofit2.Call
@@ -109,4 +112,19 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body user: RegisterUserRequest
     ): Call<RegisterUserResponse>
+
+    @GET("user/{id}")
+    fun getProfileById (
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<GetProfileByIdResponse>
+
+    @PUT("user/{id}")
+    fun updateProfile(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String,
+        @Body profile: PutUpdateProfileRequest
+    ): Call<PutUpdateProfileResponse>
 }
+
+
