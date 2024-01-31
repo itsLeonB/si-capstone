@@ -19,8 +19,6 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.time.Instant
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.TimeZone
 
@@ -37,7 +35,6 @@ class JadwalPosyanduActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityJadwalPosyanduBinding.inflate(layoutInflater)
         val view = binding.root
-        setContentView(view)
 
         supportActionBar?.hide()
 
@@ -52,12 +49,22 @@ class JadwalPosyanduActivity : AppCompatActivity() {
         binding.btnTambah.setOnClickListener {
             showCreateDialog(view)
         }
+
+        setContentView(view)
     }
 
     private fun setJadwalPosyanduData(jadwalPosyandu: List<JadwalPosyandu>, view: View) {
         val adapter = JadwalPosyanduIndexAdapter()
         adapter.submitList(jadwalPosyandu)
         binding.rvReview.adapter = adapter
+
+        if (jadwalPosyandu.isNotEmpty()) {
+            // Hide the nullAlert view
+            binding.nullAlert.visibility = View.GONE
+        } else {
+            // Show the nullAlert view
+            binding.nullAlert.visibility = View.VISIBLE
+        }
 
         adapter.setOnClickListener(object :
             JadwalPosyanduIndexAdapter.OnClickListener {
@@ -94,25 +101,10 @@ class JadwalPosyanduActivity : AppCompatActivity() {
             timePicker.show(supportFragmentManager, timePicker.toString())
         }
 
-        val utcMulai = ZonedDateTime.parse(
-            "${model.waktuMulai}+00:00",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX")
-        )
-        val utcSelesai = ZonedDateTime.parse(
-            "${model.waktuSelesai}+00:00",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX")
-        )
+        val tanggal = model.waktuMulai.substring(0, 10)
 
-        val jakartaMulai = utcMulai.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
-        val jakartaSelesai = utcSelesai.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
-
-        var jamMulai = jakartaMulai.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-        var jamSelesai = jakartaSelesai.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-
-        val tanggal = jamMulai.substring(0, 10)
-
-        jamMulai = jamMulai.substring(11, 16)
-        jamSelesai = jamSelesai.substring(11, 16)
+        val jamMulai = model.waktuMulai.substring(11, 16)
+        val jamSelesai = model.waktuSelesai.substring(11, 16)
 
         binding.tanggalEdit.setText(tanggal)
         binding.jamMulaiEdit.setText(jamMulai)

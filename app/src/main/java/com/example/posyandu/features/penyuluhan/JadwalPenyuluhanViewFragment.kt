@@ -1,4 +1,4 @@
-package com.example.posyandu
+package com.example.posyandu.features.penyuluhan
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.posyandu.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class JadwalPenyuluhanViewFragment : Fragment() {

@@ -1,6 +1,8 @@
 package com.example.posyandu.features.jadwalPosyandu
 
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 data class JadwalPosyanduIndexResponse(
 
@@ -12,7 +14,18 @@ data class JadwalPosyanduIndexResponse(
 
     @field:SerializedName("status")
     val status: String
-)
+) {
+    fun sortedData(): List<JadwalPosyandu> {
+        val dateFormat: SimpleDateFormat =
+            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+        val sortedPosyandu: List<JadwalPosyandu> = data.sortedByDescending {
+            dateFormat.parse(it.waktuMulai)
+        }
+
+        return sortedPosyandu
+    }
+}
 
 data class Posyandu(
 

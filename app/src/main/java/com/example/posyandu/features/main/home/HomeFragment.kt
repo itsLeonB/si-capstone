@@ -1,4 +1,4 @@
-package com.example.posyandu
+package com.example.posyandu.features.main.home
 
 import android.app.Activity
 import android.content.Intent
@@ -15,10 +15,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
+import com.example.posyandu.R
 import com.example.posyandu.databinding.FragmentHomeBinding
-import com.example.posyandu.features.main.home.HomeViewModel
+import com.example.posyandu.features.daftarRemaja.DaftarRemajaActivity
 import com.example.posyandu.features.main.posyandu.PosyanduFragment
 import com.example.posyandu.utils.UserManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -67,7 +66,7 @@ class HomeFragment : Fragment() {
 
 //        val cardChatTerbaru: MaterialCardView = view.findViewById(R.id.chatterbarubidan)
 
-        binding.jadwalterdekatbidan.setOnClickListener { v: View ->
+        binding.jadwalterdekatbidan.setOnClickListener { _: View ->
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)

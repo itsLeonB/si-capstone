@@ -52,21 +52,6 @@ class JadwalPosyanduIndexAdapter :
             var waktuMulai = jadwal.waktuMulai
             var waktuSelesai = jadwal.waktuSelesai
 
-            val utcMulai = ZonedDateTime.parse(
-                "$waktuMulai+00:00",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX")
-            )
-            val utcSelesai = ZonedDateTime.parse(
-                "$waktuSelesai+00:00",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX")
-            )
-
-            val jakartaMulai = utcMulai.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
-            val jakartaSelesai = utcSelesai.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
-
-            waktuMulai = jakartaMulai.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-            waktuSelesai = jakartaSelesai.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-
             val tanggal = waktuMulai.substring(0, 10)
 
             val format = SimpleDateFormat("yyyy-MM-dd", Locale("id"))

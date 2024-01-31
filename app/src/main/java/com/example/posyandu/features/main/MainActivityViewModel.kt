@@ -43,11 +43,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             ) {
                 if (response.isSuccessful) {
                     _mainBidanData.value = response.body()?.data
-                    val edit = prefs.edit()
-                    edit.putInt("posyanduId", _mainBidanData.value!!.posyandu.id)
-                    edit.apply()
-
                     val posyanduId = _mainBidanData.value!!.posyandu.id
+
+                    val edit = prefs.edit()
+                    edit.putInt("posyanduId", posyanduId)
+                    edit.putInt("bidanId", _mainBidanData.value!!.bidan.id)
+                    edit.apply()
 
                     val remajaClient =
                         ApiConfig.getApiService()

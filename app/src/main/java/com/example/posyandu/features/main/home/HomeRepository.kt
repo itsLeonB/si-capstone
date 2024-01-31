@@ -1,8 +1,8 @@
-package com.example.posyandu
+package com.example.posyandu.features.main.home
 
+import com.example.posyandu.features.main.home.Bidan
 import com.example.posyandu.features.main.home.Kader
 import com.example.posyandu.features.main.home.Remaja
-import com.example.posyandu.features.main.home.Bidan
 
 class HomeRepository {
     fun getHomeDataBidan(): Bidan {

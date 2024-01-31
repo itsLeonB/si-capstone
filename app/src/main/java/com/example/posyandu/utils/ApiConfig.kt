@@ -1,6 +1,5 @@
 package com.example.posyandu.utils
 
-import com.example.posyandu.ApiService
 import com.example.posyandu.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

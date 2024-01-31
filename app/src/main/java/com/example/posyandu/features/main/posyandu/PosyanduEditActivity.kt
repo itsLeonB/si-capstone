@@ -25,7 +25,6 @@ class PosyanduEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPosyanduEditBinding.inflate(layoutInflater)
         val view = binding.root
-        setContentView(view)
         supportActionBar?.hide()
 
         viewModel = ViewModelProvider(this)[PosyanduEditViewModel::class.java]
@@ -36,6 +35,8 @@ class PosyanduEditActivity : AppCompatActivity() {
         binding.btnSimpan.setOnClickListener {
             saveData()
         }
+
+        setContentView(view)
     }
 
     private fun saveData() {
