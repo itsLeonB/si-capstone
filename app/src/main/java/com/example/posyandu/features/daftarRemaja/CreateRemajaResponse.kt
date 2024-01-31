@@ -8,13 +8,13 @@ data class CreateRemajaResponse(
     val code: Int,
 
     @field:SerializedName("data")
-    val data: Data,
+    val data: Remaja,
 
     @field:SerializedName("status")
     val status: String
 )
 
-data class Data(
+data class Remaja(
 
     @field:SerializedName("is_kader")
     val isKader: Boolean,

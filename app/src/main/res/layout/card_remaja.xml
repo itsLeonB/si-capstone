@@ -42,35 +42,37 @@
                 android:layout_marginTop="4dp"
                 app:chipSpacingHorizontal="3dp">
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.Material3.Chip.Assist"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:checkable="false"-->
-<!--                    android:text="45 kg"-->
-<!--                    android:textAppearance="@style/TextAppearance.Material3.LabelSmall"-->
-<!--                    android:textColor="@color/md_theme_light_onPrimary"-->
-<!--                    app:chipBackgroundColor="@color/md_theme_light_primary"-->
-<!--                    app:chipEndPadding="1dp"-->
-<!--                    app:chipMinHeight="24dp"-->
-<!--                    app:chipStartPadding="1dp"-->
-<!--                    app:chipStrokeWidth="0dp"-->
-<!--                    app:ensureMinTouchTargetSize="false" />-->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/beratChip"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="false"
+                    android:text="n kg"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                    android:textColor="@color/md_theme_light_onPrimary"
+                    app:chipBackgroundColor="@color/md_theme_light_primary"
+                    app:chipEndPadding="1dp"
+                    app:chipMinHeight="24dp"
+                    app:chipStartPadding="1dp"
+                    app:chipStrokeWidth="0dp"
+                    app:ensureMinTouchTargetSize="false" />
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.Material3.Chip.Assist"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:checkable="false"-->
-<!--                    android:text="170 cm"-->
-<!--                    android:textAppearance="@style/TextAppearance.Material3.LabelSmall"-->
-<!--                    android:textColor="@color/md_theme_light_onPrimary"-->
-<!--                    app:chipBackgroundColor="@color/md_theme_light_primary"-->
-<!--                    app:chipEndPadding="1dp"-->
-<!--                    app:chipMinHeight="24dp"-->
-<!--                    app:chipStartPadding="1dp"-->
-<!--                    app:chipStrokeWidth="0dp"-->
-<!--                    app:ensureMinTouchTargetSize="false" />-->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/tinggiChip"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="false"
+                    android:text="n cm"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                    android:textColor="@color/md_theme_light_onPrimary"
+                    app:chipBackgroundColor="@color/md_theme_light_primary"
+                    app:chipEndPadding="1dp"
+                    app:chipMinHeight="24dp"
+                    app:chipStartPadding="1dp"
+                    app:chipStrokeWidth="0dp"
+                    app:ensureMinTouchTargetSize="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/kaderChip"
@@ -92,32 +94,88 @@
 
         </LinearLayout>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/status_draw_ok"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginRight="16dp"-->
-<!--            android:adjustViewBounds="true"-->
-<!--            android:src="@drawable/done_checkmark"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/status_text_ok"-->
-<!--            app:layout_constraintDimensionRatio="1"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_chainStyle="packed" />-->
+        <ImageView
+            android:id="@+id/status_draw_null"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/null_sign"
+            app:layout_constraintBottom_toTopOf="@id/status_text_null"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/status_text_ok"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="16dp"-->
-<!--            android:layout_marginBottom="16dp"-->
-<!--            android:gravity="end"-->
-<!--            android:text="tidak berisiko"-->
-<!--            android:textColor="@color/success"-->
-<!--            android:textSize="10sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/status_draw_ok" />-->
+        <TextView
+            android:id="@+id/status_text_null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="end"
+            android:text="belum ada data"
+            android:textColor="@color/md_theme_light_onSurface"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_draw_null" />
+
+        <ImageView
+            android:id="@+id/status_draw_ok"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/done_checkmark"
+            app:layout_constraintBottom_toTopOf="@id/status_text_ok"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/status_text_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="end"
+            android:text="tidak berisiko"
+            android:textColor="@color/success"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_draw_ok" />
+
+        <ImageView
+            android:id="@+id/status_draw_risk"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/error_cross"
+            app:layout_constraintBottom_toTopOf="@id/status_text_risk"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/status_text_risk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="end"
+            android:text="berisiko stunting"
+            android:textColor="@color/md_theme_light_error"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_draw_risk" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -1,23 +1,15 @@
 package com.example.posyandu.features.daftarRemaja
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.posyandu.databinding.ActivityDaftarRemajaCreateBinding
 import com.example.posyandu.features.register.RegisterUserRequest
-import com.example.posyandu.features.register.RegisterUserResponse
-import com.example.posyandu.utils.ApiConfig
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -26,16 +18,29 @@ import java.util.TimeZone
 class DaftarRemajaCreateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarRemajaCreateBinding
     private lateinit var viewModel: DaftarRemajaViewModel
-    private var userId: Int = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDaftarRemajaCreateBinding.inflate(layoutInflater)
         val view = binding.root
-        setContentView(view)
 
         viewModel = ViewModelProvider(this)[DaftarRemajaViewModel::class.java]
+
+        viewModel.registrationResult.observe(this) { success ->
+            if (success) {
+                // Registration was successful, perform the necessary actions
+                val intent = Intent()
+                intent.putExtra("snackbar_message", "Remaja berhasil didaftarkan")
+                setResult(RESULT_OK, intent)
+                finish()
+            }
+        }
+
+        viewModel.errorMessage.observe(this) { errorMessage ->
+            // Show a Snackbar or handle the error message
+            Snackbar.make(view, errorMessage, Snackbar.LENGTH_SHORT).show()
+        }
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -82,84 +87,9 @@ class DaftarRemajaCreateActivity : AppCompatActivity() {
                 role = "remaja"
             )
 
-            val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
-            val token = prefs.getString("token", "no token")
-
-            val client =
-                ApiConfig.getApiService().registerUser(
-                    token = "Bearer $token",
-                    user
-                )
-
-            client.enqueue(object : Callback<RegisterUserResponse> {
-                override fun onResponse(
-                    call: Call<RegisterUserResponse>,
-                    response: Response<RegisterUserResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        userId = response.body()!!.data.id
-
-                        val remaja = CreateRemajaRequest(
-                            userId,
-                            "Nama Ibu anda",
-                            "Nama Ayah anda",
-                            1
-                        )
-
-                        val remajaClient =
-                            ApiConfig.getApiService().createRemaja(
-                                token = "Bearer $token",
-                                remaja
-                            )
-
-                        remajaClient.enqueue(object : Callback<CreateRemajaResponse> {
-                            override fun onResponse(
-                                call: Call<CreateRemajaResponse>,
-                                response: Response<CreateRemajaResponse>
-                            ) {
-                                if (response.isSuccessful) {
-                                    viewModel.indexRemaja()
-                                    val intent = Intent()
-                                    intent.putExtra(
-                                        "snackbar_message",
-                                        "Remaja berhasil didaftarkan"
-                                    )
-                                    setResult(Activity.RESULT_OK, intent)
-                                    finish()
-                                } else {
-                                    Log.e(TAG, "onFailure: ${response.message()}")
-                                    Snackbar.make(
-                                        view,
-                                        "Remaja gagal didaftarkan, periksa kembali data",
-                                        Snackbar.LENGTH_SHORT
-                                    )
-                                        .show()
-                                }
-                            }
-
-                            override fun onFailure(call: Call<CreateRemajaResponse>, t: Throwable) {
-                                Log.e(TAG, "onFailure: ${t.message.toString()}")
-                            }
-                        })
-                    } else {
-                        Log.e(TAG, "onFailure: ${response.message()}")
-                        Snackbar.make(
-                            view,
-                            "Remaja gagal didaftarkan, periksa kembali data",
-                            Snackbar.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                }
-
-                override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                }
-            })
+            viewModel.createRemaja(user, view)
         }
-    }
 
-    companion object {
-        private const val TAG = "DaftarRemajaCreateActivity"
+        setContentView(view)
     }
 }

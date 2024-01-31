@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.posyandu.HomeRepository
 import com.example.posyandu.utils.UserManager
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -21,7 +20,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val remajaData: LiveData<Remaja> = _remajaData
 
     val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:", Locale.getDefault())
-
 
 
     fun refreshHomeData() {

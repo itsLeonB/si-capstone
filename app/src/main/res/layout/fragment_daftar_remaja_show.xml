@@ -7,7 +7,7 @@
     android:background="@color/md_theme_light_surface"
     android:padding="16dp"
     android:theme="@style/AppTheme"
-    tools:context=".DaftarRemajaActivity">
+    tools:context=".features.daftarRemaja.DaftarRemajaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/md_theme_light_errorContainer">
+            app:cardBackgroundColor="@color/md_theme_light_errorContainer">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -126,6 +126,7 @@
                     app:layout_constraintTop_toBottomOf="@id/text_risiko" />
 
                 <ImageView
+                    android:id="@+id/drawPemeriksaan"
                     android:layout_width="30dp"
                     android:layout_height="0dp"
                     android:src="@drawable/error_cross"
@@ -175,7 +176,7 @@
             android:id="@+id/optKader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_margin="16dp"
             android:backgroundTint="@color/md_theme_light_errorContainer">
 
             <androidx.constraintlayout.widget.ConstraintLayout
