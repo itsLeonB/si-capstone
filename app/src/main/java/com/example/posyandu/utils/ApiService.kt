@@ -24,6 +24,9 @@ import com.example.posyandu.features.pemeriksaan.IndexPemeriksaanByRemajaRespons
 import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateRequest
 import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateResponse
 import com.example.posyandu.features.register.GetUserResponse
+import com.example.posyandu.features.main.profile.GetProfileByIdResponse
+import com.example.posyandu.features.main.profile.PutUpdateProfileRequest
+import com.example.posyandu.features.main.profile.PutUpdateProfileResponse
 import com.example.posyandu.features.register.RegisterUserRequest
 import com.example.posyandu.features.register.RegisterUserResponse
 import com.example.posyandu.features.register.UpdateUserRequest
@@ -177,4 +180,17 @@ interface ApiService {
         @Path("id") userId: Int,
         @Header("Authorization") token: String
     ): Call<Void>
+
+    @GET("user/{id}")
+    fun getProfileById (
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<GetProfileByIdResponse>
+
+    @PUT("user/{id}")
+    fun updateProfile(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String,
+        @Body profile: PutUpdateProfileRequest
+    ): Call<PutUpdateProfileResponse>
 }

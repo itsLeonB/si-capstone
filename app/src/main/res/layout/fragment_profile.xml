@@ -459,7 +459,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
                         android:text="60298"
-                        android:maxLength="5"
                         android:enabled="false"
                         />
 
