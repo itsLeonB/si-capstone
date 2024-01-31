@@ -1,6 +1,8 @@
 package com.example.posyandu.features.main
 
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 data class MainBidanResponse(
 
@@ -14,51 +16,6 @@ data class MainBidanResponse(
     val status: String
 )
 
-data class JadwalPenyuluhanItem(
-
-    @field:SerializedName("waktu_selesai")
-    val waktuSelesai: String,
-
-    @field:SerializedName("feedback")
-    val feedback: String,
-
-    @field:SerializedName("materi")
-    val materi: String,
-
-    @field:SerializedName("posyandu")
-    val posyandu: Posyandu,
-
-    @field:SerializedName("id")
-    val id: Int,
-
-    @field:SerializedName("title")
-    val title: String,
-
-    @field:SerializedName("waktu_mulai")
-    val waktuMulai: String
-)
-
-data class Remaja(
-
-    @field:SerializedName("is_kader")
-    val isKader: Boolean,
-
-    @field:SerializedName("nama_ibu")
-    val namaIbu: String,
-
-    @field:SerializedName("posyandu")
-    val posyandu: Posyandu,
-
-    @field:SerializedName("nama_ayah")
-    val namaAyah: String,
-
-    @field:SerializedName("id")
-    val id: Int,
-
-    @field:SerializedName("user")
-    val user: User
-)
-
 data class PemeriksaanItem(
 
     @field:SerializedName("kondisi_umum")
@@ -70,11 +27,8 @@ data class PemeriksaanItem(
     @field:SerializedName("keterangan")
     val keterangan: String,
 
-    @field:SerializedName("sistole")
-    val sistole: Float,
-
-    @field:SerializedName("diastole")
-    val diastole: Float,
+    @field:SerializedName("tekanan_darah")
+    val tekananDarah: Int,
 
     @field:SerializedName("kadar_hemoglobin")
     val kadarHemoglobin: Int,
@@ -112,41 +66,43 @@ data class MainBidanData(
     @field:SerializedName("posyandu")
     val posyandu: Posyandu,
 
+    @field:SerializedName("bidan")
+    val bidan: Bidan,
+
     @field:SerializedName("pemeriksaan")
-    val pemeriksaan: List<PemeriksaanItem>,
+    val pemeriksaan: List<PemeriksaanItem>
+) {
+    fun sortedPosyandu(): List<JadwalPosyanduItem> {
+        val dateFormat: SimpleDateFormat =
+            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
-    @field:SerializedName("user")
-    val user: User
-)
+        val sortedPosyandu: List<JadwalPosyanduItem> = jadwalPosyandu.sortedByDescending {
+            dateFormat.parse(it.waktuMulai)
+        }
 
-data class Posyandu(
+        return sortedPosyandu
+    }
+}
 
-    @field:SerializedName("nama")
-    val nama: String,
+data class Remaja(
 
-    @field:SerializedName("foto")
-    val foto: String,
+    @field:SerializedName("is_kader")
+    val isKader: Boolean,
 
-    @field:SerializedName("id")
-    val id: Int,
-
-    @field:SerializedName("alamat")
-    val alamat: String
-)
-
-data class JadwalPosyanduItem(
-
-    @field:SerializedName("waktu_selesai")
-    val waktuSelesai: String,
+    @field:SerializedName("nama_ibu")
+    val namaIbu: String,
 
     @field:SerializedName("posyandu")
     val posyandu: Posyandu,
 
+    @field:SerializedName("nama_ayah")
+    val namaAyah: String,
+
     @field:SerializedName("id")
     val id: Int,
 
-    @field:SerializedName("waktu_mulai")
-    val waktuMulai: String
+    @field:SerializedName("user")
+    val user: User
 )
 
 data class User(
@@ -168,4 +124,70 @@ data class User(
 
     @field:SerializedName("tanggal_lahir")
     val tanggalLahir: String
+)
+
+data class JadwalPosyanduItem(
+
+    @field:SerializedName("waktu_selesai")
+    val waktuSelesai: String,
+
+    @field:SerializedName("posyandu")
+    val posyandu: Posyandu,
+
+    @field:SerializedName("id")
+    val id: Int,
+
+    @field:SerializedName("waktu_mulai")
+    val waktuMulai: String
+)
+
+data class Bidan(
+
+    @field:SerializedName("jabatan")
+    val jabatan: String,
+
+    @field:SerializedName("id")
+    val id: Int,
+
+    @field:SerializedName("user")
+    val user: User
+)
+
+data class Posyandu(
+
+    @field:SerializedName("nama")
+    val nama: String,
+
+    @field:SerializedName("foto")
+    val foto: String,
+
+    @field:SerializedName("id")
+    val id: Int,
+
+    @field:SerializedName("alamat")
+    val alamat: String
+)
+
+data class JadwalPenyuluhanItem(
+
+    @field:SerializedName("waktu_selesai")
+    val waktuSelesai: String,
+
+    @field:SerializedName("feedback")
+    val feedback: String,
+
+    @field:SerializedName("materi")
+    val materi: String,
+
+    @field:SerializedName("posyandu")
+    val posyandu: Posyandu,
+
+    @field:SerializedName("id")
+    val id: Int,
+
+    @field:SerializedName("title")
+    val title: String,
+
+    @field:SerializedName("waktu_mulai")
+    val waktuMulai: String
 )
