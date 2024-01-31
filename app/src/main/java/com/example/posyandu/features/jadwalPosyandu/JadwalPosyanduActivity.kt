@@ -26,10 +26,6 @@ class JadwalPosyanduActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJadwalPosyanduBinding
     private lateinit var viewModel: JadwalPosyanduViewModel
 
-    companion object {
-        private const val TAG = "JadwalPosyanduActivity"
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

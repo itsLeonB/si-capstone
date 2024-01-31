@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import com.example.posyandu.R
 import com.example.posyandu.databinding.ActivityPemeriksaanViewBinding
 import com.example.posyandu.utils.ApiConfig
@@ -108,8 +109,9 @@ class PemeriksaanViewActivity : AppCompatActivity() {
                     val outputTimeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
                     val date = inputFormat.parse(pemeriksaan.waktuPengukuran)
-                    val formattedDate = outputDateFormat.format(date)
-                    val formattedTime = "Pukul " + outputTimeFormat.format(date) + " WIB"
+                    val formattedDate = date?.let { outputDateFormat.format(it) }
+                    val formattedTime =
+                        "Pukul " + date?.let { outputTimeFormat.format(it) } + " WIB"
 
                     binding.remaja.text = pemeriksaan.remaja.user.nama
                     binding.tanggal.text = formattedDate
@@ -131,7 +133,12 @@ class PemeriksaanViewActivity : AppCompatActivity() {
                     if (pemeriksaan.berisiko()) {
                         binding.textRisiko.text = "Berisiko stunting"
                         binding.textRisiko.setTextColor(getColor(R.color.md_theme_light_error))
-                        binding.drawRisiko.setImageDrawable(getDrawable(R.drawable.error_cross))
+                        binding.drawRisiko.setImageDrawable(
+                            AppCompatResources.getDrawable(
+                                this@PemeriksaanViewActivity,
+                                R.drawable.error_cross
+                            )
+                        )
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

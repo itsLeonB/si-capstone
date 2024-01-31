@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.posyandu.databinding.ActivityDaftarRemajaCreateBinding
 import com.example.posyandu.features.register.RegisterUserRequest
@@ -19,7 +18,6 @@ import java.util.TimeZone
 class DaftarRemajaCreateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarRemajaCreateBinding
     private lateinit var viewModel: DaftarRemajaViewModel
-    private var userId: Int = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +27,7 @@ class DaftarRemajaCreateActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[DaftarRemajaViewModel::class.java]
 
-        viewModel.registrationResult.observe(this, Observer { success ->
+        viewModel.registrationResult.observe(this) { success ->
             if (success) {
                 // Registration was successful, perform the necessary actions
                 val intent = Intent()
@@ -37,12 +35,12 @@ class DaftarRemajaCreateActivity : AppCompatActivity() {
                 setResult(RESULT_OK, intent)
                 finish()
             }
-        })
+        }
 
-        viewModel.errorMessage.observe(this, Observer { errorMessage ->
+        viewModel.errorMessage.observe(this) { errorMessage ->
             // Show a Snackbar or handle the error message
             Snackbar.make(view, errorMessage, Snackbar.LENGTH_SHORT).show()
-        })
+        }
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -93,9 +91,5 @@ class DaftarRemajaCreateActivity : AppCompatActivity() {
         }
 
         setContentView(view)
-    }
-
-    companion object {
-        private const val TAG = "DaftarRemajaCreateActivity"
     }
 }

@@ -77,7 +77,7 @@ class DaftarRemajaViewModel(application: Application) : AndroidViewModel(applica
                 response: Response<RegisterUserResponse>
             ) {
                 if (response.isSuccessful) {
-                    var userId = response.body()!!.data.id
+                    val userId = response.body()!!.data.id
 
                     val remaja = CreateRemajaRequest(
                         userId,

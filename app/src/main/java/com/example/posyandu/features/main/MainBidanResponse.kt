@@ -73,8 +73,7 @@ data class MainBidanData(
     val pemeriksaan: List<PemeriksaanItem>
 ) {
     fun sortedPosyandu(): List<JadwalPosyanduItem> {
-        val dateFormat: SimpleDateFormat =
-            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
         val sortedPosyandu: List<JadwalPosyanduItem> = jadwalPosyandu.sortedByDescending {
             dateFormat.parse(it.waktuMulai)

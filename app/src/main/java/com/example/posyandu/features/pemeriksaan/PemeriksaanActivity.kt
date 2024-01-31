@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.posyandu.databinding.ActivityPemeriksaanBinding
-import com.example.posyandu.features.pemeriksaan.PemeriksaanCreateActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
@@ -26,10 +25,6 @@ class PemeriksaanActivity : AppCompatActivity() {
     private var usia by Delegates.notNull<Int>()
     private var remajaId by Delegates.notNull<Int>()
     private var userId by Delegates.notNull<Int>()
-
-    companion object {
-        private const val TAG = "PemeriksaanActivity"
-    }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

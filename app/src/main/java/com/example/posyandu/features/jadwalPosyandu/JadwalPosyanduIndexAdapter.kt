@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.posyandu.databinding.CardJadwalPosyanduBinding
 import java.text.SimpleDateFormat
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class JadwalPosyanduIndexAdapter :
@@ -49,8 +46,8 @@ class JadwalPosyanduIndexAdapter :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(jadwal: JadwalPosyandu) {
-            var waktuMulai = jadwal.waktuMulai
-            var waktuSelesai = jadwal.waktuSelesai
+            val waktuMulai = jadwal.waktuMulai
+            val waktuSelesai = jadwal.waktuSelesai
 
             val tanggal = waktuMulai.substring(0, 10)
 

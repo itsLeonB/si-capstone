@@ -40,7 +40,7 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
             val adapter = ArrayAdapter(
                 this,
                 android.R.layout.simple_dropdown_item_1line,
-                remajaIdNamaList!!.map { it.nama }
+                remajaIdNamaList.map { it.nama }
             )
 
             binding.remajaList.setAdapter(adapter)

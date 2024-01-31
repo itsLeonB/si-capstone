@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.posyandu.R
 import com.example.posyandu.databinding.ActivityDaftarRemajaBinding
 import com.example.posyandu.databinding.FragmentDaftarRemajaShowBinding
-import com.example.posyandu.features.daftarRemaja.DaftarRemajaCreateActivity
-import com.example.posyandu.features.daftarRemaja.DaftarRemajaViewModel
 import com.example.posyandu.features.pemeriksaan.PemeriksaanActivity
 import com.example.posyandu.features.pemeriksaan.PemeriksaanCreateActivity
 import com.example.posyandu.utils.ApiConfig
@@ -169,7 +167,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
                         startNewActivity.launch(intent)
                     }
                 } else {
-                    binding.optPemeriksaan.setCardBackgroundColor(getColor(com.google.android.material.R.color.m3_sys_color_light_surface_container))
+                    binding.optPemeriksaan.setCardBackgroundColor(getColor(R.color.md_theme_dark_inverseSurface))
                     binding.textRisiko.text = "Belum ada data"
                     binding.textPemeriksaan.text = "Tambah data"
                     binding.textRisiko.setTextColor(getColor(R.color.md_theme_light_onSurface))

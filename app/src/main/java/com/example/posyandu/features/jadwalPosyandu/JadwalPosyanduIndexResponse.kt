@@ -16,8 +16,7 @@ data class JadwalPosyanduIndexResponse(
     val status: String
 ) {
     fun sortedData(): List<JadwalPosyandu> {
-        val dateFormat: SimpleDateFormat =
-            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
         val sortedPosyandu: List<JadwalPosyandu> = data.sortedByDescending {
             dateFormat.parse(it.waktuMulai)

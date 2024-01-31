@@ -51,7 +51,7 @@ class PemeriksaanAdapter :
             val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val outputDateFormat = SimpleDateFormat("EEEE, d MMMM yyyy", Locale("id", "ID"))
             val date = inputFormat.parse(pemeriksaan.waktuPengukuran)
-            val formattedDate = outputDateFormat.format(date)
+            val formattedDate = date?.let { outputDateFormat.format(it) }
             if (pemeriksaan.berisiko()) {
                 binding.status.text = "Berisiko stunting"
                 binding.status.setTextColor(
