@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.posyandu.databinding.CardRemajaBinding
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 
 class DaftarRemajaIndexAdapter :
     ListAdapter<RemajaDataItem, DaftarRemajaIndexAdapter.MyViewHolder>(DIFF_CALLBACK) {
@@ -45,15 +48,60 @@ class DaftarRemajaIndexAdapter :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(remaja: RemajaDataItem) {
-            val nama = remaja.user.nama
-            val tanggalLahir = remaja.user.tanggalLahir
+            val user = remaja.user
+            val tanggalLahir = user.tanggalLahir
+            val birthDate = LocalDate.parse(tanggalLahir, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            val today = LocalDate.now()
+            val period = Period.between(birthDate, today)
             val isKader = remaja.isKader
+            val pemeriksaan = remaja.pemeriksaan
 
-            binding.namaRemaja.text = nama
-            binding.umurRemaja.text = tanggalLahir
+            binding.namaRemaja.text = user.nama
+            binding.umurRemaja.text = "${period.years} tahun"
+
+            if (pemeriksaan.id == 0) {
+                binding.beratChip.visibility = View.GONE
+                binding.tinggiChip.visibility = View.GONE
+                binding.statusDrawNull.visibility = View.VISIBLE
+                binding.statusTextNull.visibility = View.VISIBLE
+                binding.statusDrawOk.visibility = View.GONE
+                binding.statusTextOk.visibility = View.GONE
+                binding.statusDrawRisk.visibility = View.GONE
+                binding.statusTextRisk.visibility = View.GONE
+            } else {
+                binding.beratChip.text = "${pemeriksaan.beratBadan} kg"
+                binding.tinggiChip.text = "${pemeriksaan.tinggiBadan} cm"
+
+                binding.statusDrawNull.visibility = View.GONE
+                binding.statusTextNull.visibility = View.GONE
+
+                if (pemeriksaan.berisiko()) {
+                    binding.statusDrawOk.visibility = View.GONE
+                    binding.statusTextOk.visibility = View.GONE
+                    binding.statusDrawRisk.visibility = View.VISIBLE
+                    binding.statusTextRisk.visibility = View.VISIBLE
+                } else {
+                    binding.statusDrawRisk.visibility = View.GONE
+                    binding.statusTextRisk.visibility = View.GONE
+                    binding.statusDrawOk.visibility = View.VISIBLE
+                    binding.statusTextOk.visibility = View.VISIBLE
+                }
+            }
+
+//            if (pemeriksaan.beratBadan == 0) {
+//                binding.beratChip.visibility = View.GONE
+//            } else {
+//                binding.beratChip.visibility = View.VISIBLE
+//            }
+//
+//            if (pemeriksaan.tinggiBadan == 0) {
+//                binding.tinggiChip.visibility = View.GONE
+//            } else {
+//                binding.tinggiChip.visibility = View.VISIBLE
+//            }
 
             if (!isKader) {
-                binding.kaderChip.visibility = View.INVISIBLE
+                binding.kaderChip.visibility = View.GONE
             }
         }
     }

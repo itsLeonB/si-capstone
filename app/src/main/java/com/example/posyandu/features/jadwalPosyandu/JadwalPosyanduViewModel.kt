@@ -29,7 +29,10 @@ class JadwalPosyanduViewModel(application: Application) : AndroidViewModel(appli
         val token = prefs.getString("token", "no token")
 
         val client =
-            ApiConfig.getApiService().indexJadwalPosyandu(token = "Bearer $token")
+            ApiConfig.getApiService().indexJadwalPosyandu(
+                posyanduId = prefs.getInt("posyanduId", 0),
+                token = "Bearer $token"
+            )
 
         client.enqueue(object : Callback<JadwalPosyanduIndexResponse> {
             override fun onResponse(
@@ -37,7 +40,7 @@ class JadwalPosyanduViewModel(application: Application) : AndroidViewModel(appli
                 response: Response<JadwalPosyanduIndexResponse>
             ) {
                 if (response.isSuccessful) {
-                    _listJadwalPosyandu.value = response.body()?.data
+                    _listJadwalPosyandu.value = response.body()?.sortedData()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }

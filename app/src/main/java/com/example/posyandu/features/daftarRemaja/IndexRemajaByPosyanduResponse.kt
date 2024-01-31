@@ -1,7 +1,13 @@
 package com.example.posyandu.features.daftarRemaja
 
-import com.example.posyandu.features.jadwalPosyandu.Posyandu
+import android.os.Build
+import android.os.Parcel
+import android.os.Parcelable
+import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 
 data class IndexRemajaByPosyanduResponse(
 
@@ -34,28 +40,15 @@ data class User(
 
     @field:SerializedName("tanggal_lahir")
     val tanggalLahir: String
-)
-
-data class Remaja(
-
-    @field:SerializedName("is_kader")
-    val isKader: Boolean,
-
-    @field:SerializedName("nama_ibu")
-    val namaIbu: String,
-
-    @field:SerializedName("posyandu")
-    val posyandu: Posyandu,
-
-    @field:SerializedName("nama_ayah")
-    val namaAyah: String,
-
-    @field:SerializedName("id")
-    val id: Int,
-
-    @field:SerializedName("user")
-    val user: User
-)
+) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun usia(): Int {
+        val birthDate = LocalDate.parse(tanggalLahir, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        val today = LocalDate.now()
+        val period = Period.between(birthDate, today)
+        return period.years
+    }
+}
 
 data class Pemeriksaan(
 
@@ -102,7 +95,36 @@ data class Pemeriksaan(
     val diastole: Int
 ) {
     fun berisiko(): Boolean {
-        return beratBadan < 35 && tinggiBadan < 145 && sistole < 100 && diastole < 60 && lingkarLengan < 10 && tingkatGlukosa < 10 && kadarHemoglobin < 30
+        return beratBadan < 35 || tinggiBadan < 145 || sistole < 100 || diastole < 60 || lingkarLengan < 10 || tingkatGlukosa < 10 || kadarHemoglobin < 30
+    }
+}
+
+data class RemajaIdNama(
+    val id: Int,
+    val nama: String
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString() ?: ""
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(nama)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<RemajaIdNama> {
+        override fun createFromParcel(parcel: Parcel): RemajaIdNama {
+            return RemajaIdNama(parcel)
+        }
+
+        override fun newArray(size: Int): Array<RemajaIdNama?> {
+            return arrayOfNulls(size)
+        }
     }
 }
 
@@ -127,7 +149,9 @@ data class RemajaDataItem(
     val pemeriksaan: Pemeriksaan,
 
     @field:SerializedName("user")
-    val user: User,
-
-    val berisiko: Boolean = pemeriksaan.berisiko()
-)
+    val user: User
+) {
+    fun dataAvailable(): Boolean {
+        return pemeriksaan.id != 0
+    }
+}

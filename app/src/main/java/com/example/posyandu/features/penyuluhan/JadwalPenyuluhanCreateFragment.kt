@@ -1,4 +1,4 @@
-package com.example.posyandu
+package com.example.posyandu.features.penyuluhan
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.posyandu.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -47,9 +48,11 @@ class JadwalPenyuluhanCreateFragment : Fragment() {
                 .replace(R.id.container, JadwalPenyuluhanViewFragment())
                 .addToBackStack(null)
                 .commit()
-            btmBar?.let { Snackbar.make(it, "Jadwal berhasil dibuat", Snackbar.LENGTH_SHORT)
-                .setAnchorView(btmBar)
-                .show()}
+            btmBar?.let {
+                Snackbar.make(it, "Jadwal berhasil dibuat", Snackbar.LENGTH_SHORT)
+                    .setAnchorView(btmBar)
+                    .show()
+            }
         }
 
     }

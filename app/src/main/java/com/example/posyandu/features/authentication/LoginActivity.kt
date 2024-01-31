@@ -7,10 +7,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.posyandu.ApiClient
-import com.example.posyandu.LoginRequest
 import com.example.posyandu.R
 import com.example.posyandu.features.main.MainActivity
+import com.example.posyandu.utils.ApiClient
 import com.example.posyandu.utils.UserManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -20,13 +19,11 @@ import retrofit2.Response
 
 
 class LoginActivity() : AppCompatActivity(), Parcelable {
-
     private lateinit var usernameEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var loginButton: MaterialButton
 
     constructor(parcel: Parcel) : this() {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

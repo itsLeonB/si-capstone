@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.posyandu.databinding.CardJadwalPosyanduBinding
 import java.text.SimpleDateFormat
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class JadwalPosyanduIndexAdapter :
@@ -49,23 +46,8 @@ class JadwalPosyanduIndexAdapter :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(jadwal: JadwalPosyandu) {
-            var waktuMulai = jadwal.waktuMulai
-            var waktuSelesai = jadwal.waktuSelesai
-
-            val utcMulai = ZonedDateTime.parse(
-                "$waktuMulai+00:00",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX")
-            )
-            val utcSelesai = ZonedDateTime.parse(
-                "$waktuSelesai+00:00",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX")
-            )
-
-            val jakartaMulai = utcMulai.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
-            val jakartaSelesai = utcSelesai.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
-
-            waktuMulai = jakartaMulai.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-            waktuSelesai = jakartaSelesai.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+            val waktuMulai = jadwal.waktuMulai
+            val waktuSelesai = jadwal.waktuSelesai
 
             val tanggal = waktuMulai.substring(0, 10)
 

@@ -1,5 +1,6 @@
-package com.example.posyandu
+package com.example.posyandu.utils
 
+import com.example.posyandu.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.posyandu.HomeFragment"
+        android:name="com.example.posyandu.features.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_posyanduFragment"
             app:destination="@id/posyanduFragment" />
@@ -23,15 +23,10 @@
         android:id="@+id/posyanduFragment"
         android:name="com.example.posyandu.features.main.posyandu.PosyanduFragment"
         android:label="fragment_posyandu"
-        tools:layout="@layout/fragment_posyandu" >
-        <argument
-            android:name="selectedPosyandu"
-            app:argType="string"
-            app:nullable="true" />
-    </fragment>
+        tools:layout="@layout/fragment_posyandu"></fragment>
     <fragment
         android:id="@+id/konsultasiFragment"
-        android:name="com.example.posyandu.KonsultasiFragment"
+        android:name="com.example.posyandu.features.konsultasi.KonsultasiFragment"
         android:label="fragment_konsultasi"
         tools:layout="@layout/fragment_konsultasi" />
 </navigation>
