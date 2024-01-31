@@ -1,11 +1,19 @@
-package com.example.posyandu.features.konsultasi
+package com.example.posyandu.features.main.konsultasi
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.example.posyandu.R
+import com.example.posyandu.databinding.FragmentKonsultasiBinding
+import com.google.android.material.snackbar.Snackbar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +29,8 @@ class KonsultasiFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: FragmentKonsultasiBinding
+    private lateinit var startNewActivity: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +40,25 @@ class KonsultasiFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_konsultasi, container, false)
+    ): View {
+
+        startNewActivity =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val snackbarMessage = result.data?.getStringExtra("snackbar_message")
+                    val show = view?.let {
+                        Snackbar.make(it, snackbarMessage!!, Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        binding = FragmentKonsultasiBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     companion object {
@@ -56,5 +79,15 @@ class KonsultasiFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.tombol1.setOnClickListener {
+            val intent = Intent(requireActivity(), KonsultasiChatActivity::class.java)
+            startNewActivity.launch(intent)
+        }
     }
 }

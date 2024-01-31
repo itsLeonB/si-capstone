@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".features.main.konsultasi.KonsultasiChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.main.konsultasi.KonsultasiChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.penyuluhan.JadwalPenyuluhanEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.penyuluhan.JadwalPenyuluhanCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.penyuluhan.JadwalPenyuluhanViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.penyuluhan.JadwalPenyuluhanActivity"
+            android:exported="false" />
         <activity
             android:name=".features.pemeriksaan.PemeriksaanCreateActivity"
             android:exported="false" />
@@ -56,9 +74,10 @@
             android:exported="true" />
         <activity
             android:name=".features.authentication.LoginActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>

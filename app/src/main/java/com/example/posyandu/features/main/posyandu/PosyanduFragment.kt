@@ -23,16 +23,17 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.posyandu.BuildConfig
+import com.example.posyandu.features.daftarRemaja.DaftarRemajaActivity
+import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduActivity
+import com.example.posyandu.features.main.posyandu.PosyanduEditActivity
 import com.example.posyandu.R
 import com.example.posyandu.databinding.FragmentPosyanduBinding
-import com.example.posyandu.features.daftarRemaja.DaftarRemajaActivity
 import com.example.posyandu.features.daftarRemaja.RemajaIdNama
-import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduActivity
 import com.example.posyandu.features.main.MainActivity
 import com.example.posyandu.features.main.MainActivityViewModel
 import com.example.posyandu.features.pemeriksaan.PemeriksaanCreateActivity
-import com.example.posyandu.features.penyuluhan.JadwalPenyuluhanFragment
 import com.example.posyandu.utils.ApiConfig
+import com.example.posyandu.features.penyuluhan.JadwalPenyuluhanActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
@@ -170,12 +171,8 @@ class PosyanduFragment : Fragment() {
         }
 
         binding.cardJadwalPenyuluhan.setOnClickListener {
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.container, JadwalPenyuluhanFragment())
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(requireActivity(), JadwalPenyuluhanActivity::class.java)
+            startNewActivity.launch(intent)
         }
 
         binding.cardRemaja.setOnClickListener {

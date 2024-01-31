@@ -1,0 +1,54 @@
+package com.example.posyandu.features.penyuluhan
+
+import com.google.gson.annotations.SerializedName
+
+data class IndexJadwalPenyuluhanResponse(
+
+	@field:SerializedName("code")
+	val code: Int,
+
+	@field:SerializedName("data")
+	val data: List<JadwalPenyuluhan>,
+
+	@field:SerializedName("status")
+	val status: String
+)
+
+data class JadwalPenyuluhan(
+
+	@field:SerializedName("waktu_selesai")
+	val waktuSelesai: String,
+
+	@field:SerializedName("feedback")
+	val feedback: String,
+
+	@field:SerializedName("materi")
+	val materi: String,
+
+	@field:SerializedName("posyandu")
+	val posyandu: Posyandu,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("title")
+	val title: String,
+
+	@field:SerializedName("waktu_mulai")
+	val waktuMulai: String
+)
+
+data class Posyandu(
+
+	@field:SerializedName("nama")
+	val nama: String,
+
+	@field:SerializedName("foto")
+	val foto: String,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("alamat")
+	val alamat: String
+)
