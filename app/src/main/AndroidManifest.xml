@@ -19,9 +19,6 @@
             android:name=".features.main.konsultasi.KonsultasiChatActivity"
             android:exported="false" />
         <activity
-            android:name=".features.main.konsultasi.KonsultasiChatActivity"
-            android:exported="false" />
-        <activity
             android:name=".features.penyuluhan.JadwalPenyuluhanEditActivity"
             android:exported="false" />
         <activity
