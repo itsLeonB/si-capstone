@@ -30,6 +30,11 @@ import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateResponse
 import com.example.posyandu.features.register.GetUserResponse
 import com.example.posyandu.features.register.RegisterUserRequest
 import com.example.posyandu.features.register.RegisterUserResponse
+import com.example.posyandu.features.penyuluhan.CreateJadwalPenyuluhanRequest
+import com.example.posyandu.features.penyuluhan.CreateJadwalPenyuluhanResponse
+import com.example.posyandu.features.penyuluhan.GetJadwalPenyuluhanResponse
+import com.example.posyandu.features.penyuluhan.IndexJadwalPenyuluhanResponse
+import com.example.posyandu.features.penyuluhan.UpdateJadwalPenyuluhanResponse
 import com.example.posyandu.features.register.UpdateUserRequest
 import com.example.posyandu.utils.file.FileUploadResponse
 import okhttp3.MultipartBody
@@ -179,6 +184,30 @@ interface ApiService {
         @Body user: RegisterUserRequest
     ): Call<RegisterUserResponse>
 
+    @GET("jadwal-penyuluhan")
+    fun indexJadwalPenyuluhan(
+        @Header("Authorization") token: String
+    ): Call<IndexJadwalPenyuluhanResponse>
+
+    @POST("jadwal-penyuluhan")
+    fun createJadwalPenyuluhan(
+        @Header("Authorization") token: String,
+        @Body jadwalPenyuluhan: CreateJadwalPenyuluhanRequest
+    ): Call<CreateJadwalPenyuluhanResponse>
+
+    @GET("jadwal-penyuluhan/{id}")
+    fun getJadwalPenyuluhan(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<GetJadwalPenyuluhanResponse>
+
+    @PUT("jadwal-penyuluhan/{id}")
+    fun updateJadwalPenyuluhan(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String,
+        @Body jadwalPenyuluhan: CreateJadwalPenyuluhanRequest
+    ): Call<UpdateJadwalPenyuluhanResponse>
+
     @PUT("user/{id}")
     fun updateUser(
         @Path("id") userId: Int,
@@ -204,6 +233,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body profile: PutUpdateProfileRequest
     ): Call<PutUpdateProfileResponse>
+
+    @DELETE("jadwal-penyuluhan/{id}")
+    fun deleteJadwalPenyuluhan(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<Void>
+
 
     @Multipart
     @POST("file/upload")

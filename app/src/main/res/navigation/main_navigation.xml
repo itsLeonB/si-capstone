@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_posyandu" />
     <fragment
         android:id="@+id/konsultasiFragment"
-        android:name="com.example.posyandu.features.konsultasi.KonsultasiFragment"
+        android:name="com.example.posyandu.features.main.konsultasi.KonsultasiFragment"
         android:label="fragment_konsultasi"
         tools:layout="@layout/fragment_konsultasi" />
 </navigation>
