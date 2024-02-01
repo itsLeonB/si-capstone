@@ -1,7 +1,6 @@
 package com.example.posyandu.features.pemeriksaan
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +21,7 @@ import java.util.TimeZone
 class PemeriksaanCreateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPemeriksaanCreateBinding
     private lateinit var editBinding: ActivityPemeriksaanEditBinding
+    private var isKader: Boolean = false
 
     companion object {
         private const val TAG = "PemeriksaanCreateActivity"
@@ -31,8 +31,11 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val remajaIdNamaList =
             intent.getSerializableExtra("remajaIdNamaList") as ArrayList<RemajaIdNama>?
-        val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
         val token = prefs.getString("token", "no token")
+        isKader = prefs.getBoolean("isKader", false)
+        Log.e("iskader", isKader.toString())
+
         if (remajaIdNamaList != null) {
             binding = ActivityPemeriksaanCreateBinding.inflate(layoutInflater)
             val view = binding.root
@@ -44,6 +47,12 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
             )
 
             binding.remajaList.setAdapter(adapter)
+
+            if (isKader) {
+                binding.feSwitch.isEnabled = false
+                binding.kondisiUmum.isEnabled = false
+                binding.ketEdit.isEnabled = false
+            }
 
             binding.btnTambah.setOnClickListener {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
@@ -68,12 +77,6 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
                     waktuPengukuran = dateFormat.format(currentDate),
                     kondisiUmum = binding.kondisiUmum.text.toString(),
                     keterangan = binding.ketEdit.text.toString()
-                )
-
-                Log.println(
-                    Log.DEBUG,
-                    "Pemeriksaan",
-                    pemeriksaanData.waktuPengukuran + "\n" + pemeriksaanData.keterangan
                 )
 
                 val client =
@@ -117,6 +120,12 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
             editBinding.waktu.visibility = View.GONE
             editBinding.btnDel.visibility = View.GONE
 
+            if (isKader) {
+                editBinding.feSwitch.isEnabled = false
+                editBinding.kuDropdown.isEnabled = false
+                editBinding.ketEdit.isEnabled = false
+            }
+
             editBinding.btnTambah.setOnClickListener {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
                 dateFormat.timeZone =
@@ -137,12 +146,6 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
                     waktuPengukuran = dateFormat.format(currentDate),
                     kondisiUmum = editBinding.kuDropdown.text.toString(),
                     keterangan = editBinding.ketEdit.text.toString()
-                )
-
-                Log.println(
-                    Log.DEBUG,
-                    "Pemeriksaan",
-                    pemeriksaanData.waktuPengukuran + "\n" + pemeriksaanData.keterangan
                 )
 
                 val client =

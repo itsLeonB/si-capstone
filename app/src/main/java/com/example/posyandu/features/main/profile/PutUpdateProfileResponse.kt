@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class PutUpdateProfileResponse(
 
-	@field:SerializedName("code")
+    @field:SerializedName("code")
 	val code: Int,
 
-	@field:SerializedName("data")
+    @field:SerializedName("data")
 	val data: Data,
 
-	@field:SerializedName("status")
+    @field:SerializedName("status")
 	val status: String
 )
 

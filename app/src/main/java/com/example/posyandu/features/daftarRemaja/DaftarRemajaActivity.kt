@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.example.posyandu.BuildConfig
 import com.example.posyandu.R
 import com.example.posyandu.databinding.ActivityDaftarRemajaBinding
 import com.example.posyandu.databinding.FragmentDaftarRemajaShowBinding
@@ -32,6 +36,7 @@ import java.util.Locale
 class DaftarRemajaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarRemajaBinding
     private lateinit var viewModel: DaftarRemajaViewModel
+    private lateinit var token: String
 
     val startNewActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -87,6 +92,9 @@ class DaftarRemajaActivity : AppCompatActivity() {
             startNewActivity.launch(intent)
         }
 
+        val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
+        token = prefs.getString("token", "no token").toString()
+
         setContentView(view)
     }
 
@@ -113,6 +121,16 @@ class DaftarRemajaActivity : AppCompatActivity() {
             override fun onClick(position: Int, model: RemajaDataItem) {
                 val binding = FragmentDaftarRemajaShowBinding.inflate(layoutInflater)
                 val customView = binding.root
+
+                val glideUrl = GlideUrl(
+                    BuildConfig.BASE_URL + "file/" + model.user.foto, LazyHeaders.Builder()
+                        .addHeader("Authorization", "Bearer $token")
+                        .build()
+                )
+
+                Glide.with(this@DaftarRemajaActivity)
+                    .load(glideUrl)
+                    .into(binding.foto)
 
                 val user = model.user
                 binding.nama.text = user.nama

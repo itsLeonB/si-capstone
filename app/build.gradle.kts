@@ -64,6 +64,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("com.pusher:pusher-java-client:2.4.2")
+    implementation("id.zelory:compressor:3.0.1")
 }
 
 secrets {
