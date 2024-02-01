@@ -25,6 +25,8 @@ class PemeriksaanActivity : AppCompatActivity() {
     private var usia by Delegates.notNull<Int>()
     private var remajaId by Delegates.notNull<Int>()
     private var userId by Delegates.notNull<Int>()
+    private lateinit var role: String
+    private var isKader: Boolean = false
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -54,10 +56,13 @@ class PemeriksaanActivity : AppCompatActivity() {
         val view = binding.root
 
         userId = intent.getIntExtra("userId", 0)
+        remajaId = intent.getIntExtra("remajaId", 0)
         nama = intent.getStringExtra("nama").toString()
         nik = intent.getLongExtra("nik", 0)
         usia = intent.getIntExtra("usia", 0)
-        remajaId = intent.getIntExtra("remajaId", 0)
+        val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
+        role = prefs.getString("role", "")!!
+        isKader = prefs.getBoolean("isKader", false)
 
         viewModel = ViewModelProvider(this)[PemeriksaanViewModel::class.java]
         viewModel.listPemeriksaan.observe(this) { listPemeriksaan ->
@@ -79,11 +84,15 @@ class PemeriksaanActivity : AppCompatActivity() {
                 }
             }
 
-        binding.btnTambah.setOnClickListener {
-            val intent = Intent(this, PemeriksaanCreateActivity::class.java)
-            intent.putExtra("nama", nama)
-            intent.putExtra("remajaId", remajaId)
-            startNewActivity.launch(intent)
+        if (role == "remaja" && isKader == false) {
+            binding.btnTambah.visibility = View.GONE
+        } else {
+            binding.btnTambah.setOnClickListener {
+                val intent = Intent(this, PemeriksaanCreateActivity::class.java)
+                intent.putExtra("nama", nama)
+                intent.putExtra("remajaId", remajaId)
+                startNewActivity.launch(intent)
+            }
         }
 
         setContentView(view)

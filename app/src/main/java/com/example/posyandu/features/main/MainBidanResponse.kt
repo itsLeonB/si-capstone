@@ -1,7 +1,12 @@
 package com.example.posyandu.features.main
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 data class MainBidanResponse(
@@ -73,8 +78,7 @@ data class MainBidanData(
     val pemeriksaan: List<PemeriksaanItem>
 ) {
     fun sortedPosyandu(): List<JadwalPosyanduItem> {
-        val dateFormat: SimpleDateFormat =
-            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
         val sortedPosyandu: List<JadwalPosyanduItem> = jadwalPosyandu.sortedByDescending {
             dateFormat.parse(it.waktuMulai)
@@ -124,7 +128,15 @@ data class User(
 
     @field:SerializedName("tanggal_lahir")
     val tanggalLahir: String
-)
+) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun usia(): Int {
+        val birthDate = LocalDate.parse(tanggalLahir, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        val today = LocalDate.now()
+        val period = Period.between(birthDate, today)
+        return period.years
+    }
+}
 
 data class JadwalPosyanduItem(
 

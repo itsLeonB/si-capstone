@@ -12,11 +12,15 @@ import com.example.posyandu.features.jadwalPosyandu.CreateJadwalPosyanduResponse
 import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduIndexResponse
 import com.example.posyandu.features.jadwalPosyandu.UpdateJadwalPosyanduResponse
 import com.example.posyandu.features.main.MainBidanResponse
+import com.example.posyandu.features.main.MainResponse
 import com.example.posyandu.features.main.posyandu.GetPosyanduResponse
 import com.example.posyandu.features.main.posyandu.ListPosyanduResponse
 import com.example.posyandu.features.main.posyandu.UpdatePengampuRequest
 import com.example.posyandu.features.main.posyandu.UpdatePosyanduRequest
 import com.example.posyandu.features.main.posyandu.UpdatePosyanduResponse
+import com.example.posyandu.features.main.profile.GetProfileByIdResponse
+import com.example.posyandu.features.main.profile.PutUpdateProfileRequest
+import com.example.posyandu.features.main.profile.PutUpdateProfileResponse
 import com.example.posyandu.features.pemeriksaan.CreatePemeriksaanRequest
 import com.example.posyandu.features.pemeriksaan.CreatePemeriksaanResponse
 import com.example.posyandu.features.pemeriksaan.GetPemeriksaanResponse
@@ -24,19 +28,21 @@ import com.example.posyandu.features.pemeriksaan.IndexPemeriksaanByRemajaRespons
 import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateRequest
 import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateResponse
 import com.example.posyandu.features.register.GetUserResponse
-import com.example.posyandu.features.main.profile.GetProfileByIdResponse
-import com.example.posyandu.features.main.profile.PutUpdateProfileRequest
-import com.example.posyandu.features.main.profile.PutUpdateProfileResponse
 import com.example.posyandu.features.register.RegisterUserRequest
 import com.example.posyandu.features.register.RegisterUserResponse
 import com.example.posyandu.features.register.UpdateUserRequest
+import com.example.posyandu.utils.file.FileUploadResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -49,6 +55,11 @@ interface ApiService {
     fun loadMainBidan(
         @Header("Authorization") token: String
     ): Call<MainBidanResponse>
+
+    @GET("home")
+    fun loadMain(
+        @Header("Authorization") token: String
+    ): Call<MainResponse>
 
     @GET("posyandu/{id}")
     fun getPosyandu(
@@ -182,7 +193,7 @@ interface ApiService {
     ): Call<Void>
 
     @GET("user/{id}")
-    fun getProfileById (
+    fun getProfileById(
         @Path("id") id: Int,
         @Header("Authorization") token: String
     ): Call<GetProfileByIdResponse>
@@ -193,4 +204,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body profile: PutUpdateProfileRequest
     ): Call<PutUpdateProfileResponse>
+
+    @Multipart
+    @POST("file/upload")
+    fun uploadFile(
+        @Part file: MultipartBody.Part,
+        @Part("type") type: RequestBody,
+        @Header("Authorization") token: String
+    ): Call<FileUploadResponse>
 }

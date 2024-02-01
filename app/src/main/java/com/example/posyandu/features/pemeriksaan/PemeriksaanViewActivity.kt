@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,6 +28,8 @@ class PemeriksaanViewActivity : AppCompatActivity() {
     private lateinit var viewModel: PemeriksaanViewModel
     private var remajaId by Delegates.notNull<Int>()
     private var userId by Delegates.notNull<Int>()
+    private lateinit var role: String
+    private var isKader: Boolean = false
 
     companion object {
         private const val TAG = "PemeriksaanViewActivity"
@@ -55,6 +58,8 @@ class PemeriksaanViewActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
         val token = prefs.getString("token", "no token")
+        role = prefs.getString("role", "")!!
+        isKader = prefs.getBoolean("isKader", false)
 
         // Retrieve the message from the intent
         val message = intent.getStringExtra("snackbar_message")
@@ -79,11 +84,15 @@ class PemeriksaanViewActivity : AppCompatActivity() {
                 }
             }
 
-        binding.btnEdit.setOnClickListener {
-            val intent = Intent(this, PemeriksaanEditActivity::class.java)
-            intent.putExtra("pemeriksaanId", pemeriksaanId)
-            startNewActivity.launch(intent)
-            finish()
+        if (role == "remaja" && isKader == false) {
+            binding.btnEdit.visibility = View.GONE
+        } else {
+            binding.btnEdit.setOnClickListener {
+                val intent = Intent(this, PemeriksaanEditActivity::class.java)
+                intent.putExtra("pemeriksaanId", pemeriksaanId)
+                startNewActivity.launch(intent)
+                finish()
+            }
         }
 
         setContentView(view)

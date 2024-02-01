@@ -73,18 +73,20 @@ class LoginActivity() : AppCompatActivity(), Parcelable {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     val token = responseBody?.data!!.token
+                    val role = responseBody.data.role
                     val sharedPreferences =
                         getSharedPreferences("Preferences", Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()) {
                         putString("token", token)
+                        putString("role", role)
                         apply()
                     }
 
-                    val role = when (username) {
-                        "admin" -> "bidan"
-                        "kader" -> "kader"
-                        else -> "default"
-                    }
+//                    val role = when (username) {
+//                        "admin" -> "bidan"
+//                        "kader" -> "kader"
+//                        else -> "default"
+//                    }
 
 
                     proceedToMain(token, role)
