@@ -93,7 +93,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                     Log.e(TAG, "onFailure: ${t.message.toString()}")
                 }
             })
-        } else if (role != "bidan") {
+        } else {
             val client =
                 ApiConfig.getApiService().loadMain(token = "Bearer $token")
 

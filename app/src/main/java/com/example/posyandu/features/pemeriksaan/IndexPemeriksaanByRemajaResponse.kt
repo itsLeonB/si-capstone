@@ -16,7 +16,7 @@ data class IndexPemeriksaanByRemajaResponse(
     val status: String
 ) {
     fun sortedPemeriksaan(): List<Pemeriksaan> {
-        val dateFormat: SimpleDateFormat =
+        val dateFormat =
             SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
         val sortedPemeriksaan: List<Pemeriksaan> = data.sortedByDescending {
