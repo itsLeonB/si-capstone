@@ -1,5 +1,6 @@
 package com.example.posyandu.features.jadwalPosyandu
 
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -25,12 +26,17 @@ import java.util.TimeZone
 class JadwalPosyanduActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJadwalPosyanduBinding
     private lateinit var viewModel: JadwalPosyanduViewModel
+    private lateinit var prefs: SharedPreferences
+    private lateinit var role: String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJadwalPosyanduBinding.inflate(layoutInflater)
         val view = binding.root
+
+        prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
+        role = prefs.getString("role", "")!!
 
         supportActionBar?.hide()
 
@@ -42,8 +48,12 @@ class JadwalPosyanduActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvReview.layoutManager = layoutManager
 
-        binding.btnTambah.setOnClickListener {
-            showCreateDialog(view)
+        if (role == "bidan") {
+            binding.btnTambah.setOnClickListener {
+                showCreateDialog(view)
+            }
+        } else {
+            binding.btnTambah.visibility = View.GONE
         }
 
         setContentView(view)
@@ -62,13 +72,15 @@ class JadwalPosyanduActivity : AppCompatActivity() {
             binding.nullAlert.visibility = View.VISIBLE
         }
 
-        adapter.setOnClickListener(object :
-            JadwalPosyanduIndexAdapter.OnClickListener {
-            @RequiresApi(Build.VERSION_CODES.O)
-            override fun onClick(position: Int, model: JadwalPosyandu) {
-                showEditDialog(view, model)
-            }
-        })
+        if (role == "bidan") {
+            adapter.setOnClickListener(object :
+                JadwalPosyanduIndexAdapter.OnClickListener {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onClick(position: Int, model: JadwalPosyandu) {
+                    showEditDialog(view, model)
+                }
+            })
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

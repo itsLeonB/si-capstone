@@ -1,10 +1,10 @@
 package com.example.posyandu.features.pemeriksaan
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.posyandu.databinding.ActivityPemeriksaanEditBinding
@@ -23,6 +23,7 @@ class PemeriksaanEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPemeriksaanEditBinding
     private var remajaId by Delegates.notNull<Int>()
     private lateinit var viewModel: PemeriksaanViewModel
+    private var isKader: Boolean = false
 
     companion object {
         private const val TAG = "PemeriksaanEditActivity"
@@ -40,9 +41,50 @@ class PemeriksaanEditActivity : AppCompatActivity() {
         binding = ActivityPemeriksaanEditBinding.inflate(layoutInflater)
         val view = binding.root
         val pemeriksaanId = intent.getIntExtra("pemeriksaanId", 0)
-        val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
         val token = prefs.getString("token", "no token")
+        isKader = prefs.getBoolean("isKader", false)
         viewModel = ViewModelProvider(this)[PemeriksaanViewModel::class.java]
+
+        if (isKader) {
+            binding.feSwitch.isEnabled = false
+            binding.kuDropdown.isEnabled = false
+            binding.ketEdit.isEnabled = false
+            binding.btnDel.visibility = View.GONE
+        } else {
+            binding.btnDel.setOnClickListener {
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Apakah anda yakin untuk menghapus pemeriksaan?")
+                    .setPositiveButton("Ya") { _, _ ->
+                        val client = ApiConfig.getApiService()
+                            .deletePemeriksaan(pemeriksaanId, "Bearer $token")
+
+                        client.enqueue(object : Callback<Void> {
+                            override fun onResponse(
+                                call: Call<Void>,
+                                response: Response<Void>
+                            ) {
+                                if (response.isSuccessful) {
+                                    viewModel.indexPemeriksaan(remajaId)
+                                    finishWithMessage("Pemeriksaan berhasil dihapus")
+                                } else {
+                                    Log.e(TAG, "onFailure: ${response.message()}")
+                                }
+                            }
+
+                            override fun onFailure(
+                                call: Call<Void>,
+                                t: Throwable
+                            ) {
+                                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                            }
+                        })
+                    }
+                    .setNegativeButton("Tidak") { _, _ ->
+                    }
+                    .show()
+            }
+        }
 
         val client =
             ApiConfig.getApiService().getPemeriksaan(pemeriksaanId, "Bearer $token")
@@ -147,39 +189,6 @@ class PemeriksaanEditActivity : AppCompatActivity() {
                     Log.e(TAG, "onFailure: ${t.message.toString()}")
                 }
             })
-        }
-
-        binding.btnDel.setOnClickListener {
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Apakah anda yakin untuk menghapus pemeriksaan?")
-                .setPositiveButton("Ya") { _, _ ->
-                    val client = ApiConfig.getApiService()
-                        .deletePemeriksaan(pemeriksaanId, "Bearer $token")
-
-                    client.enqueue(object : Callback<Void> {
-                        override fun onResponse(
-                            call: Call<Void>,
-                            response: Response<Void>
-                        ) {
-                            if (response.isSuccessful) {
-                                viewModel.indexPemeriksaan(remajaId)
-                                finishWithMessage("Pemeriksaan berhasil dihapus")
-                            } else {
-                                Log.e(TAG, "onFailure: ${response.message()}")
-                            }
-                        }
-
-                        override fun onFailure(
-                            call: Call<Void>,
-                            t: Throwable
-                        ) {
-                            Log.e(TAG, "onFailure: ${t.message.toString()}")
-                        }
-                    })
-                }
-                .setNegativeButton("Tidak") { _, _ ->
-                }
-                .show()
         }
 
         setContentView(view)
