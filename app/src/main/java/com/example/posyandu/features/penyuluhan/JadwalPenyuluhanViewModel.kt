@@ -28,9 +28,10 @@ class JadwalPenyuluhanViewModel(application: Application) : AndroidViewModel(app
         val prefs =
             getApplication<Application>().getSharedPreferences("Preferences", Context.MODE_PRIVATE)
         val token = prefs.getString("token", "no token")
+        val posyanduid = prefs.getInt("posyanduId",0)
 
         val client =
-            ApiConfig.getApiService().indexJadwalPenyuluhan(token = "Bearer $token")
+            ApiConfig.getApiService().indexJadwalPenyuluhanPosyanduId(token = "Bearer $token", id = posyanduid)
 
         client.enqueue(object : Callback<IndexJadwalPenyuluhanResponse> {
             override fun onResponse(

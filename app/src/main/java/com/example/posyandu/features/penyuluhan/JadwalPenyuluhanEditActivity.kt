@@ -7,18 +7,33 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.posyandu.R
 import com.example.posyandu.databinding.ActivityJadwalPenyuluhanEditBinding
+import com.example.posyandu.databinding.FragmentJadwalPosyanduEditBinding
+import com.example.posyandu.databinding.FragmentProfileBinding
+import com.example.posyandu.features.jadwalPosyandu.JadwalPosyandu
 import com.example.posyandu.utils.ApiConfig
 import com.example.posyandu.utils.ApiService
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.TimeZone
 
 class JadwalPenyuluhanEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJadwalPenyuluhanEditBinding
@@ -44,6 +59,7 @@ class JadwalPenyuluhanEditActivity : AppCompatActivity() {
         token = prefs.getString("token", "no token")!!
         apiClient = ApiConfig.getApiService()
 
+
         val JadwalPenyuluhanid = intent.getIntExtra("JadwalPenyuluhanid", 0)
         populateFields(JadwalPenyuluhanid)
 
@@ -64,7 +80,28 @@ class JadwalPenyuluhanEditActivity : AppCompatActivity() {
         }
         setContentView(view)
 
+        val today = MaterialDatePicker.todayInUtcMilliseconds()
+
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setStart(today)
+
+        binding.tanggalEdit.setOnClickListener {
+            val datePicker = createDatePicker(binding.tanggalEdit, constraintsBuilder, today)
+            datePicker.show(supportFragmentManager, datePicker.toString())
+        }
+
+        binding.jamMulaiEdit.setOnClickListener {
+            val timePicker = createTimePicker(binding.jamMulaiEdit)
+            timePicker.show(supportFragmentManager, timePicker.toString())
+        }
+
+        binding.jamSelesaiEdit.setOnClickListener {
+            val timePicker = createTimePicker(binding.jamSelesaiEdit)
+            timePicker.show(supportFragmentManager, timePicker.toString())
+        }
     }
+
 
     private fun sendUpdate(JadwalPenyuluhanid: Int) {
         val jadwalrequest = CreateJadwalPenyuluhanRequest(
@@ -98,9 +135,10 @@ class JadwalPenyuluhanEditActivity : AppCompatActivity() {
                 finishWithMessage("Error saat mengirim data")
             }
         })
+
     }
 
-    private fun populateFields(JadwalPenyuluhanid: Int) {
+    private fun populateFields(JadwalPenyuluhanid : Int) {
         val client = apiClient.getJadwalPenyuluhan(JadwalPenyuluhanid, "Bearer $token")
 
         client.enqueue(object : Callback<GetJadwalPenyuluhanResponse> {
@@ -112,7 +150,7 @@ class JadwalPenyuluhanEditActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val userData = response.body()!!.data
 
-                    binding.tanggalEdit.setText(userData.toString())
+                    binding.tanggalEdit.setText(userData.title)
                     binding.jamMulaiEdit.setText(userData.waktuMulai)
                     binding.jamSelesaiEdit.setText(userData.waktuSelesai)
                     binding.feedbackPenyuluhanEdit.setText(userData.feedback)
@@ -158,6 +196,50 @@ class JadwalPenyuluhanEditActivity : AppCompatActivity() {
                 finishWithMessage("Terjadi error")
             }
         })
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createDatePicker(
+        editText: TextInputEditText,
+        constraintsBuilder: CalendarConstraints.Builder,
+        today: Long,
+    ): MaterialDatePicker<Long> {
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setCalendarConstraints(constraintsBuilder.build())
+                .setSelection(today)
+                .setTitleText("Pilih tanggal")
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            val dateTime = LocalDateTime.ofInstant(
+                datePicker.selection?.let { it1 -> Instant.ofEpochMilli(it1) },
+                TimeZone.getDefault().toZoneId()
+            )
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val formattedDate = dateTime.format(formatter)
+            editText.setText(formattedDate)
+        }
+
+        return datePicker
+    }
+    private fun createTimePicker(editText: TextInputEditText): MaterialTimePicker {
+        val timePicker =
+            MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setHour(12)
+                .setMinute(10)
+                .setTitleText("Pilih jam")
+                .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            // Handle the selected time
+            val selectedTime = String.format("%02d:%02d", timePicker.hour, timePicker.minute)
+
+            // Set the selected time to the appropriate EditText
+            editText.setText(selectedTime)
+        }
+
+        return timePicker
     }
 }
 

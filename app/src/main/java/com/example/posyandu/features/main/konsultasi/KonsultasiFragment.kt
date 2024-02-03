@@ -89,5 +89,7 @@ class KonsultasiFragment : Fragment() {
             val intent = Intent(requireActivity(), KonsultasiChatActivity::class.java)
             startNewActivity.launch(intent)
         }
+
+
     }
 }
