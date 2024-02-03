@@ -13,6 +13,12 @@ import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduIndexResponse
 import com.example.posyandu.features.jadwalPosyandu.UpdateJadwalPosyanduResponse
 import com.example.posyandu.features.main.MainBidanResponse
 import com.example.posyandu.features.main.MainResponse
+import com.example.posyandu.features.main.konsultasi.CreateKonsultasiRequest
+import com.example.posyandu.features.main.konsultasi.CreateKonsultasiResponse
+import com.example.posyandu.features.main.konsultasi.CreateKonsultasiRoomRequest
+import com.example.posyandu.features.main.konsultasi.CreateKonsultasiRoomResponse
+import com.example.posyandu.features.main.konsultasi.GetbyRoomResponse
+import com.example.posyandu.features.main.konsultasi.GetbySenderResponse
 import com.example.posyandu.features.main.posyandu.GetPosyanduResponse
 import com.example.posyandu.features.main.posyandu.ListPosyanduResponse
 import com.example.posyandu.features.main.posyandu.UpdatePengampuRequest
@@ -189,6 +195,12 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<IndexJadwalPenyuluhanResponse>
 
+    @GET("jadwal-penyuluhan/posyandu/{id}")
+    fun indexJadwalPenyuluhanPosyanduId(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<IndexJadwalPenyuluhanResponse>
+
     @POST("jadwal-penyuluhan")
     fun createJadwalPenyuluhan(
         @Header("Authorization") token: String,
@@ -248,4 +260,26 @@ interface ApiService {
         @Part("type") type: RequestBody,
         @Header("Authorization") token: String
     ): Call<FileUploadResponse>
+
+    @POST("chat-room")
+    fun createRoom(
+        @Header("Authorization") token: String,
+        @Body profile: CreateKonsultasiRoomRequest
+    ): Call<CreateKonsultasiRoomResponse>
+
+    @POST("chat")
+    fun createChat(
+        @Header("Authorization") token: String,
+        @Body profile: CreateKonsultasiRequest
+    ): Call<CreateKonsultasiResponse>
+
+    @GET("chat/room/{id}")
+    fun  getRoom(
+        @Header("Authorization") token: String
+    ): Call<GetbyRoomResponse>
+
+    @GET("chat/sender/{id}")
+    fun getSender(
+        @Header("Authorization") token: String
+    ): Call<GetbySenderResponse>
 }

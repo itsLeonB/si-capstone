@@ -52,7 +52,7 @@ class JadwalPenyuluhanActivity : AppCompatActivity() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onClick(position: Int, model: JadwalPenyuluhan) {
                 val intent = Intent(baseContext, JadwalPenyuluhanViewActivity::class.java)
-                intent.putExtra("JadwalPenyuluhanid",model.id)
+                intent.putExtra("JadwalPenyuluhanid", model.id)
                 startNewActivity.launch(intent)
             }
         })
