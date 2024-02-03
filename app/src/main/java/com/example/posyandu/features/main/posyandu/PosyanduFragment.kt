@@ -45,7 +45,9 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class PosyanduFragment : Fragment() {
@@ -219,14 +221,14 @@ class PosyanduFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun displayJadwalPosyandu(waktuMulai: String?) {
         if (waktuMulai != null) {
-            val tanggal = waktuMulai.substring(0, 10)
-            val format = SimpleDateFormat("yyyy-MM-dd", Locale("id"))
-            val date = format.parse(tanggal)
-            val hariFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id"))
-            val hari = date?.let { hariFormat.format(it) }
-            val jam = waktuMulai.substring(11, 16)
+            val tanggal = LocalDate.parse(waktuMulai.substring(0, 10))
+            val hari =
+                tanggal.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale("id")))
+            val jam = LocalTime.parse(waktuMulai.substring(11, 16))
+                .format(DateTimeFormatter.ofPattern("HH:mm"))
 
             binding.tanggalJadwalPosyandu.text = hari
             binding.jamJadwalPosyandu.text = "Pukul $jam WIB"
@@ -236,14 +238,14 @@ class PosyanduFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun displayJadwalPenyuluhan(waktuMulai: String?) {
         if (waktuMulai != null) {
-            val tanggal = waktuMulai.substring(0, 10)
-            val format = SimpleDateFormat("yyyy-MM-dd", Locale("id"))
-            val date = format.parse(tanggal)
-            val hariFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id"))
-            val hari = date?.let { hariFormat.format(it) }
-            val jam = waktuMulai.substring(11, 16)
+            val tanggal = LocalDate.parse(waktuMulai.substring(0, 10))
+            val hari =
+                tanggal.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale("id")))
+            val jam = LocalTime.parse(waktuMulai.substring(11, 16))
+                .format(DateTimeFormatter.ofPattern("HH:mm"))
 
             binding.tanggalJadwalPenyuluhan.text = hari
             binding.jamJadwalPenyuluhan.text = "Pukul $jam WIB"

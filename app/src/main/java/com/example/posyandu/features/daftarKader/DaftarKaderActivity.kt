@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.posyandu.databinding.ActivityDaftarKaderBinding
+import com.example.posyandu.features.main.konsultasi.KonsultasiChatActivity
 import com.google.android.material.snackbar.Snackbar
 
 class DaftarKaderActivity : AppCompatActivity() {
@@ -29,7 +30,7 @@ class DaftarKaderActivity : AppCompatActivity() {
         }
 
     companion object {
-        private const val TAG = "DaftarRemajaActivity"
+        private const val TAG = "DaftarKaderActivity"
     }
 
     @Deprecated("Deprecated in Java")
@@ -80,7 +81,9 @@ class DaftarKaderActivity : AppCompatActivity() {
             DaftarKaderAdapter.OnClickListener {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onClick(position: Int, model: KaderItem) {
-                TODO("connect to konsultasi, langsung chat room")
+                val intent = Intent(this@DaftarKaderActivity, KonsultasiChatActivity::class.java)
+                intent.putExtra("receiverId", model.user.id)
+                startNewActivity.launch(intent)
             }
         })
     }
