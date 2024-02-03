@@ -47,7 +47,7 @@ data class Posyandu(
 	val foto: String,
 
 	@field:SerializedName("id")
-	val id: Int,
+	val id: Int.Companion,
 
 	@field:SerializedName("alamat")
 	val alamat: String

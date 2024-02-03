@@ -9,4 +9,5 @@ class KonsultasiChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_konsultasi_chat)
     }
+
 }

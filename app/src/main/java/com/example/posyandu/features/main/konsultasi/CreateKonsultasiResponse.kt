@@ -2,19 +2,40 @@ package com.example.posyandu.features.main.konsultasi
 
 import com.google.gson.annotations.SerializedName
 
-data class CreateKonsultasiRoomResponse(
+data class CreateKonsultasiResponse(
 
 	@field:SerializedName("code")
 	val code: Int,
 
 	@field:SerializedName("data")
-	val data: RoomData,
+	val data: ChatData,
 
 	@field:SerializedName("status")
 	val status: String
 )
 
-data class RoomData(
+data class Sender(
+
+	@field:SerializedName("nik")
+	val nik: Long,
+
+	@field:SerializedName("role")
+	val role: String,
+
+	@field:SerializedName("nama")
+	val nama: String,
+
+	@field:SerializedName("foto")
+	val foto: String,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("tanggal_lahir")
+	val tanggalLahir: String
+)
+
+data class Room(
 
 	@field:SerializedName("konsultan")
 	val konsultan: Konsultan,
@@ -26,7 +47,7 @@ data class RoomData(
 	val pasien: Pasien
 )
 
-data class Konsultan(
+data class Receiver(
 
 	@field:SerializedName("nik")
 	val nik: Long,
@@ -47,23 +68,26 @@ data class Konsultan(
 	val tanggalLahir: String
 )
 
-data class Pasien(
+data class ChatData(
 
-	@field:SerializedName("nik")
-	val nik: Long,
+	@field:SerializedName("is_read")
+	val isRead: Boolean,
 
-	@field:SerializedName("role")
-	val role: String,
+	@field:SerializedName("receiver")
+	val receiver: Receiver,
 
-	@field:SerializedName("nama")
-	val nama: String,
-
-	@field:SerializedName("foto")
-	val foto: String,
+	@field:SerializedName("sender")
+	val sender: Sender,
 
 	@field:SerializedName("id")
-	val id: Int,
+	val id: String,
 
-	@field:SerializedName("tanggal_lahir")
-	val tanggalLahir: String
+	@field:SerializedName("message")
+	val message: String,
+
+	@field:SerializedName("room")
+	val room: Room,
+
+	@field:SerializedName("timestamp")
+	val timestamp: String
 )
