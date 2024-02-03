@@ -118,6 +118,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/provinsi_input"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -127,7 +128,7 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/provinsi_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -136,6 +137,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/kota_input"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -145,7 +147,7 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/kota_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -154,6 +156,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/kecamatan_input"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -163,7 +166,7 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/kecamatan_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -172,6 +175,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/kelurahan_input"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -181,7 +185,7 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/kelurahan_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

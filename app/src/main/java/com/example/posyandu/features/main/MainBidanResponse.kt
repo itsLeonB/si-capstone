@@ -3,8 +3,8 @@ package com.example.posyandu.features.main
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
-import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -77,14 +77,32 @@ data class MainBidanData(
     @field:SerializedName("pemeriksaan")
     val pemeriksaan: List<PemeriksaanItem>
 ) {
+    @RequiresApi(Build.VERSION_CODES.O)
     fun sortedPosyandu(): List<JadwalPosyanduItem> {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val dateTimeFormatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
-        val sortedPosyandu: List<JadwalPosyanduItem> = jadwalPosyandu.sortedByDescending {
-            dateFormat.parse(it.waktuMulai)
-        }
+        val currentDateTime = LocalDateTime.now()
 
-        return sortedPosyandu
+        val sorted: List<JadwalPosyanduItem> = jadwalPosyandu
+            .filter { LocalDateTime.parse(it.waktuMulai, dateTimeFormatter) >= currentDateTime }
+            .sortedBy { LocalDateTime.parse(it.waktuMulai, dateTimeFormatter) }
+
+        return sorted
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sortedPenyuluhan(): List<JadwalPenyuluhanItem> {
+        val dateTimeFormatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+        val currentDateTime = LocalDateTime.now()
+
+        val sorted: List<JadwalPenyuluhanItem> = jadwalPenyuluhan
+            .filter { LocalDateTime.parse(it.waktuMulai, dateTimeFormatter) >= currentDateTime }
+            .sortedBy { LocalDateTime.parse(it.waktuMulai, dateTimeFormatter) }
+
+        return sorted
     }
 }
 

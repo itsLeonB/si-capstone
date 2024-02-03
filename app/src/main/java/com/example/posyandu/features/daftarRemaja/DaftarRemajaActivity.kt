@@ -37,6 +37,7 @@ class DaftarRemajaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarRemajaBinding
     private lateinit var viewModel: DaftarRemajaViewModel
     private lateinit var token: String
+    private lateinit var role: String
 
     val startNewActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -93,7 +94,8 @@ class DaftarRemajaActivity : AppCompatActivity() {
         }
 
         val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
-        token = prefs.getString("token", "no token").toString()
+        token = prefs.getString("token", "no token")!!
+        role = prefs.getString("role", "no role")!!
 
         setContentView(view)
     }
@@ -218,135 +220,140 @@ class DaftarRemajaActivity : AppCompatActivity() {
                     startNewActivity.launch(intent)
                 }
 
-                if (model.isKader) {
-                    binding.optRemaja.visibility = View.GONE
-                    binding.optKader.visibility = View.VISIBLE
+                if (role == "bidan") {
+                    if (model.isKader) {
+                        binding.optRemaja.visibility = View.GONE
+                        binding.optKader.visibility = View.VISIBLE
 
-                    val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
-                    val token = prefs.getString("token", "no token")
+                        val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+                        val token = prefs.getString("token", "no token")
 
-                    val remajaRequest = UpdateRemajaRequest(
-                        model.isKader,
-                        model.namaIbu,
-                        model.namaAyah,
-                        model.posyandu.id
-                    )
-
-                    val client =
-                        ApiConfig.getApiService().updateRemaja(
-                            model.id,
-                            "Bearer $token",
-                            remajaRequest,
+                        val remajaRequest = UpdateRemajaRequest(
+                            model.isKader,
+                            model.namaIbu,
+                            model.namaAyah,
+                            model.posyandu.id
                         )
 
-                    binding.optKader.setOnClickListener {
-                        remajaDialog.cancel()
-                        MaterialAlertDialogBuilder(this@DaftarRemajaActivity)
-                            .setTitle("Anda yakin untuk mencabut akses kader?")
-                            .setPositiveButton("Ya") { _, _ ->
-                                remajaRequest.isKader = false
+                        val client =
+                            ApiConfig.getApiService().updateRemaja(
+                                model.id,
+                                "Bearer $token",
+                                remajaRequest,
+                            )
 
-                                client.enqueue(object : Callback<UpdateRemajaResponse> {
-                                    override fun onResponse(
-                                        call: Call<UpdateRemajaResponse>,
-                                        response: Response<UpdateRemajaResponse>
-                                    ) {
-                                        if (response.isSuccessful) {
-                                            viewModel.indexRemaja()
-                                            Snackbar.make(
-                                                view,
-                                                "Akses kader berhasil dicabut",
-                                                Snackbar.LENGTH_SHORT
-                                            )
-                                                .show()
-                                        } else {
-                                            Log.e(TAG, "onFailure: ${response.message()}")
-                                            Snackbar.make(
-                                                view,
-                                                "Terjadi error, harap coba lagi",
-                                                Snackbar.LENGTH_SHORT
-                                            )
-                                                .show()
+                        binding.optKader.setOnClickListener {
+                            remajaDialog.cancel()
+                            MaterialAlertDialogBuilder(this@DaftarRemajaActivity)
+                                .setTitle("Anda yakin untuk mencabut akses kader?")
+                                .setPositiveButton("Ya") { _, _ ->
+                                    remajaRequest.isKader = false
+
+                                    client.enqueue(object : Callback<UpdateRemajaResponse> {
+                                        override fun onResponse(
+                                            call: Call<UpdateRemajaResponse>,
+                                            response: Response<UpdateRemajaResponse>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                viewModel.indexRemaja()
+                                                Snackbar.make(
+                                                    view,
+                                                    "Akses kader berhasil dicabut",
+                                                    Snackbar.LENGTH_SHORT
+                                                )
+                                                    .show()
+                                            } else {
+                                                Log.e(TAG, "onFailure: ${response.message()}")
+                                                Snackbar.make(
+                                                    view,
+                                                    "Terjadi error, harap coba lagi",
+                                                    Snackbar.LENGTH_SHORT
+                                                )
+                                                    .show()
+                                            }
                                         }
-                                    }
 
-                                    override fun onFailure(
-                                        call: Call<UpdateRemajaResponse>,
-                                        t: Throwable
-                                    ) {
-                                        Log.e(TAG, "onFailure: ${t.message.toString()}")
-                                    }
-                                })
-                            }
-                            .setNegativeButton("Tidak") { _, _ ->
-                                remajaDialog.show()
-                            }
-                            .show()
+                                        override fun onFailure(
+                                            call: Call<UpdateRemajaResponse>,
+                                            t: Throwable
+                                        ) {
+                                            Log.e(TAG, "onFailure: ${t.message.toString()}")
+                                        }
+                                    })
+                                }
+                                .setNegativeButton("Tidak") { _, _ ->
+                                    remajaDialog.show()
+                                }
+                                .show()
+                        }
+                    } else {
+                        binding.optRemaja.visibility = View.VISIBLE
+                        binding.optKader.visibility = View.GONE
+                        val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
+                        val token = prefs.getString("token", "no token")
+
+                        val remajaRequest = UpdateRemajaRequest(
+                            model.isKader,
+                            model.namaIbu,
+                            model.namaAyah,
+                            model.posyandu.id
+                        )
+
+                        val client =
+                            ApiConfig.getApiService().updateRemaja(
+                                model.id,
+                                "Bearer $token",
+                                remajaRequest,
+                            )
+
+                        binding.optRemaja.setOnClickListener {
+                            remajaDialog.cancel()
+                            MaterialAlertDialogBuilder(this@DaftarRemajaActivity)
+                                .setTitle("Anda yakin untuk memberikan akses kader?")
+                                .setPositiveButton("Ya") { _, _ ->
+                                    remajaRequest.isKader = true
+
+                                    client.enqueue(object : Callback<UpdateRemajaResponse> {
+                                        override fun onResponse(
+                                            call: Call<UpdateRemajaResponse>,
+                                            response: Response<UpdateRemajaResponse>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                viewModel.indexRemaja()
+                                                Snackbar.make(
+                                                    view,
+                                                    "Akses kader berhasil diberikan",
+                                                    Snackbar.LENGTH_SHORT
+                                                )
+                                                    .show()
+                                            } else {
+                                                Log.e(TAG, "onFailure: ${response.message()}")
+                                                Snackbar.make(
+                                                    view,
+                                                    "Terjadi error, harap coba lagi",
+                                                    Snackbar.LENGTH_SHORT
+                                                )
+                                                    .show()
+                                            }
+                                        }
+
+                                        override fun onFailure(
+                                            call: Call<UpdateRemajaResponse>,
+                                            t: Throwable
+                                        ) {
+                                            Log.e(TAG, "onFailure: ${t.message.toString()}")
+                                        }
+                                    })
+                                }
+                                .setNegativeButton("Tidak") { _, _ ->
+                                    remajaDialog.show()
+                                }
+                                .show()
+                        }
                     }
                 } else {
-                    binding.optRemaja.visibility = View.VISIBLE
+                    binding.optRemaja.visibility = View.GONE
                     binding.optKader.visibility = View.GONE
-                    val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
-                    val token = prefs.getString("token", "no token")
-
-                    val remajaRequest = UpdateRemajaRequest(
-                        model.isKader,
-                        model.namaIbu,
-                        model.namaAyah,
-                        model.posyandu.id
-                    )
-
-                    val client =
-                        ApiConfig.getApiService().updateRemaja(
-                            model.id,
-                            "Bearer $token",
-                            remajaRequest,
-                        )
-
-                    binding.optRemaja.setOnClickListener {
-                        remajaDialog.cancel()
-                        MaterialAlertDialogBuilder(this@DaftarRemajaActivity)
-                            .setTitle("Anda yakin untuk memberikan akses kader?")
-                            .setPositiveButton("Ya") { _, _ ->
-                                remajaRequest.isKader = true
-
-                                client.enqueue(object : Callback<UpdateRemajaResponse> {
-                                    override fun onResponse(
-                                        call: Call<UpdateRemajaResponse>,
-                                        response: Response<UpdateRemajaResponse>
-                                    ) {
-                                        if (response.isSuccessful) {
-                                            viewModel.indexRemaja()
-                                            Snackbar.make(
-                                                view,
-                                                "Akses kader berhasil diberikan",
-                                                Snackbar.LENGTH_SHORT
-                                            )
-                                                .show()
-                                        } else {
-                                            Log.e(TAG, "onFailure: ${response.message()}")
-                                            Snackbar.make(
-                                                view,
-                                                "Terjadi error, harap coba lagi",
-                                                Snackbar.LENGTH_SHORT
-                                            )
-                                                .show()
-                                        }
-                                    }
-
-                                    override fun onFailure(
-                                        call: Call<UpdateRemajaResponse>,
-                                        t: Throwable
-                                    ) {
-                                        Log.e(TAG, "onFailure: ${t.message.toString()}")
-                                    }
-                                })
-                            }
-                            .setNegativeButton("Tidak") { _, _ ->
-                                remajaDialog.show()
-                            }
-                            .show()
-                    }
                 }
             }
         })

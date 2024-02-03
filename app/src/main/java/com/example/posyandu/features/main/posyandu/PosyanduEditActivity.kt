@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -66,26 +67,49 @@ class PosyanduEditActivity : AppCompatActivity() {
 
         val requestPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-                if (permissions[android.Manifest.permission.READ_EXTERNAL_STORAGE] == true) {
-                    val intent =
-                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    pickImageLauncher.launch(intent)
-                } else {
-                    Toast.makeText(
-                        this@PosyanduEditActivity,
-                        "Ijinkan penggunaan storage",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (permissions[android.Manifest.permission.READ_MEDIA_IMAGES] == true) {
+                        val intent =
+                            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        pickImageLauncher.launch(intent)
+                    } else {
+                        Toast.makeText(
+                            this@PosyanduEditActivity,
+                            "Ijinkan penggunaan storage",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    // Check if the user selected "Don't ask again" and show a dialog to navigate to app settings
-                    if (!shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        showSettingsDialog()
+                        // Check if the user selected "Don't ask again" and show a dialog to navigate to app settings
+                        if (!shouldShowRequestPermissionRationale(android.Manifest.permission.READ_MEDIA_IMAGES)) {
+                            showSettingsDialog()
+                        }
+                    }
+                } else {
+                    if (permissions[android.Manifest.permission.READ_EXTERNAL_STORAGE] == true) {
+                        val intent =
+                            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        pickImageLauncher.launch(intent)
+                    } else {
+                        Toast.makeText(
+                            this@PosyanduEditActivity,
+                            "Ijinkan penggunaan storage",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        // Check if the user selected "Don't ask again" and show a dialog to navigate to app settings
+                        if (!shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            showSettingsDialog()
+                        }
                     }
                 }
             }
 
         binding.imgEdit.setOnClickListener {
-            requestPermissionLauncher.launch(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requestPermissionLauncher.launch(arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES))
+            } else {
+                requestPermissionLauncher.launch(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE))
+            }
         }
 
         binding.btnSimpan.setOnClickListener {
