@@ -35,7 +35,6 @@ import com.example.posyandu.features.jadwalPosyandu.JadwalPosyanduActivity
 import com.example.posyandu.features.main.MainActivity
 import com.example.posyandu.features.main.MainActivityViewModel
 import com.example.posyandu.features.main.Posyandu
-import com.example.posyandu.features.main.posyandu.PosyanduEditActivity
 import com.example.posyandu.features.pemeriksaan.PemeriksaanActivity
 import com.example.posyandu.features.pemeriksaan.PemeriksaanCreateActivity
 import com.example.posyandu.features.penyuluhan.JadwalPenyuluhanActivity

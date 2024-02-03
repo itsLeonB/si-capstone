@@ -196,6 +196,7 @@ class PosyanduEditActivity : AppCompatActivity() {
                                 ).show()
                                 val path = response.body()?.data?.path
                                 binding.imgEdit.setText(path)
+                                inputStream.close()
                             } else {
                                 Toast.makeText(
                                     this@PosyanduEditActivity,
