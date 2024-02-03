@@ -28,8 +28,8 @@ class PemeriksaanViewActivity : AppCompatActivity() {
     private lateinit var viewModel: PemeriksaanViewModel
     private var remajaId by Delegates.notNull<Int>()
     private var userId by Delegates.notNull<Int>()
+    private var currentUserId by Delegates.notNull<Int>()
     private lateinit var role: String
-    private var isKader: Boolean = false
 
     companion object {
         private const val TAG = "PemeriksaanViewActivity"
@@ -59,7 +59,7 @@ class PemeriksaanViewActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
         val token = prefs.getString("token", "no token")
         role = prefs.getString("role", "")!!
-        isKader = prefs.getBoolean("isKader", false)
+        currentUserId = prefs.getInt("currentUserId", 0)
 
         // Retrieve the message from the intent
         val message = intent.getStringExtra("snackbar_message")
@@ -83,17 +83,6 @@ class PemeriksaanViewActivity : AppCompatActivity() {
                         .show()
                 }
             }
-
-        if (role == "remaja" && isKader == false) {
-            binding.btnEdit.visibility = View.GONE
-        } else {
-            binding.btnEdit.setOnClickListener {
-                val intent = Intent(this, PemeriksaanEditActivity::class.java)
-                intent.putExtra("pemeriksaanId", pemeriksaanId)
-                startNewActivity.launch(intent)
-                finish()
-            }
-        }
 
         setContentView(view)
     }
@@ -148,6 +137,32 @@ class PemeriksaanViewActivity : AppCompatActivity() {
                                 R.drawable.error_cross
                             )
                         )
+                    }
+
+                    when (role) {
+                        "remaja" -> {
+                            binding.btnEdit.visibility = View.GONE
+                        }
+                        "kader" -> {
+                            if (currentUserId == userId) {
+                                binding.btnEdit.visibility = View.GONE
+                            } else {
+                                binding.btnEdit.setOnClickListener {
+                                    val intent = Intent(this@PemeriksaanViewActivity, PemeriksaanEditActivity::class.java)
+                                    intent.putExtra("pemeriksaanId", pemeriksaanId)
+                                    startNewActivity.launch(intent)
+                                    finish()
+                                }
+                            }
+                        }
+                        "bidan" -> {
+                            binding.btnEdit.setOnClickListener {
+                                val intent = Intent(this@PemeriksaanViewActivity, PemeriksaanEditActivity::class.java)
+                                intent.putExtra("pemeriksaanId", pemeriksaanId)
+                                startNewActivity.launch(intent)
+                                finish()
+                            }
+                        }
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

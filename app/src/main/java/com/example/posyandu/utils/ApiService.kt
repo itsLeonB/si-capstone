@@ -2,9 +2,11 @@ package com.example.posyandu.utils
 
 import com.example.posyandu.features.authentication.LoginRequest
 import com.example.posyandu.features.authentication.LoginResponse
+import com.example.posyandu.features.daftarKader.IndexKaderResponse
 import com.example.posyandu.features.daftarRemaja.CreateRemajaRequest
 import com.example.posyandu.features.daftarRemaja.CreateRemajaResponse
 import com.example.posyandu.features.daftarRemaja.GetRemajaResponse
+import com.example.posyandu.features.daftarRemaja.IndexRemajaAsKaderResponse
 import com.example.posyandu.features.daftarRemaja.IndexRemajaByPosyanduResponse
 import com.example.posyandu.features.daftarRemaja.UpdateRemajaRequest
 import com.example.posyandu.features.daftarRemaja.UpdateRemajaResponse
@@ -33,14 +35,14 @@ import com.example.posyandu.features.pemeriksaan.GetPemeriksaanResponse
 import com.example.posyandu.features.pemeriksaan.IndexPemeriksaanByRemajaResponse
 import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateRequest
 import com.example.posyandu.features.pemeriksaan.PemeriksaanUpdateResponse
-import com.example.posyandu.features.register.GetUserResponse
-import com.example.posyandu.features.register.RegisterUserRequest
-import com.example.posyandu.features.register.RegisterUserResponse
 import com.example.posyandu.features.penyuluhan.CreateJadwalPenyuluhanRequest
 import com.example.posyandu.features.penyuluhan.CreateJadwalPenyuluhanResponse
 import com.example.posyandu.features.penyuluhan.GetJadwalPenyuluhanResponse
 import com.example.posyandu.features.penyuluhan.IndexJadwalPenyuluhanResponse
 import com.example.posyandu.features.penyuluhan.UpdateJadwalPenyuluhanResponse
+import com.example.posyandu.features.register.GetUserResponse
+import com.example.posyandu.features.register.RegisterUserRequest
+import com.example.posyandu.features.register.RegisterUserResponse
 import com.example.posyandu.features.register.UpdateUserRequest
 import com.example.posyandu.utils.file.FileUploadResponse
 import okhttp3.MultipartBody
@@ -220,6 +222,16 @@ interface ApiService {
         @Body jadwalPenyuluhan: CreateJadwalPenyuluhanRequest
     ): Call<UpdateJadwalPenyuluhanResponse>
 
+    @GET("kader/remaja")
+    fun indexRemajaAsKader(
+        @Header("Authorization") token: String
+    ): Call<IndexRemajaAsKaderResponse>
+
+    @GET("kader")
+    fun indexKader(
+        @Header("Authorization") token: String
+    ): Call<IndexKaderResponse>
+
     @PUT("user/{id}")
     fun updateUser(
         @Path("id") userId: Int,
@@ -251,7 +263,6 @@ interface ApiService {
         @Path("id") id: Int,
         @Header("Authorization") token: String
     ): Call<Void>
-
 
     @Multipart
     @POST("file/upload")

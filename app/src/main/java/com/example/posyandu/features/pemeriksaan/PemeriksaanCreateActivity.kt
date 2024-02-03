@@ -21,7 +21,6 @@ import java.util.TimeZone
 class PemeriksaanCreateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPemeriksaanCreateBinding
     private lateinit var editBinding: ActivityPemeriksaanEditBinding
-    private var isKader: Boolean = false
 
     companion object {
         private const val TAG = "PemeriksaanCreateActivity"
@@ -33,8 +32,7 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
             intent.getSerializableExtra("remajaIdNamaList") as ArrayList<RemajaIdNama>?
         val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
         val token = prefs.getString("token", "no token")
-        isKader = prefs.getBoolean("isKader", false)
-        Log.e("iskader", isKader.toString())
+        val role = prefs.getString("role", "no role")
 
         if (remajaIdNamaList != null) {
             binding = ActivityPemeriksaanCreateBinding.inflate(layoutInflater)
@@ -48,10 +46,12 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
 
             binding.remajaList.setAdapter(adapter)
 
-            if (isKader) {
-                binding.feSwitch.isEnabled = false
-                binding.kondisiUmum.isEnabled = false
-                binding.ketEdit.isEnabled = false
+            if (role == "kader") {
+                binding.feSwitch.visibility = View.GONE
+                binding.kuInput.visibility = View.GONE
+                binding.kondisiUmum.visibility = View.GONE
+                binding.ketInput.visibility = View.GONE
+                binding.ketEdit.visibility = View.GONE
             }
 
             binding.btnTambah.setOnClickListener {
@@ -120,10 +120,12 @@ class PemeriksaanCreateActivity : AppCompatActivity() {
             editBinding.waktu.visibility = View.GONE
             editBinding.btnDel.visibility = View.GONE
 
-            if (isKader) {
-                editBinding.feSwitch.isEnabled = false
-                editBinding.kuDropdown.isEnabled = false
-                editBinding.ketEdit.isEnabled = false
+            if (role == "kader") {
+                editBinding.feSwitch.visibility = View.GONE
+                editBinding.kuInput.visibility = View.GONE
+                editBinding.kuDropdown.visibility = View.GONE
+                editBinding.ketInput.visibility = View.GONE
+                editBinding.ketEdit.visibility = View.GONE
             }
 
             editBinding.btnTambah.setOnClickListener {

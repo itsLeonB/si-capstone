@@ -25,8 +25,8 @@ class PemeriksaanActivity : AppCompatActivity() {
     private var usia by Delegates.notNull<Int>()
     private var remajaId by Delegates.notNull<Int>()
     private var userId by Delegates.notNull<Int>()
+    private var currentUserId by Delegates.notNull<Int>()
     private lateinit var role: String
-    private var isKader: Boolean = false
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -62,7 +62,7 @@ class PemeriksaanActivity : AppCompatActivity() {
         usia = intent.getIntExtra("usia", 0)
         val prefs = getSharedPreferences("Preferences", MODE_PRIVATE)
         role = prefs.getString("role", "")!!
-        isKader = prefs.getBoolean("isKader", false)
+        currentUserId = prefs.getInt("currentUserId", 0)
 
         viewModel = ViewModelProvider(this)[PemeriksaanViewModel::class.java]
         viewModel.listPemeriksaan.observe(this) { listPemeriksaan ->
@@ -84,14 +84,29 @@ class PemeriksaanActivity : AppCompatActivity() {
                 }
             }
 
-        if (role == "remaja" && isKader == false) {
-            binding.btnTambah.visibility = View.GONE
-        } else {
-            binding.btnTambah.setOnClickListener {
-                val intent = Intent(this, PemeriksaanCreateActivity::class.java)
-                intent.putExtra("nama", nama)
-                intent.putExtra("remajaId", remajaId)
-                startNewActivity.launch(intent)
+        when (role) {
+            "remaja" -> {
+                binding.btnTambah.visibility = View.GONE
+            }
+            "kader" -> {
+                if (currentUserId == userId) {
+                    binding.btnTambah.visibility = View.GONE
+                } else {
+                    binding.btnTambah.setOnClickListener {
+                        val intent = Intent(this, PemeriksaanCreateActivity::class.java)
+                        intent.putExtra("nama", nama)
+                        intent.putExtra("remajaId", remajaId)
+                        startNewActivity.launch(intent)
+                    }
+                }
+            }
+            "bidan" -> {
+                binding.btnTambah.setOnClickListener {
+                    val intent = Intent(this, PemeriksaanCreateActivity::class.java)
+                    intent.putExtra("nama", nama)
+                    intent.putExtra("remajaId", remajaId)
+                    startNewActivity.launch(intent)
+                }
             }
         }
 

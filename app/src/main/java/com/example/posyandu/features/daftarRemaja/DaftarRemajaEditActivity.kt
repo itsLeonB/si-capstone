@@ -1,5 +1,6 @@
 package com.example.posyandu.features.daftarRemaja
 
+import AdministrativeArea
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -41,6 +42,15 @@ class DaftarRemajaEditActivity : AppCompatActivity() {
         prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE)
         token = prefs.getString("token", "no token")!!
         apiClient = ApiConfig.getApiService()
+
+        val adminArea = AdministrativeArea()
+        adminArea.populateDropdowns(
+            this,
+            binding.provinsiEdit,
+            binding.kotaEdit,
+            binding.kecamatanEdit,
+            binding.kelurahanEdit
+        )
 
         val userId = intent.getIntExtra("userId", 0)
         populateFields(userId)

@@ -88,18 +88,6 @@ class DaftarRemajaIndexAdapter :
                 }
             }
 
-//            if (pemeriksaan.beratBadan == 0) {
-//                binding.beratChip.visibility = View.GONE
-//            } else {
-//                binding.beratChip.visibility = View.VISIBLE
-//            }
-//
-//            if (pemeriksaan.tinggiBadan == 0) {
-//                binding.tinggiChip.visibility = View.GONE
-//            } else {
-//                binding.tinggiChip.visibility = View.VISIBLE
-//            }
-
             if (!isKader) {
                 binding.kaderChip.visibility = View.GONE
             }
